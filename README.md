@@ -6,9 +6,9 @@ Working, ready to build Bare-Bones watch face for Pebble (OG and Time) Aplite an
 Instructions
 ------------
 
-  # Copy (or clone) into your project
-  # Create you own uuid (in CloudPebble generate one with a single button push under settings) - see appinfo.json
-  # Compile and run!
+  1. Copy (or clone) into your project
+  2. Create you own uuid (in CloudPebble generate one with a single button push under settings) - see appinfo.json
+  3. Compile and run!
 
 Then start adding options and resources. By default the empty framework will:
 
