@@ -10,6 +10,8 @@
     "companyName": "clach04",
     "longName": "FILL ME IN!",
     "projectType": "native",
+    "resources": {
+    },
     "sdkVersion": "3",
     "shortName": "FILL ME IN!",
     "targetPlatforms": [
