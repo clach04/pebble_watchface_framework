@@ -1,0 +1,24 @@
+{
+    "appKeys": {
+        "KEY_BACKGROUND_COLOR": 2,
+        "KEY_TIME_COLOR": 0,
+        "KEY_VIBRATE_ON_DISCONNECT": 1
+    },
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "clach04",
+    "longName": "FILL ME IN!",
+    "projectType": "native",
+    "sdkVersion": "3",
+    "shortName": "FILL ME IN!",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "00000000-0000-0000-0000-000000000000",
+    "versionLabel": "0.1",
+    "watchapp": {
+        "watchface": true
+    }
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Preferences</title>
+  <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
+  <script src='js/slate.min.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Preferences</h1>
+
+    <!-- TODO consider removing this -->
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Options</div>
+
+      <div class='item-container-content'>
+        <label class='item'>
+          Time Color
+          <input id='time_color_picker' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the color for the Time. Note: Only available on Basalt watches that support many colors.
+      </div>
+
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the color for the Background. Note: Only available on Basalt watches that support many colors.
+      </div>
+
+    </div>
+
+    <!-- TODO Lose section, move vib option into above? -->
+    <div class='item-container'>
+      <div class='item-container-header'>Vibrate</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Vibrate on Bluetooth disconnect
+          <input id='vibrate_disconnect_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        By default will vibrate on bluetooth disconnect.
+      </div>
+    </div>
+
+    <!-- TODO Save rather than submit? -->
+    <!-- TODO Cancel button? -->
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getHexStrColorWith0x(in_str) {
+    /*
+    ** Returns hex string WITH a leading 0x
+    */
+    if (in_str.startsWith('0x'))
+    {
+        return in_str;
+    }
+    else
+    {
+        return '0x' + in_str;
+    }
+  }
+
+  function getHexStrColorWithOut0x(in_str) {
+    /*
+    ** Returns hex string withOUT a leading 0x
+    */
+    if (in_str.startsWith('0x'))
+    {
+        return in_str.substr(2, 6);
+    }
+    else
+    {
+        return in_str;
+    }
+  }
+
+  function getBoolValue(in_value) {
+    var result=false;
+
+    switch (in_value) {
+        case true:
+        case 'true':
+        case 'True':
+        case 'TRUE':
+        case 1:
+        case '1':
+        case 'on':
+            result = true;
+            break;
+        default:
+            result = false;
+            break;
+    }
+    return result;
+  }
+
+  function getConfigData() {
+    var options = {
+      'time_color': getHexStrColorWithOut0x(document.getElementById('time_color_picker').value),
+      'background_color': getHexStrColorWithOut0x(document.getElementById('background_color_picker').value),
+      'vibrate_disconnect': document.getElementById('vibrate_disconnect_checkbox').checked
+    };
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+        // as of 2015-08 not part of Chrome/Webkit in Pebble for Android
+        if (typeof String.prototype.startsWith != 'function') {
+          // see below for better implementation!
+          String.prototype.startsWith = function (str){
+            return this.indexOf(str) === 0;
+          };
+        }
+
+    // pick URL parameters...
+    document.getElementById('time_color_picker').value = getHexStrColorWith0x(getQueryParam('time_color', 'FFFFFF'));
+    document.getElementById('background_color_picker').value = getHexStrColorWith0x(getQueryParam('background_color', '000000'));
+    document.getElementById('vibrate_disconnect_checkbox').checked = getBoolValue(getQueryParam('vibrate_disconnect', 'off'));
+  })();
+  </script>
+</html>
