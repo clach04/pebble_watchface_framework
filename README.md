@@ -24,7 +24,7 @@ Then start adding options and resources. By default the empty framework will:
 Additional options
 ------------------
 
-See `watch_config.h`:
+In an ideal situation, `watchface.c` and `watchface.h` should not need editing *ever*. There may be cases where `main.c` needs editing. Most of the time `watch_config.h` is the only file that will need editing. `watch_config.h` options:
 
   * If `DEFAULT_TIME_COLOR` is defined it will be used for the default time color.
   * If `DEFAULT_TIME_COLOR` is defined it will be used for thedefault background time color.
