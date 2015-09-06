@@ -51,6 +51,19 @@
 #define DEFAULT_BACKGROUND_COLOR GColorBlack
 #endif /* DEFAULT_BACKGROUND_COLOR */
 
+#ifndef TICK_HANDLER
+#define TICK_HANDLER tick_handler
+#endif /* TICK_HANDLER */
+
+#ifndef MAIN_WINDOW_LOAD
+#define MAIN_WINDOW_LOAD main_window_load
+#endif /* MAIN_WINDOW_LOAD */
+
+#ifndef MAIN_WINDOW_UNLOAD
+#define MAIN_WINDOW_UNLOAD main_window_unload
+#endif /* MAIN_WINDOW_UNLOAD */
+
+
 extern Window    *s_main_window;
 extern TextLayer *s_time_layer;
 extern TextLayer *s_date_layer;
