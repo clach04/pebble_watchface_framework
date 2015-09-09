@@ -37,4 +37,10 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * If BLUETOOTH_DISCONNECTED_STR is defined, this text will be displayed for the Bluetooth disconnect message.
   * If `DATE_FMT_STR` is defined it will be used for the format of the date text.
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
-  * If `` is defined it will be used for the
+
+Examples
+--------
+
+  * https://github.com/clach04/watchface_JupiterMass
+  * https://github.com/clach04/watchface_CapNion
+  * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has a custom ticker (and setup/cleanup)
