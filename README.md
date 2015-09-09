@@ -42,5 +42,8 @@ Examples
 --------
 
   * https://github.com/clach04/watchface_JupiterMass
+      * https://github.com/clach04/watchface_JupiterMass/blob/master/src/watch_config.h + the resources (font and screen shot) that make this different from the basic template)
   * https://github.com/clach04/watchface_CapNion
+      * https://github.com/clach04/watchface_CapNion/blob/master/src/watch_config.h + the resources (font and screen shot) that make this different from the basic template)
   * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has a custom ticker (and setup/cleanup)
+      * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
