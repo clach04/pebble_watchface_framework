@@ -64,15 +64,15 @@
 #endif /* MAIN_WINDOW_UNLOAD */
 
 
-extern Window    *s_main_window;
-extern TextLayer *s_time_layer;
-extern TextLayer *s_date_layer;
-extern TextLayer *s_battery_layer;
-extern TextLayer *s_bluetooth_layer;
+extern Window    *main_window;
+extern TextLayer *time_layer;
+extern TextLayer *date_layer;
+extern TextLayer *battery_layer;
+extern TextLayer *bluetooth_layer;
 
-extern GFont       s_time_font;
-extern BitmapLayer *s_background_layer;
-extern GBitmap     *s_background_bitmap;
+extern GFont       time_font;
+extern BitmapLayer *background_layer;
+extern GBitmap     *background_bitmap;
 /* For colors, see http://developer.getpebble.com/tools/color-picker/#0000FF */
 extern GColor       time_color;  /* NOTE used for date too */
 extern GColor       background_color;
