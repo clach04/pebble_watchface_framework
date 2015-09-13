@@ -154,6 +154,42 @@ void cleanup_date()
     text_layer_destroy(date_layer);
 }
 
+void setup_bg_image(Window *window, uint32_t resource_id)
+{
+    Layer *window_layer = window_get_root_layer(window);
+    GRect bounds = layer_get_bounds(window_layer);
+
+    // Create GBitmap, then set to created BitmapLayer
+    background_bitmap = gbitmap_create_with_resource(resource_id);
+    
+    background_layer = bitmap_layer_create(bounds);
+    bitmap_layer_set_bitmap(background_layer, background_bitmap);
+
+#ifdef PBL_PLATFORM_APLITE
+     bitmap_layer_set_compositing_mode(background_layer, GCompOpAssign);
+#elif PBL_PLATFORM_BASALT
+     bitmap_layer_set_compositing_mode(background_layer, GCompOpSet);
+#endif
+
+    layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(background_layer));
+}
+
+void cleanup_bg_image()
+{
+    /* Destroy GBitmap */
+    if (background_bitmap)
+    {
+        gbitmap_destroy(background_bitmap);
+    }
+
+    /* Destroy BitmapLayer */
+    if (background_layer)
+    {
+        bitmap_layer_destroy(background_layer);
+    }
+}
+
+
 void update_time() {
     // Get a tm structure
     time_t    temp = time(NULL);
@@ -203,27 +239,10 @@ void update_time() {
 }
 
 void main_window_load(Window *window) {
-#ifdef BG_IMAGE
-    Layer *window_layer = window_get_root_layer(window);
-    GRect bounds = layer_get_bounds(window_layer);
-
-    // Create GBitmap, then set to created BitmapLayer
-    background_bitmap = gbitmap_create_with_resource(BG_IMAGE);
-    
-    background_layer = bitmap_layer_create(bounds);
-    bitmap_layer_set_bitmap(background_layer, background_bitmap);
-
-#ifdef PBL_PLATFORM_APLITE
-     bitmap_layer_set_compositing_mode(background_layer, GCompOpAssign);
-#elif PBL_PLATFORM_BASALT
-     bitmap_layer_set_compositing_mode(background_layer, GCompOpSet);
-#endif
-#endif /* BG_IMAGE */
-
     window_set_background_color(window, background_color);
 
 #ifdef BG_IMAGE
-    layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(background_layer));
+    setup_bg_image(window, BG_IMAGE);
 #endif /* BG_IMAGE */
 
     // Create time TextLayer
@@ -268,11 +287,7 @@ void main_window_unload(Window *window) {
 #endif /* FONT_NAME */
 
 #ifdef BG_IMAGE
-    /* Destroy GBitmap */
-    gbitmap_destroy(background_bitmap);
-
-    /* Destroy BitmapLayer */
-    bitmap_layer_destroy(background_layer);
+    cleanup_bg_image();
 #endif /* BG_IMAGE */
 
     /* Destroy TextLayers */
