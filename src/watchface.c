@@ -154,15 +154,23 @@ void cleanup_date()
     text_layer_destroy(date_layer);
 }
 
-void setup_bg_image(Window *window, uint32_t resource_id)
+/*
+** If bounds is GRectZero then use whole watch screen
+*/
+void setup_bg_image(Window *window, uint32_t resource_id, GRect bounds)
 {
-    Layer *window_layer = window_get_root_layer(window);
-    GRect bounds = layer_get_bounds(window_layer);
-
     // Create GBitmap, then set to created BitmapLayer
     background_bitmap = gbitmap_create_with_resource(resource_id);
-    
+
+    if (bounds.origin.x == 0 &&
+        bounds.origin.y == 0 &&
+        bounds.size.w == 0 &&
+        bounds.size.h == 0)
+    {
+        bounds = layer_get_bounds(window_get_root_layer(window));
+    }
     background_layer = bitmap_layer_create(bounds);
+
     bitmap_layer_set_bitmap(background_layer, background_bitmap);
 
 #ifdef PBL_PLATFORM_APLITE
@@ -242,7 +250,7 @@ void main_window_load(Window *window) {
     window_set_background_color(window, background_color);
 
 #ifdef BG_IMAGE
-    setup_bg_image(window, BG_IMAGE);
+    setup_bg_image(window, BG_IMAGE, GRectZero);
 #endif /* BG_IMAGE */
 
     // Create time TextLayer
