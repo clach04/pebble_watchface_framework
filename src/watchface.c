@@ -250,7 +250,7 @@ void main_window_load(Window *window) {
     window_set_background_color(window, background_color);
 
 #ifdef BG_IMAGE
-    setup_bg_image(window, BG_IMAGE, GRectZero);
+    setup_bg_image(window, BG_IMAGE, BG_IMAGE_GRECT);
 #endif /* BG_IMAGE */
 
     // Create time TextLayer
