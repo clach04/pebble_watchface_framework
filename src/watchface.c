@@ -275,18 +275,25 @@ void main_window_load(Window *window) {
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(time_layer));
 
     setup_date(window);
+#ifndef NO_BATTERY
     setup_battery(window);
+#endif /* NO_BATTERY */
     setup_bluetooth(window);
 
     /* Make sure the time is displayed from the start */
     update_time();
+
+#ifndef NO_BATTERY
     /* Ensure battery status is displayed from the start */
     handle_battery(battery_state_service_peek());
+#endif /* NO_BATTERY */
 }
 
 void main_window_unload(Window *window) {
     cleanup_bluetooth();
+#ifndef NO_BATTERY
     cleanup_battery();
+#endif /* NO_BATTERY */
     cleanup_date();
 
 #ifdef FONT_NAME
