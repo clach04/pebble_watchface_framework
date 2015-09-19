@@ -278,7 +278,9 @@ void main_window_load(Window *window) {
 #ifndef NO_BATTERY
     setup_battery(window);
 #endif /* NO_BATTERY */
+#ifndef NO_BLUETOOTH
     setup_bluetooth(window);
+#endif /* NO_BLUETOOTH */
 
     /* Make sure the time is displayed from the start */
     update_time();
@@ -290,7 +292,9 @@ void main_window_load(Window *window) {
 }
 
 void main_window_unload(Window *window) {
+#ifndef NO_BLUETOOTH
     cleanup_bluetooth();
+#endif /* NO_BLUETOOTH */
 #ifndef NO_BATTERY
     cleanup_battery();
 #endif /* NO_BATTERY */
