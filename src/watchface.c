@@ -236,11 +236,13 @@ void update_time() {
     }
 #endif /* DEBUG_TIME */
 
+#ifndef NO_DATE
     /* Update the date only when the day changes */
     if (last_day != tick_time->tm_mday)
     {
         update_date(tick_time);
     }
+#endif /* NO_DATE */
 
     // Display this time on the TextLayer
     text_layer_set_text(time_layer, buffer);
@@ -274,7 +276,9 @@ void main_window_load(Window *window) {
     // Add it as a child layer to the Window's root layer
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(time_layer));
 
+#ifndef NO_DATE
     setup_date(window);
+#endif /* NO_DATE */
 #ifndef NO_BATTERY
     setup_battery(window);
 #endif /* NO_BATTERY */
@@ -298,7 +302,9 @@ void main_window_unload(Window *window) {
 #ifndef NO_BATTERY
     cleanup_battery();
 #endif /* NO_BATTERY */
+#ifndef NO_DATE
     cleanup_date();
+#endif /* NO_DATE */
 
 #ifdef FONT_NAME
     /* Unload GFonts */
