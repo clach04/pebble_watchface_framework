@@ -33,7 +33,8 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * If `FONT_SYSTEM_NAME` is defined to a system font name and `FONT_NAME` is not defined, that system font will be used for time display
   * if `REMOVE_LEADING_ZERO_FROM_TIME` is defined, and the watch is configured for 12 hour format display, the leading zero "0" will be removed for times in the morning.
   * Update CLOCK_POS, BT_POS, DATE_POS, and BAT_POS to change the on screen position of Time, Bluetooth disconnect message, Date, and battery power.
-  * `BT_ALIGN`, `BAT_ALIGN`', and `TIME_ALIGN` are used to change alignment.
+  * FONT_BT_SYSTEM_NAME, FONT_BAT_SYSTEM_NAME, and FONT_DATE_SYSTEM_NAME can override the system font used.
+  * `BT_ALIGN`, `BAT_ALIGN`, and `TIME_ALIGN` are used to change alignment.
   * If BLUETOOTH_DISCONNECTED_STR is defined, this text will be displayed for the Bluetooth disconnect message.
   * If `DATE_FMT_STR` is defined it will be used for the format of the date text.
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
