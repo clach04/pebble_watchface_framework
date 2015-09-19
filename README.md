@@ -37,6 +37,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * If BLUETOOTH_DISCONNECTED_STR is defined, this text will be displayed for the Bluetooth disconnect message.
   * If `DATE_FMT_STR` is defined it will be used for the format of the date text.
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
+  * Use; NO_BLUETOOTH, NO_BATTERY, and NO_DATE to disable display of bluetooth disconnect, battery status, and date.
 
 Examples
 --------
