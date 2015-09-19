@@ -66,7 +66,7 @@ void setup_bluetooth(Window *window)
     bluetooth_layer = text_layer_create(BT_POS);
     text_layer_set_text_color(bluetooth_layer, time_color);
     text_layer_set_background_color(bluetooth_layer, GColorClear);
-    text_layer_set_font(bluetooth_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+    text_layer_set_font(bluetooth_layer, fonts_get_system_font(FONT_BT_SYSTEM_NAME));
     text_layer_set_text_alignment(bluetooth_layer, BT_ALIGN);
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(bluetooth_layer));
     text_layer_set_text(bluetooth_layer, "");
@@ -111,7 +111,7 @@ void setup_battery(Window *window)
     battery_layer = text_layer_create(BAT_POS);
     text_layer_set_text_color(battery_layer, time_color);
     text_layer_set_background_color(battery_layer, GColorClear);
-    text_layer_set_font(battery_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+    text_layer_set_font(battery_layer, fonts_get_system_font(FONT_BAT_SYSTEM_NAME));
     text_layer_set_text_alignment(battery_layer, BAT_ALIGN);
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(battery_layer));
     text_layer_set_text(battery_layer, MAX_BAT_STR);
@@ -142,7 +142,7 @@ void setup_date(Window *window)
     text_layer_set_text(date_layer, MAX_DATE_STR);
 
     /* Apply to TextLayer */
-    text_layer_set_font(date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+    text_layer_set_font(date_layer, fonts_get_system_font(FONT_DATE_SYSTEM_NAME));
     text_layer_set_text_alignment(date_layer, GTextAlignmentRight);
 
     // Add it as a child layer to the Window's root layer
