@@ -7,7 +7,7 @@ Instructions
 ------------
 
   1. Copy (or clone) into your project
-  2. Create you own uuid (in CloudPebble generate one with a single button push under settings) - see appinfo.json
+  2. Create a new uuid (in CloudPebble generate one with a single button push under settings) - see appinfo.json
   3. Compile and run!
 
 Then start adding options and resources. By default the empty framework will:
@@ -20,6 +20,8 @@ Then start adding options and resources. By default the empty framework will:
       * Time/date/etc. text color
       * Background color
       * Whether to vibrate on Bluetooth disconnect (default is do *not* vibrate)
+
+There is no default icon, add a 28x28 resource and declare it as an icon, see http://developer.getpebble.com/guides/pebble-apps/resources/image-resources/
 
 Additional options
 ------------------
