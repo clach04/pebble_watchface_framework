@@ -1,6 +1,11 @@
 #include <pebble.h>
 #include "watchface.h"
 
+#ifdef USE_SHADOW_TIME_EFFECT
+#include "effect_layer.h"  /* from https://github.com/ygalanter/EffectLayer */
+#endif /* USE_SHADOW_TIME_EFFECT */
+
+
 Window    *main_window=NULL;
 TextLayer *time_layer=NULL;
 TextLayer *date_layer=NULL;
@@ -40,6 +45,41 @@ char * debug_time_list[] = {
     NULL
 };
 #endif /* DEBUG_TIME */
+
+#ifdef USE_SHADOW_TIME_EFFECT
+static EffectLayer* effect_layer=NULL;
+static EffectOffset effect_offset;
+
+
+void setup_effects(Window *window)
+{
+    //effect_layer = effect_layer_create(GRect(0, 0, 144, 168)); // will cover entire screen
+    effect_layer = effect_layer_create(CLOCK_POS);
+
+    effect_offset.orig_color = time_color;
+    effect_offset.offset_color = background_color;
+    effect_offset.offset_y = 2;
+    effect_offset.offset_x = 2;
+
+    effect_layer_add_effect(effect_layer, effect_outline, &effect_offset);
+    /* Other effect examples */
+    //effect_layer_add_effect(effect_layer, effect_shadow, &effect_offset);
+
+    //effect_layer_add_effect(effect_layer, effect_invert, NULL);
+    //effect_layer_add_effect(effect_layer, effect_invert_bw_only, NULL);
+    //effect_layer_add_effect(effect_layer, effect_rotate_90_degrees, (void *)true); // rotates 90 degrees counterclockwise
+
+    layer_add_child(window_get_root_layer(window), effect_layer_get_layer(effect_layer));
+}
+
+void cleanup_effects()
+{
+    if (effect_layer)
+    {
+        effect_layer_destroy(effect_layer);
+    }
+}
+#endif /* USE_SHADOW_TIME_EFFECT */
 
 void handle_bluetooth(bool connected)
 {
@@ -286,6 +326,10 @@ void main_window_load(Window *window) {
     setup_bluetooth(window);
 #endif /* NO_BLUETOOTH */
 
+#ifdef USE_SHADOW_TIME_EFFECT
+    setup_effects(window);
+#endif /* USE_SHADOW_TIME_EFFECT */
+
     /* Make sure the time is displayed from the start */
     update_time();
 
@@ -296,6 +340,10 @@ void main_window_load(Window *window) {
 }
 
 void main_window_unload(Window *window) {
+#ifdef USE_SHADOW_TIME_EFFECT
+    cleanup_effects();
+#endif /* USE_SHADOW_TIME_EFFECT */
+
 #ifndef NO_BLUETOOTH
     cleanup_bluetooth();
 #endif /* NO_BLUETOOTH */
