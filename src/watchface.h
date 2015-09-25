@@ -67,6 +67,10 @@
 #define TICK_HANDLER tick_handler
 #endif /* TICK_HANDLER */
 
+#ifndef DEBUG_TICK_HANDLER
+#define DEBUG_TICK_HANDLER debug_tick_handler
+#endif /* DEBUG_TICK_HANDLER */
+
 #ifndef MAIN_WINDOW_LOAD
 #define MAIN_WINDOW_LOAD main_window_load
 #endif /* MAIN_WINDOW_LOAD */

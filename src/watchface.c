@@ -31,12 +31,20 @@ bool bluetooth_state = false;
 char * debug_time_list[] = {
     "00:00",
     "01:01",
+    "01:23",
+    "04:56",
+    "07:58",
+    "07:59",
+    "05:26",
+    "07:48",
+    "09:23",
     "11:11",
     "12:34",
     "22:22",
     "23:50",
-    "25:55",
+    "23:55",
     /* 12 hour format withOUT leading zero, or space */
+    "12:12",
     "1:01",
     "8:55",
     /* 12 hour format withOUT leading zero, with  space */
@@ -286,6 +294,10 @@ void update_time() {
 
     // Display this time on the TextLayer
     text_layer_set_text(time_layer, buffer);
+
+#ifdef DEBUG_TIME_PAUSE
+    psleep(DEBUG_TIME_PAUSE);
+#endif /* DEBUG_TIME_PAUSE */
 }
 
 void main_window_load(Window *window) {
@@ -474,7 +486,7 @@ void init()
     /* Register events; TickTimerService, Battery */
     tick_timer_service_subscribe(MINUTE_UNIT, TICK_HANDLER);
 #ifdef DEBUG_TIME
-    tick_timer_service_subscribe(SECOND_UNIT, debug_tick_handler);
+    tick_timer_service_subscribe(SECOND_UNIT, DEBUG_TICK_HANDLER);
 #endif /* DEBUG_TIME */
 
     /* TODO use AppSync instead? */
