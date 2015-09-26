@@ -258,12 +258,16 @@ void update_time() {
     {
         static int     str_counter=0;
 
-        strcpy(buffer, debug_time_list[str_counter]);
-        str_counter++;
-        if (debug_time_list[str_counter] == NULL)
-        {
-            str_counter = 0;
-        }
+        #ifdef DEBUG_TIME_SCREENSHOT
+            strcpy(buffer, debug_time_list[3]);
+        #else
+            strcpy(buffer, debug_time_list[str_counter]);
+            str_counter++;
+            if (debug_time_list[str_counter] == NULL)
+            {
+                str_counter = 0;
+            }
+        #endif /* DEBUG_TIME_SCREENSHOT */
     }
 #else
     {
@@ -486,7 +490,9 @@ void init()
     /* Register events; TickTimerService, Battery */
     tick_timer_service_subscribe(MINUTE_UNIT, TICK_HANDLER);
 #ifdef DEBUG_TIME
-    tick_timer_service_subscribe(SECOND_UNIT, DEBUG_TICK_HANDLER);
+    #ifndef DEBUG_TIME_SCREENSHOT
+        tick_timer_service_subscribe(SECOND_UNIT, DEBUG_TICK_HANDLER);
+    #endif /* DEBUG_TIME_SCREENSHOT */
 #endif /* DEBUG_TIME */
 
     /* TODO use AppSync instead? */
