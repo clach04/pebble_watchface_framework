@@ -420,6 +420,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 time_color = COLOR_FALLBACK(GColorFromHEX(config_time_color), GColorWhite);
                 text_layer_set_text_color(time_layer, time_color);
                 text_layer_set_text_color(date_layer, time_color);
+                text_layer_set_text_color(battery_layer, time_color);
                 text_layer_set_text_color(bluetooth_layer, time_color);
                 break;
 
