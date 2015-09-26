@@ -1,23 +1,18 @@
+function getStorageValue(item, default_value){
+    var retVal = localStorage.getItem(item);
+    //console.log('value' + item + ': ' + String(retVal));
+    if (retVal === null || retVal == 'undefined' || retVal == 'null'){
+        retVal = default_value;
+    }
+    return retVal;
+}
+
 Pebble.addEventListener('showConfiguration', function(e) {
-  var background_color = localStorage.getItem('background_color');
-  if (!background_color)
-  {
-      // http://developer.getpebble.com/tools/color-picker/#000000
-      background_color = "000000";  // GColorBlack
-  }
-  var time_color = localStorage.getItem('time_color');
-  if (!time_color)
-  {
-      // http://developer.getpebble.com/tools/color-picker/#0000FF
-      time_color = "0000FF";  // GColorBlue
-  }
+  // http://developer.getpebble.com/tools/color-picker/
+  var background_color = getStorageValue('background_color', '000000'); // GColorBlack
+  var time_color = getStorageValue('time_color', 'FFFFFF'); // GColorWhite
   var vibrate_disconnect_str = 'off';
-  var vibrate_disconnect = localStorage.getItem('vibrate_disconnect');
-  if (! vibrate_disconnect)
-  {
-      console.log('!vibrate_disconnect: ');
-      vibrate_disconnect = 0;
-  }
+  var vibrate_disconnect = getStorageValue('vibrate_disconnect', 0);
   if (vibrate_disconnect == 1)
   {
       vibrate_disconnect_str = 'on';
@@ -29,9 +24,9 @@ Pebble.addEventListener('showConfiguration', function(e) {
 
   var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html' +
       '?' +
-      'background_color=' + background_color + '&' +
-      'time_color=' + time_color + '&' +
-      'vibrate_disconnect=' + vibrate_disconnect;
+      'background_color=' + encodeURIComponent(background_color) + '&' +
+      'time_color=' + encodeURIComponent(time_color) + '&' +
+      'vibrate_disconnect=' + encodeURIComponent(vibrate_disconnect);
   console.log('Configuration window opened. ' + URL);
   Pebble.openURL(URL);
 });
