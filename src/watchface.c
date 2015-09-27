@@ -260,6 +260,7 @@ void update_time() {
 
         #ifdef DEBUG_TIME_SCREENSHOT
             strcpy(buffer, debug_time_list[3]);
+            light_enable(true);  // mostly for emulator
         #else
             strcpy(buffer, debug_time_list[str_counter]);
             str_counter++;
