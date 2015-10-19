@@ -6,7 +6,7 @@ Working, ready to build Bare-Bones watch face for Pebble (OG and Time) Aplite an
 Instructions
 ------------
 
-  1. Copy (or clone) into your project
+  1. Copy (or clone) into your project. Click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
   2. Create a new uuid (in CloudPebble generate one with a single button push under settings) - see appinfo.json
   3. Compile and run!
 
