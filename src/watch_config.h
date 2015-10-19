@@ -12,10 +12,10 @@
     #define BT_POS GRect(0, 100, 180, 180) /* probably taller than really needed */
 
     #define DATE_ALIGN GTextAlignmentCenter
-    #define DATE_POS GRect(0, 140, 180, 180) /* probably taller than really needed */
+    #define DATE_POS GRect(0, 120, 180, 180) /* probably taller than really needed */
 
     #define BAT_ALIGN GTextAlignmentCenter
-    #define BAT_POS GRect(0, 120, 180, 180) /* probably taller than really needed */
+    #define BAT_POS GRect(0, 140, 180, 180) /* probably taller than really needed */
 #else /* PBL_RECT 144x168*/
     #define CLOCK_POS GRect(0, 52, 144, 168) /* probably taller than really needed */
     #define BT_POS GRect(0, 120, 144, 168) /* probably taller than really needed */
