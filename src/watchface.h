@@ -51,6 +51,10 @@
 #define BAT_ALIGN GTextAlignmentLeft
 #endif /* BAT_ALIGN */
 
+#ifndef DATE_ALIGN
+#define DATE_ALIGN GTextAlignmentRight
+#endif /* TIME_ALIGN */
+
 #ifndef TIME_ALIGN
 #define TIME_ALIGN GTextAlignmentCenter
 #endif /* TIME_ALIGN */

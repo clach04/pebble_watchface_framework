@@ -191,7 +191,7 @@ void setup_date(Window *window)
 
     /* Apply to TextLayer */
     text_layer_set_font(date_layer, fonts_get_system_font(FONT_DATE_SYSTEM_NAME));
-    text_layer_set_text_alignment(date_layer, GTextAlignmentRight);
+    text_layer_set_text_alignment(date_layer, DATE_ALIGN);
 
     // Add it as a child layer to the Window's root layer
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(date_layer));
