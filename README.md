@@ -1,7 +1,7 @@
 Watchface Framework
 ===================
 
-Working, ready to build Bare-Bones watch face for Pebble (OG and Time) Aplite and Basalt. With configuration and settings support.
+Working, ready to build Bare-Bones watch face for Pebble (OG/Classic, Time, and Round) Aplite, Basalt, and Chalk. With configuration and settings support.
 
 Instructions
 ------------
