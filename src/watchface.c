@@ -137,7 +137,7 @@ void handle_battery(BatteryChargeState charge_state) {
         text_layer_set_text_color(battery_layer, COLOR_FALLBACK(GColorGreen, time_color));
     } else {
         snprintf(battery_text, sizeof(battery_text), BAT_FMT_STR, charge_state.charge_percent);
-#ifdef PBL_PLATFORM_BASALT
+#ifdef PBL_COLOR
         /* TODO Check charge level and change color? E.g. red at 10%/20% */
         if (charge_state.charge_percent <= 20)
         {
@@ -221,9 +221,9 @@ void setup_bg_image(Window *window, uint32_t resource_id, GRect bounds)
 
     bitmap_layer_set_bitmap(background_layer, background_bitmap);
 
-#ifdef PBL_PLATFORM_APLITE
+#ifdef PBL_BW
      bitmap_layer_set_compositing_mode(background_layer, GCompOpAssign);
-#elif PBL_PLATFORM_BASALT
+#elif PBL_COLOR
      bitmap_layer_set_compositing_mode(background_layer, GCompOpSet);
 #endif
 
@@ -455,7 +455,7 @@ void init()
     time_color = DEFAULT_TIME_COLOR;
     background_color = DEFAULT_BACKGROUND_COLOR;
 
-#ifdef PBL_PLATFORM_BASALT
+#ifdef PBL_COLOR
     /* TODO refactor */
     if (persist_exists(KEY_TIME_COLOR))
     {
@@ -469,7 +469,7 @@ void init()
         APP_LOG(APP_LOG_LEVEL_INFO, "Read background color: %x", config_background_color);
         background_color = COLOR_FALLBACK(GColorFromHEX(config_background_color), GColorBlack);
     }
-#endif /* PBL_PLATFORM_BASALT */
+#endif /* PBL_COLOR */
 
     if (persist_exists(KEY_VIBRATE_ON_DISCONNECT))
     {
