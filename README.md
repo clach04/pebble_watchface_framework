@@ -29,7 +29,7 @@ Additional options
 In an ideal situation, `watchface.c` and `watchface.h` should not need editing *ever*. There may be cases where `main.c` needs editing. Most of the time `watch_config.h` is the only file that will need editing. `watch_config.h` options:
 
   * If `DEFAULT_TIME_COLOR` is defined it will be used for the default time color.
-  * If `DEFAULT_TIME_COLOR` is defined it will be used for thedefault background time color.
+  * If `DEFAULT_BACKGROUND_COLOR` is defined it will be used for the default background time color.
   * If an image is present under resources and defined as `BG_IMAGE`, it will be used as a background image. For Basalt, image transparency is honored.
   * If a font  present under resources and  defined as `FONT_NAME`, it will be used for displaying the time.
   * If `FONT_SYSTEM_NAME` is defined to a system font name and `FONT_NAME` is not defined, that system font will be used for time display
