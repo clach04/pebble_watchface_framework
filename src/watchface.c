@@ -190,7 +190,11 @@ void setup_date(Window *window)
     text_layer_set_text(date_layer, MAX_DATE_STR);
 
     /* Apply to TextLayer */
+#ifdef USE_TIME_FONT_FOR_DATE
+    text_layer_set_font(date_layer, time_font);
+#else
     text_layer_set_font(date_layer, fonts_get_system_font(FONT_DATE_SYSTEM_NAME));
+#endif /*  USE_TIME_FONT_FOR_DATE */
     text_layer_set_text_alignment(date_layer, DATE_ALIGN);
 
     // Add it as a child layer to the Window's root layer
