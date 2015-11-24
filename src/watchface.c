@@ -424,9 +424,20 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 persist_write_int(KEY_TIME_COLOR, config_time_color);
                 time_color = COLOR_FALLBACK(GColorFromHEX(config_time_color), GColorWhite);
                 text_layer_set_text_color(time_layer, time_color);
-                text_layer_set_text_color(date_layer, time_color);
-                text_layer_set_text_color(battery_layer, time_color);
-                text_layer_set_text_color(bluetooth_layer, time_color);
+
+                if (date_layer) /* or #ifndef NO_DATE */
+                {
+                    text_layer_set_text_color(date_layer, time_color);
+                }
+                if (battery_layer)
+                {
+                    text_layer_set_text_color(battery_layer, time_color);
+                }
+                if (bluetooth_layer)
+                {
+                    text_layer_set_text_color(bluetooth_layer, time_color);
+                }
+                APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
                 break;
 
             case KEY_BACKGROUND_COLOR:
@@ -436,6 +447,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 persist_write_int(KEY_BACKGROUND_COLOR, config_background_color);
                 background_color = COLOR_FALLBACK(GColorFromHEX(config_background_color), GColorWhite); // FIXME Aplite colors inverted?
                 window_set_background_color(main_window, background_color);
+                APP_LOG(APP_LOG_LEVEL_DEBUG, "BACKGROUND COLOR DONE");
                 break;
 
             case KEY_VIBRATE_ON_DISCONNECT:
