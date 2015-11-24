@@ -48,7 +48,7 @@ Examples
 
   * https://github.com/clach04/watchface_JupiterMass - Black and White, Color, and Round support
       * https://github.com/clach04/watchface_JupiterMass/blob/master/src/watch_config.h + the resources (font and image) that make this different from the basic template)
-  * https://github.com/clach04/watchface_spawn/wiki - has a number of branches showing different ideas and formats for a watchface with changes only made in watch_config.h. To import and demo these:
+  * https://github.com/clach04/watchface_spawn/wiki - has a number of branches showing different ideas and formats for a watchface with changes only made in watch_config.h. Uses builtin system font and a single PNG image (with transparency) To import and demo these:
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/132x132_bigtime_at_bottom
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/144x144_time_at_bottom
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/basic_watchface
@@ -56,3 +56,4 @@ Examples
       * https://github.com/clach04/watchface_CapNion/blob/master/src/watch_config.h + the resources (font and image) that make this different from the basic template)
   * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has a custom ticker (and setup/cleanup)
       * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
+
