@@ -525,9 +525,9 @@ void init()
     /* TODO use AppSync instead? */
     app_message_register_inbox_received(in_recv_handler);
 #ifdef MAX_MESSAGE_SIZES
-    app_message_open(MAX_MESSAGE_SIZE_IN, MAX_MESSAGE_SIZE_OUT); 
+    app_message_open(MAX_MESSAGE_SIZE_IN, MAX_MESSAGE_SIZE_OUT);
 #else /* MAX_MESSAGE_INBOX_SIZE */
-    app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum()); 
+    app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
 #endif /* MAX_MESSAGE_INBOX_SIZE */
 }
 
