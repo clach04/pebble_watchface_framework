@@ -454,7 +454,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 config_background_color = (int)t->value->int32;
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting background color: 0x%06x", config_background_color);
                 persist_write_int(KEY_BACKGROUND_COLOR, config_background_color);
-                background_color = COLOR_FALLBACK(GColorFromHEX(config_background_color), GColorWhite); // FIXME Aplite colors inverted?
+                background_color = COLOR_FALLBACK(GColorFromHEX(config_background_color), GColorBlack); // FIXME Aplite colors inverted?
                 window_set_background_color(main_window, background_color);
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "BACKGROUND COLOR DONE");
                 break;
