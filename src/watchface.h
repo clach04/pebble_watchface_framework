@@ -83,11 +83,6 @@
 #define MAIN_WINDOW_UNLOAD main_window_unload
 #endif /* MAIN_WINDOW_UNLOAD */
 
-#ifndef BG_IMAGE_GRECT
-#define BG_IMAGE_GRECT GRectZero
-#endif /* BG_IMAGE_GRECT */
-
-
 extern Window    *main_window;
 extern TextLayer *time_layer;
 extern TextLayer *date_layer;
