@@ -6,6 +6,10 @@
 #endif /* USE_SHADOW_TIME_EFFECT */
 
 
+#ifdef PBL_BW
+    #define GColorFromHEX(int_color) int_color == 0 ? GColorBlack : GColorWhite
+#endif /* PBL_BW */
+
 Window    *main_window=NULL;
 TextLayer *time_layer=NULL;
 TextLayer *date_layer=NULL;
@@ -431,7 +435,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 config_time_color = (int)t->value->int32;
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting time color: 0x%06x", config_time_color);
                 persist_write_int(KEY_TIME_COLOR, config_time_color);
-                time_color = COLOR_FALLBACK(GColorFromHEX(config_time_color), GColorWhite);
+                time_color = GColorFromHEX(config_time_color);
                 text_layer_set_text_color(time_layer, time_color);
 
                 if (date_layer) /* or #ifndef NO_DATE */
@@ -454,7 +458,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 config_background_color = (int)t->value->int32;
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting background color: 0x%06x", config_background_color);
                 persist_write_int(KEY_BACKGROUND_COLOR, config_background_color);
-                background_color = COLOR_FALLBACK(GColorFromHEX(config_background_color), GColorBlack); // FIXME Aplite colors inverted?
+                background_color = GColorFromHEX(config_background_color);
                 window_set_background_color(main_window, background_color);
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "BACKGROUND COLOR DONE");
                 break;
@@ -488,13 +492,13 @@ void init()
     {
         config_time_color = persist_read_int(KEY_TIME_COLOR);
         APP_LOG(APP_LOG_LEVEL_INFO, "Read time color: %x", config_time_color);
-        time_color = COLOR_FALLBACK(GColorFromHEX(config_time_color), GColorWhite);
+        time_color = GColorFromHEX(config_time_color);
     }
     if (persist_exists(KEY_BACKGROUND_COLOR))
     {
         config_background_color = persist_read_int(KEY_BACKGROUND_COLOR);
         APP_LOG(APP_LOG_LEVEL_INFO, "Read background color: %x", config_background_color);
-        background_color = COLOR_FALLBACK(GColorFromHEX(config_background_color), GColorBlack);
+        background_color = GColorFromHEX(config_background_color);
     }
 #endif /* PBL_COLOR */
 
