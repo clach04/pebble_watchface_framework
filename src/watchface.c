@@ -214,6 +214,8 @@ void setup_bg_image(Window *window, uint32_t resource_id, GRect bounds)
     // Create GBitmap, then set to created BitmapLayer
     background_bitmap = gbitmap_create_with_resource(resource_id);
 
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() entry", __func__);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bounds x=%d, y=%d, w=%d, h=%d", __func__, bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
     if (bounds.origin.x == 0 &&
         bounds.origin.y == 0 &&
         bounds.size.w == 0 &&
@@ -221,6 +223,7 @@ void setup_bg_image(Window *window, uint32_t resource_id, GRect bounds)
     {
         bounds = layer_get_bounds(window_get_root_layer(window));
     }
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bounds x=%d, y=%d, w=%d, h=%d", __func__, bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
     background_layer = bitmap_layer_create(bounds);
 
     bitmap_layer_set_bitmap(background_layer, background_bitmap);
@@ -315,7 +318,7 @@ void main_window_load(Window *window) {
 #ifdef BG_IMAGE
     #ifdef BG_IMAGE_GRECT
         setup_bg_image(window, BG_IMAGE, BG_IMAGE_GRECT);
-    else /* BG_IMAGE_GRECT */
+    #else /* BG_IMAGE_GRECT */
         setup_bg_image(window, BG_IMAGE, GRectZero);
     #endif /* BG_IMAGE_GRECT */
 #endif /* BG_IMAGE */
