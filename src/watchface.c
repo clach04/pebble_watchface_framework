@@ -424,6 +424,8 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
     {
         switch(t->key)
         {
+            /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro  */
+
             case KEY_TIME_COLOR:
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "got KEY_TIME_COLOR");
                 config_time_color = (int)t->value->int32;
@@ -522,7 +524,11 @@ void init()
 
     /* TODO use AppSync instead? */
     app_message_register_inbox_received(in_recv_handler);
+#ifdef MAX_MESSAGE_SIZES
+    app_message_open(MAX_MESSAGE_SIZE_IN, MAX_MESSAGE_SIZE_OUT); 
+#else /* MAX_MESSAGE_INBOX_SIZE */
     app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum()); 
+#endif /* MAX_MESSAGE_INBOX_SIZE */
 }
 
 

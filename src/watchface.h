@@ -8,6 +8,23 @@
 #define KEY_VIBRATE_ON_DISCONNECT 1
 #define KEY_BACKGROUND_COLOR 2
 
+#ifndef USE_MAX_MESSAGE_SIZE
+    /*
+    ** framework expects ONLY the three items above
+    ** pebble-js-app.js sanitizes values and
+    ** max length is about 90 bytes incoming, e.g.:
+    **    {"KEY_TIME_COLOR":16777215,"KEY_BACKGROUND_COLOR":16777215,"KEY_VIBRATE_ON_DISCONNECT":0}
+    ** Setting accurate max sizes avoids warnings:
+    **  [INFO] essage_outbox.c:49: app_message_open() called with app_message_outbox_size_maximum().
+    **  [INFO] essage_outbox.c:52: This consumes 8200 bytes of heap memory, potentially more in the future!
+    **  [INFO] message_inbox.c:13: app_message_open() called with app_message_inbox_size_maximum().
+    **  [INFO] message_inbox.c:16: This consumes 8200 bytes of heap memory, potentially more in the future!    
+    */
+    #define MAX_MESSAGE_SIZES
+    #define MAX_MESSAGE_SIZE_IN 200
+    #define MAX_MESSAGE_SIZE_OUT 0
+#endif
+
 #ifndef BLUETOOTH_DISCONNECTED_STR
 #define BLUETOOTH_DISCONNECTED_STR "BT Disconnected"
 #endif /* BLUETOOTH_DISCONNECTED_STR */
