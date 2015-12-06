@@ -57,8 +57,9 @@ Examples
   * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has a custom ticker (and setup/cleanup)
       * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
 
-Notes
------
+Notes and other resources
+-------------------------
 
 For suggestions on image options and converstion see https://www.reddit.com/r/pebble/comments/3ej5wf/pebble_time_image_conversion_contrast/
 
+Multi-platform support https://developer.getpebble.com/guides/best-practices/multi-platform/
