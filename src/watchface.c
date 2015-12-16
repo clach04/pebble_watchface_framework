@@ -283,6 +283,10 @@ void update_time() {
     }
 #else
     {
+        /*
+        ** TODO experiment with clock_copy_time_string()
+        ** https://developer.getpebble.com/docs/c/Foundation/Wall_Time/
+        */
         // Write the current hours and minutes into the buffer
         if(clock_is_24h_style() == true) {
             // 24h hour format
