@@ -46,7 +46,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
 Examples
 --------
 
-  * https://github.com/clach04/watchface_JupiterMass - Black and White, Color, and Round support
+  * https://github.com/clach04/watchface_JupiterMass - Black and White, Color, and Round support ![](../watchface_JupiterMass/screenshots/basalt_charging.png)
       * https://github.com/clach04/watchface_JupiterMass/blob/master/src/watch_config.h + the resources (font and image) that make this different from the basic template)
   * https://github.com/clach04/watchface_spawn/wiki - has a number of branches showing different ideas and formats for a watchface with changes only made in watch_config.h. Uses builtin system font and a single PNG image (with transparency) To import and demo these:
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/132x132_bigtime_at_bottom
