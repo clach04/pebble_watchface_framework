@@ -3,6 +3,19 @@ Watchface Framework
 
 Working, ready to build Bare-Bones watch face for Pebble (OG/Classic, Time, and Round) Aplite, Basalt, and Chalk. With configuration and settings support.
 
+All the examples below use the same framework.
+
+<img src="https://raw.githubusercontent.com/clach04/watchface_JupiterMass/master/screenshots/basalt_charging.png" alt="NR7 Pebble Time color screenshot showing charging in progress"> 
+<img src="https://raw.githubusercontent.com/clach04/watchface_JupiterMass/master/screenshots/chalk_round.png" alt="NR7 Pebble Time Round color screenshot">
+<img src="https://raw.githubusercontent.com/clach04/watchface_CapNion/master/screenshots/basalt_emu_screenshot_001.png" alt="Capinion Pebble Time color screenshot">
+<img src="https://raw.githubusercontent.com/clach04/watchface_Paragade/master/screenshots/basalt_paragon_001.png" alt="Paragade Pebble Time color screenshot">
+<img src="https://raw.githubusercontent.com/clach04/watchface_Paragade/master/screenshots/aplite_renegade_001.png" alt="Paragade Original Pebble Mono screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/132x132_bigtime_at_bottom.png" alt="Spawn Big Time  Pebble Time color screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/144x144_time_at_bottom.png" alt="Spawn Small Time  Pebble Time color screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/basic_watchface.png" alt="Spawn Big Time and Info  Pebble Time color screenshot">
+
+
+
 Instructions
 ------------
 
@@ -45,17 +58,6 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
 
 Examples
 --------
-
-All use the same framework.
-
-<img src="https://raw.githubusercontent.com/clach04/watchface_JupiterMass/master/screenshots/basalt_charging.png" alt="NR7 Pebble Time color screenshot showing charging in progress"> 
-<img src="https://raw.githubusercontent.com/clach04/watchface_JupiterMass/master/screenshots/chalk_round.png" alt="NR7 Pebble Time Round color screenshot">
-<img src="https://raw.githubusercontent.com/clach04/watchface_CapNion/master/screenshots/basalt_emu_screenshot_001.png" alt="Capinion Pebble Time color screenshot">
-<img src="https://raw.githubusercontent.com/clach04/watchface_Paragade/master/screenshots/basalt_paragon_001.png" alt="Paragade Pebble Time color screenshot">
-<img src="https://raw.githubusercontent.com/clach04/watchface_Paragade/master/screenshots/aplite_renegade_001.png" alt="Paragade Original Pebble Mono screenshot">
-
-
-basalt_emu_screenshot_001.png
 
   * https://github.com/clach04/watchface_JupiterMass - Black and White, Color, and Round support
       * https://github.com/clach04/watchface_JupiterMass/blob/master/src/watch_config.h + the resources (font and image) that make this different from the basic template)
