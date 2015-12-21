@@ -17,13 +17,17 @@ Window    *main_window=NULL;
 TextLayer *time_layer=NULL;
 TextLayer *date_layer=NULL;
 TextLayer *battery_layer=NULL;
-TextLayer *bluetooth_layer=NULL;
+TextLayer *bluetooth_tlayer=NULL;
 
 GFont       time_font;
 #ifdef BG_IMAGE
 BitmapLayer *background_layer=NULL;
 GBitmap     *background_bitmap=NULL;
 #endif /* BG_IMAGE */
+#ifdef BT_DISCONNECT_IMAGE
+BitmapLayer *bluetooth_blayer=NULL;
+GBitmap     *bluetooth_disconnect_bitmap=NULL;
+#endif /* BT_DISCONNECT_IMAGE */
 /* For colors, see http://developer.getpebble.com/tools/color-picker/#0000FF */
 GColor       time_color;  /* NOTE used for date too */
 GColor       background_color;
@@ -61,10 +65,14 @@ char * debug_time_list[] = {
 };
 #endif /* DEBUG_TIME */
 
+/* TODO resequence? */
+void setup_bt_image(Window *window, uint32_t resource_id, GRect bounds);
+void cleanup_bt_image();
+
+
 #ifdef USE_SHADOW_TIME_EFFECT
 static EffectLayer* effect_layer=NULL;
 static EffectOffset effect_offset;
-
 
 void setup_effects(Window *window)
 {
@@ -98,14 +106,25 @@ void cleanup_effects()
 
 void handle_bluetooth(bool connected)
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bluetooth status %d", __func__, (int) connected);
     /* TODO use gfx not text */
     if (connected)
     {
-        text_layer_set_text(bluetooth_layer, "");
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bluetooth connected", __func__);
+        #ifdef BT_DISCONNECT_IMAGE
+            bitmap_layer_set_bitmap(bluetooth_blayer, NULL); /* Show nothing */
+        #else /* BT_DISCONNECT_IMAGE */
+            text_layer_set_text(bluetooth_tlayer, "");
+        #endif /* BT_DISCONNECT_IMAGE */
     }
     else
     {
-        text_layer_set_text(bluetooth_layer, BLUETOOTH_DISCONNECTED_STR);
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bluetooth DISconnected", __func__); // TODO open issue with Pebble - Why is this NOT showing up in debug log?
+        #ifdef BT_DISCONNECT_IMAGE
+            bitmap_layer_set_bitmap(bluetooth_blayer, bluetooth_disconnect_bitmap);
+        #else /* BT_DISCONNECT_IMAGE */
+            text_layer_set_text(bluetooth_tlayer, BLUETOOTH_DISCONNECTED_STR);
+        #endif /* BT_DISCONNECT_IMAGE */
         if (config_time_vib_on_disconnect && (bluetooth_state != connected))
         {
             /* had BT connection then lost it, rather than started disconnected */
@@ -118,13 +137,22 @@ void handle_bluetooth(bool connected)
 
 void setup_bluetooth(Window *window)
 {
-    bluetooth_layer = text_layer_create(BT_POS);
-    text_layer_set_text_color(bluetooth_layer, time_color);
-    text_layer_set_background_color(bluetooth_layer, GColorClear);
-    text_layer_set_font(bluetooth_layer, fonts_get_system_font(FONT_BT_SYSTEM_NAME));
-    text_layer_set_text_alignment(bluetooth_layer, BT_ALIGN);
-    layer_add_child(window_get_root_layer(window), text_layer_get_layer(bluetooth_layer));
-    text_layer_set_text(bluetooth_layer, "");
+#ifdef BT_DISCONNECT_IMAGE
+    #ifdef BT_DISCONNECT_IMAGE_GRECT
+        setup_bt_image(window, BT_DISCONNECT_IMAGE, BT_DISCONNECT_IMAGE_GRECT);
+    #else /* BT_DISCONNECT_IMAGE_GRECT */
+        setup_bt_image(window, BT_DISCONNECT_IMAGE, GRectZero);
+    #endif /* BT_DISCONNECT_IMAGE_GRECT */
+#else
+    /* text */
+    bluetooth_tlayer = text_layer_create(BT_POS);
+    text_layer_set_text_color(bluetooth_tlayer, time_color);
+    text_layer_set_background_color(bluetooth_tlayer, GColorClear);
+    text_layer_set_font(bluetooth_tlayer, fonts_get_system_font(FONT_BT_SYSTEM_NAME));
+    text_layer_set_text_alignment(bluetooth_tlayer, BT_ALIGN);
+    layer_add_child(window_get_root_layer(window), text_layer_get_layer(bluetooth_tlayer));
+    text_layer_set_text(bluetooth_tlayer, "");
+#endif /* BT_DISCONNECT_IMAGE */
 
     handle_bluetooth(bluetooth_connection_service_peek());
     bluetooth_connection_service_subscribe(handle_bluetooth);
@@ -133,7 +161,11 @@ void setup_bluetooth(Window *window)
 void cleanup_bluetooth()
 {
     bluetooth_connection_service_unsubscribe();
-    text_layer_destroy(bluetooth_layer);
+#ifdef BT_DISCONNECT_IMAGE
+    cleanup_bt_image();
+#else
+    text_layer_destroy(bluetooth_tlayer);
+#endif /* BT_DISCONNECT_IMAGE */
 }
 
 void handle_battery(BatteryChargeState charge_state) {
@@ -259,6 +291,53 @@ void cleanup_bg_image()
     }
 }
 
+#ifdef BT_DISCONNECT_IMAGE
+/*
+** If bounds is GRectZero then use whole watch screen, auto centered
+*/
+void setup_bt_image(Window *window, uint32_t resource_id, GRect bounds)
+{
+    // Create GBitmap, then set to created BitmapLayer
+    bluetooth_disconnect_bitmap = gbitmap_create_with_resource(resource_id);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() entry", __func__);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bounds x=%d, y=%d, w=%d, h=%d", __func__, bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
+    if (bounds.origin.x == 0 &&
+        bounds.origin.y == 0 &&
+        bounds.size.w == 0 &&
+        bounds.size.h == 0)
+    {
+        bounds = layer_get_bounds(window_get_root_layer(window));
+    }
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bounds x=%d, y=%d, w=%d, h=%d", __func__, bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
+    bluetooth_blayer = bitmap_layer_create(bounds);
+
+    /* Do not attached image to layer (yet...) */
+    bitmap_layer_set_bitmap(bluetooth_blayer, NULL);
+
+#ifdef PBL_BW
+     bitmap_layer_set_compositing_mode(bluetooth_blayer, GCompOpAssign);
+#elif PBL_COLOR
+     bitmap_layer_set_compositing_mode(bluetooth_blayer, GCompOpSet);
+#endif
+    layer_add_child(window_get_root_layer(main_window), bitmap_layer_get_layer(bluetooth_blayer));
+}
+
+void cleanup_bt_image()
+{
+    /* Destroy GBitmap */
+    if (bluetooth_disconnect_bitmap)
+    {
+        gbitmap_destroy(bluetooth_disconnect_bitmap);
+    }
+
+    /* Destroy BitmapLayer */
+    if (bluetooth_blayer)
+    {
+        bitmap_layer_destroy(bluetooth_blayer);
+    }
+}
+#endif /* BT_DISCONNECT_IMAGE_GRECT */
 
 void update_time() {
     // Get a tm structure
@@ -361,7 +440,9 @@ void main_window_load(Window *window) {
 #ifndef NO_BATTERY
     setup_battery(window);
 #endif /* NO_BATTERY */
+
 #ifndef NO_BLUETOOTH
+    /* setup BT layer AFTER (i.e. on top of) time layer */
     setup_bluetooth(window);
 #endif /* NO_BLUETOOTH */
 
@@ -453,9 +534,9 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 {
                     text_layer_set_text_color(battery_layer, time_color);
                 }
-                if (bluetooth_layer)
+                if (bluetooth_tlayer)
                 {
-                    text_layer_set_text_color(bluetooth_layer, time_color);
+                    text_layer_set_text_color(bluetooth_tlayer, time_color);
                 }
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
                 break;

@@ -52,6 +52,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
       * if `USE_TIME_FONT_FOR_DATE` is defined, the date is displayed using the same font as used for time
   * `BT_ALIGN`, `BAT_ALIGN`, and `TIME_ALIGN` are used to change alignment.
   * If `BLUETOOTH_DISCONNECTED_STR` is defined, this text will be displayed for the Bluetooth disconnect message.
+  * If `BT_DISCONNECT_IMAGE` is defined, this resource image will be displayed on bluetooth disconnect.
   * If `DATE_FMT_STR` is defined it will be used for the format of the date text.
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
   * `NO_BLUETOOTH`, `NO_BATTERY`, and `NO_DATE` will disable display of bluetooth disconnect, battery status, and date.

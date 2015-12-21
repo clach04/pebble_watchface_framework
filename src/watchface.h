@@ -104,7 +104,7 @@ extern Window    *main_window;
 extern TextLayer *time_layer;
 extern TextLayer *date_layer;
 extern TextLayer *battery_layer;
-extern TextLayer *bluetooth_layer;
+extern TextLayer *bluetooth_tlayer;
 
 extern GFont       time_font;
 extern BitmapLayer *background_layer;
