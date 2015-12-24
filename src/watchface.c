@@ -113,6 +113,10 @@ void handle_bluetooth(bool connected)
         APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bluetooth connected", __func__);
         #ifdef BT_DISCONNECT_IMAGE
             bitmap_layer_set_bitmap(bluetooth_blayer, NULL); /* Show nothing */
+            /*
+            ** alternative is layer_set_hidden()
+            **  https://developer.getpebble.com/docs/c/User_Interface/Layers/#layer_set_hidden
+            */
         #else /* BT_DISCONNECT_IMAGE */
             text_layer_set_text(bluetooth_tlayer, "");
         #endif /* BT_DISCONNECT_IMAGE */
