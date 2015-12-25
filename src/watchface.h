@@ -30,6 +30,11 @@
 #endif /* BLUETOOTH_DISCONNECTED_STR */
 
 #ifndef DATE_FMT_STR
+/*
+** DATE_FMT_STR format for date, passed to strftime()
+** https://developer.getpebble.com/docs/c/Standard_C/Time/#strftime
+** See http://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html for more details
+*/
 #define DATE_FMT_STR "%a, %d %b"  /* TODO review %d for day */
 #define MAX_DATE_STR "Thu, 00 Aug"  /* if custom version of DATE_FMT_STR is set, MAX_DATE_STR  needs to be updated too */
 #endif /* DATE_FMT_STR */
