@@ -56,6 +56,26 @@ Pebble.addEventListener('showConfiguration', function(e) {
         stored_dict = JSON.parse(stored_dict_str);
     }
     console.log('stored_dict: ' + JSON.stringify(stored_dict));
+    console.log('default_dict: ' + JSON.stringify(default_dict));
+
+    /* Handle old config - not stored in dict */
+    console.log('Checking old (non-dict) config items');
+    var old_config_names = ['background_color', 'time_color', 'vibrate_disconnect'];
+    for (var i in old_config_names)
+    {
+        var config_name=old_config_names[i];
+        var tmp_setting;
+        console.log('i=' + i + '=' + config_name);
+        tmp_setting = getStorageValue(config_name, null);
+        if (tmp_setting !== null)
+        {
+            default_dict[config_name] = tmp_setting;
+            console.log('about to remove old localStorage item ' + config_name);
+            localStorage.removeItem(config_name);
+        }
+    }
+
+    var configuration = merge_options(default_dict, stored_dict);
     if (Pebble.getActiveWatchInfo)
     {
         /*
@@ -64,9 +84,9 @@ Pebble.addEventListener('showConfiguration', function(e) {
         */
         var info = Pebble.getActiveWatchInfo();
         console.log('Pebble info: ' + JSON.stringify(info));
-        default_dict.pebble_platform = info.platform;
-        default_dict.pebble_model = info.model;
-        default_dict.pebble_language = info.language;
+        configuration.pebble_platform = info.platform;
+        configuration.pebble_model = info.model;
+        configuration.pebble_language = info.language;
         /*
         ** Useful info:
             platform: aplite|basalt|chalk
@@ -115,27 +135,6 @@ Pebble.addEventListener('showConfiguration', function(e) {
         ** NOTE emulator with 3.8 SDK for aplite does have this info.
         */
     }
-
-    console.log('default_dict: ' + JSON.stringify(default_dict));
-
-    /* Handle old config - not stored in dict */
-    console.log('Checking old (non-dict) config items');
-    var old_config_names = ['background_color', 'time_color', 'vibrate_disconnect'];
-    for (var i in old_config_names)
-    {
-        var config_name=old_config_names[i];
-        var tmp_setting;
-        console.log('i=' + i + '=' + config_name);
-        tmp_setting = getStorageValue(config_name, null);
-        if (tmp_setting !== null)
-        {
-            default_dict[config_name] = tmp_setting;
-            console.log('about to remove old localStorage item ' + config_name);
-            localStorage.removeItem(config_name);
-        }
-    }
-
-    var configuration = merge_options(default_dict, stored_dict);
     console.log('configuration: ' + JSON.stringify(configuration));
 
     var param_array = [];
