@@ -34,6 +34,9 @@ Pebble.addEventListener('showConfiguration', function(e) {
             localStorage.setItem('vibrate_disconnect', true);
     */
     /* DEBUG */
+
+    var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html';
+
     var default_dict = {
         version_settings: 0,  // Bump this when ever config storage changes
         // http://developer.getpebble.com/tools/color-picker/
@@ -84,9 +87,9 @@ Pebble.addEventListener('showConfiguration', function(e) {
         temp_str = config_key + '=' + encodeURIComponent(configuration[config_key]);
         param_array.push(temp_str);
     }
-    var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html' + '?' + param_array.join('&');
-    console.log('Configuration window opened. ' + URL);
-    Pebble.openURL(URL);
+    var URL_with_params = URL + '?' + param_array.join('&');
+    console.log('Configuration window opened. ' + URL_with_params);
+    Pebble.openURL(URL_with_params);
 });
 
 Pebble.addEventListener('webviewclosed',
