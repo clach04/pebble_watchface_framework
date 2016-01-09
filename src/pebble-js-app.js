@@ -56,6 +56,66 @@ Pebble.addEventListener('showConfiguration', function(e) {
         stored_dict = JSON.parse(stored_dict_str);
     }
     console.log('stored_dict: ' + JSON.stringify(stored_dict));
+    if (Pebble.getActiveWatchInfo)
+    {
+        /*
+        ** SDK v3 or higher.
+        ** E.g. Basalt, Chalk, or Aplite with 3.8+
+        */
+        var info = Pebble.getActiveWatchInfo();
+        console.log('Pebble info: ' + JSON.stringify(info));
+        default_dict.pebble_platform = info.platform;
+        default_dict.pebble_model = info.model;
+        default_dict.pebble_language = info.language;
+        /*
+        ** Useful info:
+            platform: aplite|basalt|chalk
+            model: qemu_platform_aplite|qemu_platform_basalt|qemu_platform_chalk|pebble_time_black
+
+        Seen in emulator:
+        {
+            "platform": "aplite",
+            "model": "qemu_platform_aplite",
+            "firmware": {
+                "major": 3,
+                "suffix": "",
+                "minor": 3,
+                "patch": 1
+            },
+            "language": "en_US"
+        }
+        {
+            "platform": "basalt",
+            "model": "qemu_platform_basalt",
+            "firmware": {
+                "major": 3,
+                "suffix": "",
+                "minor": 3,
+                "patch": 1
+            },
+            "language": "en_US"
+        }
+        {
+            "platform": "chalk",
+            "model": "qemu_platform_chalk",
+            "firmware": {
+                "major": 3,
+                "suffix": "",
+                "minor": 3,
+                "patch": 1
+            },
+            "language": "en_US"
+        }
+        */
+    }
+    else
+    {
+        /*
+        ** Info NOT available with SDK pre v3. Probably old Aplite.
+        ** NOTE emulator with 3.8 SDK for aplite does have this info.
+        */
+    }
+
     console.log('default_dict: ' + JSON.stringify(default_dict));
 
     /* Handle old config - not stored in dict */
