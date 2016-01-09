@@ -55,31 +55,22 @@ Pebble.addEventListener('showConfiguration', function(e) {
     console.log('stored_dict: ' + JSON.stringify(stored_dict));
     console.log('default_dict: ' + JSON.stringify(default_dict));
 
-    // TODO replace with a loop, remove duplicate code
-  var background_color = getStorageValue('background_color', null);
-    if (background_color !== null)
+    /* Handle old config - not stored in dict */
+    console.log('Checking old (non-dict) config items');
+    var old_config_names = ['background_color', 'time_color', 'vibrate_disconnect'];
+    for (var i in old_config_names)
     {
-        default_dict.background_color = background_color;
-        console.log('about to remove old localStorage item background_color');
-        localStorage.removeItem('background_color');
+        var config_name=old_config_names[i];
+        var tmp_setting;
+        console.log('i=' + i + '=' + config_name);
+        tmp_setting = getStorageValue(config_name, null);
+        if (tmp_setting !== null)
+        {
+            default_dict[config_name] = tmp_setting;
+            console.log('about to remove old localStorage item ' + config_name);
+            localStorage.removeItem(config_name);
+        }
     }
-
-  var time_color = getStorageValue('time_color', null);
-    if (time_color !== null)
-    {
-        default_dict.time_color = time_color;
-        console.log('about to remove old localStorage item time_color');
-        localStorage.removeItem('time_color');
-    }
-
-  var vibrate_disconnect = getStorageValue('vibrate_disconnect', null);
-    if (vibrate_disconnect !== null)
-    {
-        default_dict.vibrate_disconnect = vibrate_disconnect;
-        console.log('about to remove old localStorage item vibrate_disconnect');
-        localStorage.removeItem('vibrate_disconnect');
-    }
-
 
     var configuration = merge_options(default_dict, stored_dict);
     console.log('configuration: ' + JSON.stringify(configuration));
