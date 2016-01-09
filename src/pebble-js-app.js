@@ -201,6 +201,9 @@ Pebble.addEventListener('webviewclosed',
             */
             var configuration = merge_options(default_dict, configuration_from_page);
 
+            /* Validate config */
+            configuration.vibrate_disconnect = force_bool(configuration.vibrate_disconnect);
+
             /* even though we don't really trust `configuration`, store it in local phone storage */
             // TODO store (validated) dictionary (below) instead - which stores color settings differently
             console.log('store config on phone');
@@ -210,7 +213,7 @@ Pebble.addEventListener('webviewclosed',
             var dictionary = {
               "KEY_TIME_COLOR": parseInt(configuration.time_color, 16),  // TODO color not validated
               "KEY_BACKGROUND_COLOR": parseInt(configuration.background_color, 16),  // TODO color not validated
-              "KEY_VIBRATE_ON_DISCONNECT": force_bool(configuration.vibrate_disconnect) ? 1 : 0  // Force to int
+              "KEY_VIBRATE_ON_DISCONNECT": configuration.vibrate_disconnect ? 1 : 0  // Force to int
             };
 
             console.log('dictionary to send to Pebble' + JSON.stringify(dictionary));
