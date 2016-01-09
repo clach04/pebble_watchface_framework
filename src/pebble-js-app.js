@@ -208,12 +208,9 @@ Pebble.addEventListener('webviewclosed',
 
             // Send to Pebble
             var vibrate_disconnect = 0;
-            if ('vibrate_disconnect' in configuration)
+            if (force_bool(configuration.vibrate_disconnect))
             {
-                if (force_bool(configuration.vibrate_disconnect))
-                {
-                    vibrate_disconnect = 1;
-                }
+                vibrate_disconnect = 1;
             }
             var dictionary = {
               "KEY_TIME_COLOR": parseInt(configuration.time_color, 16),
