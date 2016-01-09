@@ -57,12 +57,7 @@ Pebble.addEventListener('showConfiguration', function(e) {
 
     // TODO replace with a loop, remove duplicate code
   var background_color = getStorageValue('background_color', null);
-    if (background_color === null)
-    {
-        // FIXME loose this....
-        background_color = default_dict.background_color;
-    }
-    else
+    if (background_color !== null)
     {
         default_dict.background_color = background_color;
         console.log('about to remove old localStorage item background_color');
@@ -70,12 +65,7 @@ Pebble.addEventListener('showConfiguration', function(e) {
     }
 
   var time_color = getStorageValue('time_color', null);
-    if (time_color === null)
-    {
-        // FIXME loose this....
-        time_color = default_dict.time_color;
-    }
-    else
+    if (time_color !== null)
     {
         default_dict.time_color = time_color;
         console.log('about to remove old localStorage item time_color');
@@ -83,12 +73,7 @@ Pebble.addEventListener('showConfiguration', function(e) {
     }
 
   var vibrate_disconnect = getStorageValue('vibrate_disconnect', null);
-    if (vibrate_disconnect === null)
-    {
-        // FIXME loose this....
-        vibrate_disconnect = default_dict.vibrate_disconnect;
-    }
-    else
+    if (vibrate_disconnect !== null)
     {
         default_dict.vibrate_disconnect = vibrate_disconnect;
         console.log('about to remove old localStorage item vibrate_disconnect');
