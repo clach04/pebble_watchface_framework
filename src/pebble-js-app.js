@@ -108,6 +108,12 @@ Pebble.addEventListener('webviewclosed',
             */
             // TODO as configuration is untrusted and may be missing values, merge in from default_dict
 
+            /* even though we don't realy trust `configuration`, store it in local phone storage */
+            // TODO store dictionary instead - which stores number differently
+            console.log('store config on phone');
+            localStorage.setItem('stored_dict', JSON.stringify(configuration));
+
+            // Send to Pebble
             if ('vibrate_disconnect' in configuration)
             {
                 switch (configuration.vibrate_disconnect) {
@@ -127,16 +133,11 @@ Pebble.addEventListener('webviewclosed',
             }
             var dictionary = {
               "KEY_TIME_COLOR": parseInt(configuration.time_color, 16),
-              "KEY_BACKGROUND_COLOR": parseInt(configuration.background_color, 16), // FIXME if mising default value..
+              "KEY_BACKGROUND_COLOR": parseInt(configuration.background_color, 16),
               "KEY_VIBRATE_ON_DISCONNECT": vibrate_disconnect
             };
-            /* even though we don't realy trust `configuration`, store it in local phone storage */
-            // TODO store dictionary instead - which stores number differently
-            console.log('store config on phone');
-            localStorage.setItem('stored_dict', JSON.stringify(configuration));
 
             console.log('dictionary to send to Pebble' + JSON.stringify(dictionary));
-            // Send to Pebble
             Pebble.sendAppMessage(dictionary,
                 function(e) {
                     console.log("Configuration sent to Pebble successfully!");
