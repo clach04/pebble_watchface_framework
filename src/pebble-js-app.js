@@ -99,14 +99,18 @@ Pebble.addEventListener('showConfiguration', function(e) {
     var configuration = merge_options(default_dict, stored_dict);
     console.log('configuration: ' + JSON.stringify(configuration));
 
-    // TODO refactor below to iterate through dict
-  var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html' +
-      '?' +
-      'background_color=' + encodeURIComponent(configuration.background_color) + '&' +
-      'time_color=' + encodeURIComponent(configuration.time_color) + '&' +
-      'vibrate_disconnect=' + encodeURIComponent(configuration.vibrate_disconnect);
-  console.log('Configuration window opened. ' + URL);
-  Pebble.openURL(URL);
+    var param_array = [];
+    var temp_str;
+    var config_key;
+    for (config_key in configuration)
+    {
+        console.log('config_key: ' + config_key + '=' + configuration[config_key]);
+        temp_str = config_key + '=' + encodeURIComponent(configuration[config_key]);
+        param_array.push(temp_str);
+    }
+    var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html' + '?' + param_array.join('&');
+    console.log('Configuration window opened. ' + URL);
+    Pebble.openURL(URL);
 });
 
 Pebble.addEventListener('webviewclosed',
