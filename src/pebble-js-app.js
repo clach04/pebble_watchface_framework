@@ -9,6 +9,34 @@ var default_dict = {
 };
 
 
+function force_bool(in_value)
+{
+    var result=false;
+
+    switch (in_value)
+    {
+        case true:
+        case 'true':
+        case 'True':
+        case 'TRUE':
+        case 1:
+        case '1':
+        case 'on':
+        case 'On':
+        case 'ON':
+        case 'yes':
+        case 'Yes':
+        case 'YES':
+        case 'Y':
+            result = true;
+            break;
+        default:
+            result = false;
+            break;
+    }
+    return result;
+}
+
 function getStorageValue(item, default_value){
     var retVal = localStorage.getItem(item);
     //console.log('value' + item + ': ' + String(retVal));
@@ -182,19 +210,9 @@ Pebble.addEventListener('webviewclosed',
             var vibrate_disconnect = 0;
             if ('vibrate_disconnect' in configuration)
             {
-                switch (configuration.vibrate_disconnect) {
-                    case true:
-                    case 'true':
-                    case 'True':
-                    case 'TRUE':
-                    case 1:
-                    case '1':
-                    case 'on':
-                        vibrate_disconnect = 1;
-                        break;
-                    default:
-                        vibrate_disconnect = 0;
-                        break;
+                if (force_bool(configuration.vibrate_disconnect))
+                {
+                    vibrate_disconnect = 1;
                 }
             }
             var dictionary = {
