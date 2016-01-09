@@ -1,3 +1,14 @@
+var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html';
+
+var default_dict = {
+    version_settings: 0,  // Bump this when ever config storage changes
+    // http://developer.getpebble.com/tools/color-picker/
+    background_color: '000000',  // GColorBlack
+    time_color: 'FFFFFF',  // GColorWhite
+    vibrate_disconnect: 0
+};
+
+
 function getStorageValue(item, default_value){
     var retVal = localStorage.getItem(item);
     //console.log('value' + item + ': ' + String(retVal));
@@ -35,15 +46,6 @@ Pebble.addEventListener('showConfiguration', function(e) {
     */
     /* DEBUG */
 
-    var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html';
-
-    var default_dict = {
-        version_settings: 0,  // Bump this when ever config storage changes
-        // http://developer.getpebble.com/tools/color-picker/
-        background_color: '000000',  // GColorBlack
-        time_color: 'FFFFFF',  // GColorWhite
-        vibrate_disconnect: 0
-    };
     var stored_dict_str = getStorageValue('stored_dict', null);
     console.log('stored_dict_str: ' + stored_dict_str);
     var stored_dict;
