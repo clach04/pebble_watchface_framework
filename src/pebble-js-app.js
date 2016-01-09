@@ -158,23 +158,28 @@ Pebble.addEventListener('webviewclosed',
         console.log('e.response: ' + e.response);
         console.log('e.response.length: ' + e.response.length);
         try {
-            var configuration = JSON.parse(decodeURIComponent(e.response));
-            var vibrate_disconnect = 0;
-
-            console.log('dictionary to validate ' + JSON.stringify(configuration));
+            var configuration_from_page = JSON.parse(decodeURIComponent(e.response));
+            console.log('dictionary to validate ' + JSON.stringify(configuration_from_page));
             /*
-            ** configuration can from an external web site, this is not trustworthy
-            ** and so needs validation. This avoids needing to add lots of
-            ** protection to the C code on the Pebble.
+            ** configuration_from_page is from an external web site,
+            ** this is not trustworthy and so needs validation.
+            ** Validation/translation reduces the need for _some_
+            ** protection C code on the Pebble.
             */
-            // TODO as configuration is untrusted and may be missing values, merge in from default_dict
 
-            /* even though we don't realy trust `configuration`, store it in local phone storage */
-            // TODO store dictionary instead - which stores number differently
+            /*
+            ** As configuration is untrusted and may be missing values,
+            ** merge in from default_dict
+            */
+            var configuration = merge_options(default_dict, configuration_from_page);
+
+            /* even though we don't really trust `configuration`, store it in local phone storage */
+            // TODO store (validated) dictionary (below) instead - which stores color settings differently
             console.log('store config on phone');
             localStorage.setItem('stored_dict', JSON.stringify(configuration));
 
             // Send to Pebble
+            var vibrate_disconnect = 0;
             if ('vibrate_disconnect' in configuration)
             {
                 switch (configuration.vibrate_disconnect) {
