@@ -213,8 +213,8 @@ Pebble.addEventListener('webviewclosed',
                 vibrate_disconnect = 1;
             }
             var dictionary = {
-              "KEY_TIME_COLOR": parseInt(configuration.time_color, 16),
-              "KEY_BACKGROUND_COLOR": parseInt(configuration.background_color, 16),
+              "KEY_TIME_COLOR": parseInt(configuration.time_color, 16),  // TODO color not validated
+              "KEY_BACKGROUND_COLOR": parseInt(configuration.background_color, 16),  // TODO color not validated
               "KEY_VIBRATE_ON_DISCONNECT": vibrate_disconnect
             };
 
