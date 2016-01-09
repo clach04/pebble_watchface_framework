@@ -207,15 +207,10 @@ Pebble.addEventListener('webviewclosed',
             localStorage.setItem('stored_dict', JSON.stringify(configuration));
 
             // Send to Pebble
-            var vibrate_disconnect = 0;
-            if (force_bool(configuration.vibrate_disconnect))
-            {
-                vibrate_disconnect = 1;
-            }
             var dictionary = {
               "KEY_TIME_COLOR": parseInt(configuration.time_color, 16),  // TODO color not validated
               "KEY_BACKGROUND_COLOR": parseInt(configuration.background_color, 16),  // TODO color not validated
-              "KEY_VIBRATE_ON_DISCONNECT": vibrate_disconnect
+              "KEY_VIBRATE_ON_DISCONNECT": force_bool(configuration.vibrate_disconnect) ? 1 : 0  // Force to int
             };
 
             console.log('dictionary to send to Pebble' + JSON.stringify(dictionary));
