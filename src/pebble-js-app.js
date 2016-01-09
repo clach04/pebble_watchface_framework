@@ -204,9 +204,13 @@ Pebble.addEventListener('webviewclosed',
             /* Validate config */
             configuration.vibrate_disconnect = force_bool(configuration.vibrate_disconnect) ? 1 : 0;  // Force to int
 
-            /* even though we don't really trust `configuration`, store it in local phone storage */
-            // TODO store (validated) dictionary (below) instead - which stores color settings differently
-            console.log('store config on phone');
+            /*
+            ** even though we don't really trust `configuration`, store it in local phone storage
+            ** TODO store (validated) dictionary (below) on phone instead
+            **    - key names different
+            **    - color settings string (hex) versus int number
+            */
+            console.log('store config on phone: ' + JSON.stringify(configuration));
             localStorage.setItem('stored_dict', JSON.stringify(configuration));
 
             // Send to Pebble
