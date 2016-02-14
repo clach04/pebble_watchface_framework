@@ -29,6 +29,7 @@ Then start adding options and resources. By default the empty framework will:
   * Display time, updating once per minute- using system font
   * Display Battery power
   * Display notice when Bluetooth is disconnected
+  * On Basalt and higher (e.g. Chalk) show step count for today
   * Have a config/settings option on Phone to configure:
       * Time/date/etc. text color
       * Background color
