@@ -18,6 +18,7 @@ TextLayer *time_layer=NULL;
 TextLayer *date_layer=NULL;
 TextLayer *battery_layer=NULL;
 TextLayer *bluetooth_tlayer=NULL;
+TextLayer *health_tlayer=NULL;
 
 GFont       time_font;
 #ifdef BG_IMAGE
@@ -171,6 +172,77 @@ void cleanup_bluetooth()
     text_layer_destroy(bluetooth_tlayer);
 #endif /* BT_DISCONNECT_IMAGE */
 }
+
+/*****************/
+#if defined(PBL_HEALTH)
+static void health_handler(HealthEventType event, void *context)
+{
+    // Which type of event occured?
+    switch(event)
+    {
+        case HealthEventSignificantUpdate:
+            APP_LOG(APP_LOG_LEVEL_INFO, "New HealthService HealthEventSignificantUpdate event");
+            //break;
+        case HealthEventMovementUpdate:
+            APP_LOG(APP_LOG_LEVEL_INFO, "New HealthService HealthEventMovementUpdate event");
+            update_health();
+            break;
+        case HealthEventSleepUpdate:
+            APP_LOG(APP_LOG_LEVEL_INFO, "New HealthService HealthEventSleepUpdate event");
+            break;
+    }
+}
+
+void setup_health(Window *window)
+{
+    health_tlayer = text_layer_create(HEALTH_POS);
+    text_layer_set_text_color(health_tlayer, time_color);
+    text_layer_set_background_color(health_tlayer, GColorClear);
+    text_layer_set_font(health_tlayer, fonts_get_system_font(FONT_DATE_SYSTEM_NAME));
+    text_layer_set_text_alignment(health_tlayer, HEALTH_ALIGN);
+    layer_add_child(window_get_root_layer(window), text_layer_get_layer(health_tlayer));
+    text_layer_set_text(health_tlayer, "");
+
+#ifdef UPDATE_HEALTH_ON_ACTIVITY
+    if(!health_service_events_subscribe(health_handler, NULL))
+    {
+        APP_LOG(APP_LOG_LEVEL_ERROR, "Health not available!");
+    }
+#endif /* UPDATE_HEALTH_ON_ACTIVITY */
+}
+
+void update_health()
+{
+    /* Create a long-lived buffer */
+    static char buffer[] = MAX_HEALTH_STR;
+
+    time_t start = time_start_of_today();
+    time_t end = time(NULL);  /* Now */
+
+    /* Check data is available */
+    HealthServiceAccessibilityMask result = health_service_metric_accessible(HealthMetricStepCount, start, end);
+    if(result & HealthServiceAccessibilityMaskAvailable)
+    {
+        HealthValue steps = health_service_sum(HealthMetricStepCount, start, end);
+
+        APP_LOG(APP_LOG_LEVEL_INFO, "Steps today: %d", (int)steps);
+        snprintf(buffer, sizeof(buffer), HEALTH_FMT_STR, (int) steps);
+    }
+    else
+    {
+        APP_LOG(APP_LOG_LEVEL_ERROR, "No data available!");
+        strcpy(buffer, "");
+    }
+    text_layer_set_text(health_tlayer, buffer);
+}
+
+void cleanup_health()
+{
+    health_service_events_unsubscribe();
+    text_layer_destroy(health_tlayer);
+}
+#endif /* PBL_HEALTH */
+/*****************/
 
 void handle_battery(BatteryChargeState charge_state) {
     static char battery_text[] = MAX_BAT_STR;
@@ -401,6 +473,10 @@ void update_time() {
     // Display this time on the TextLayer
     text_layer_set_text(time_layer, buffer);
 
+#if defined(PBL_HEALTH)
+    update_health();
+#endif /* PBL_HEALTH */
+
 #ifdef DEBUG_TIME_PAUSE
     psleep(DEBUG_TIME_PAUSE);
 #endif /* DEBUG_TIME_PAUSE */
@@ -454,6 +530,10 @@ void main_window_load(Window *window) {
     setup_effects(window);
 #endif /* USE_SHADOW_TIME_EFFECT */
 
+#ifdef USE_HEALTH
+    setup_health(window);
+#endif /* USE_HEALTH */
+
     /* Make sure the time is displayed from the start */
     update_time();
 
@@ -464,6 +544,10 @@ void main_window_load(Window *window) {
 }
 
 void main_window_unload(Window *window) {
+#ifdef USE_HEALTH
+    cleanup_health();
+#endif /* USE_HEALTH */
+
 #ifdef USE_SHADOW_TIME_EFFECT
     cleanup_effects();
 #endif /* USE_SHADOW_TIME_EFFECT */

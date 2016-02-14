@@ -56,6 +56,10 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * If `DATE_FMT_STR` is defined it will be used for the format of the date text.
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
   * `NO_BLUETOOTH`, `NO_BATTERY`, and `NO_DATE` will disable display of bluetooth disconnect, battery status, and date.
+  * If `USE_HEALTH` is defined step counts will be displayed. Pebble Time and later only.
+      * If `UPDATE_HEALTH_ON_ACTIVITY` is set, step count is updated when the Pebble Health service has an update. If not set, step count is updated once per minute.
+      * `HEALTH_POS` is a GRect()
+      * `HEALTH_FMT_STR` is the format of the string to display. `MAX_HEALTH_STR` should be updated if `HEALTH_FMT_STR` is set.
 
 Examples
 --------

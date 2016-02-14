@@ -140,3 +140,20 @@ extern void tick_handler(struct tm *tick_time, TimeUnits units_changed);
 extern void in_recv_handler(DictionaryIterator *iterator, void *context);
 extern void init();
 extern void deinit();
+
+#if defined(PBL_HEALTH)
+extern TextLayer *health_tlayer;
+
+#ifndef HEALTH_ALIGN
+    #define HEALTH_ALIGN GTextAlignmentCenter
+#endif
+
+#ifndef HEALTH_FMT_STR
+    #define HEALTH_FMT_STR "%d steps today"
+    #define MAX_HEALTH_STR "123456 steps today"   /* update to match HEALTH_FMT_STR */
+#endif /* HEALTH_FMT_STR */
+
+void setup_health(Window *window);
+void update_health();
+void cleanup_health();
+#endif /* PBL_HEALTH */
