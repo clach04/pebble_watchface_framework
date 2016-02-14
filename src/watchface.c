@@ -249,27 +249,35 @@ void cleanup_health()
 /*****************/
 
 void handle_battery(BatteryChargeState charge_state) {
+    GColor       battery_color=time_color;
 #ifndef DRAW_BATTERY
     static char battery_text[] = MAX_BAT_STR;
+#endif /* DRAW_BATTERY */
 
-    if (charge_state.is_charging) {
-        snprintf(battery_text, sizeof(battery_text), "Charging");
-        text_layer_set_text_color(battery_layer, COLOR_FALLBACK(GColorGreen, time_color));
-    } else {
-        snprintf(battery_text, sizeof(battery_text), BAT_FMT_STR, charge_state.charge_percent);
 #ifdef PBL_COLOR
-        /* TODO Check charge level and change color? E.g. red at 10%/20% */
+    if (charge_state.is_charging)
+    {
+        battery_color = COLOR_FALLBACK(GColorGreen, time_color);
+    }
+    else
+    {
         if (charge_state.charge_percent <= 20)
         {
-            text_layer_set_text_color(battery_layer, GColorRed);
+            battery_color = GColorRed;
         }
-        else /* TODO different colors for different ranges */
-        {
-            /* TODO is this an expensive call ? */
-            text_layer_set_text_color(battery_layer, time_color);
-        }
-#endif
     }
+#endif /* PBL_COLOR */
+
+#ifndef DRAW_BATTERY
+    if (charge_state.is_charging)
+    {
+        snprintf(battery_text, sizeof(battery_text), "Charging");
+    }
+    else
+    {
+        snprintf(battery_text, sizeof(battery_text), BAT_FMT_STR, charge_state.charge_percent);
+    }
+    text_layer_set_text_color(battery_layer, battery_color);
     text_layer_set_text(battery_layer, battery_text);
 #endif /* DRAW_BATTERY */
 }
