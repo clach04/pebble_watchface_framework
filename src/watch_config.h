@@ -11,6 +11,8 @@
     //#define UPDATE_HEALTH_ON_ACTIVITY  /* If not set, only updates step count display once per minute */
 #endif /* PBL_HEALTH */
 
+#define DRAW_BATTERY
+
 #ifdef PBL_ROUND /* 180x180 */
 /*TODO center/move right*/
     #define CLOCK_POS GRect(0, 52, 180, 180) /* probably taller than really needed */

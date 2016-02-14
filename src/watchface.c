@@ -16,7 +16,11 @@
 Window    *main_window=NULL;
 TextLayer *time_layer=NULL;
 TextLayer *date_layer=NULL;
+#ifndef DRAW_BATTERY
 TextLayer *battery_layer=NULL;
+#else
+Layer *battery_layer;
+#endif /* DRAW_BATTERY */
 TextLayer *bluetooth_tlayer=NULL;
 TextLayer *health_tlayer=NULL;
 
@@ -245,6 +249,7 @@ void cleanup_health()
 /*****************/
 
 void handle_battery(BatteryChargeState charge_state) {
+#ifndef DRAW_BATTERY
     static char battery_text[] = MAX_BAT_STR;
 
     if (charge_state.is_charging) {
@@ -266,11 +271,13 @@ void handle_battery(BatteryChargeState charge_state) {
 #endif
     }
     text_layer_set_text(battery_layer, battery_text);
+#endif /* DRAW_BATTERY */
 }
 
 /* Battery level */
 void setup_battery(Window *window)
 {
+#ifndef DRAW_BATTERY
     battery_layer = text_layer_create(BAT_POS);
     text_layer_set_text_color(battery_layer, time_color);
     text_layer_set_background_color(battery_layer, GColorClear);
@@ -278,6 +285,7 @@ void setup_battery(Window *window)
     text_layer_set_text_alignment(battery_layer, BAT_ALIGN);
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(battery_layer));
     text_layer_set_text(battery_layer, MAX_BAT_STR);
+#endif /* DRAW_BATTERY */
 
     battery_state_service_subscribe(handle_battery);
 }
@@ -285,7 +293,9 @@ void setup_battery(Window *window)
 void cleanup_battery()
 {
     battery_state_service_unsubscribe();
+#ifndef DRAW_BATTERY
     text_layer_destroy(battery_layer);
+#endif /* DRAW_BATTERY */
 }
 
 void update_date(struct tm *tick_time) {
@@ -620,7 +630,9 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 }
                 if (battery_layer)
                 {
-                    text_layer_set_text_color(battery_layer, time_color);
+                    #ifndef DRAW_BATTERY
+                        text_layer_set_text_color(battery_layer, time_color);
+                    #endif /* DRAW_BATTERY */
                 }
                 if (bluetooth_tlayer)
                 {
