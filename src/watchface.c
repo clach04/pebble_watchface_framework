@@ -544,6 +544,10 @@ void main_window_load(Window *window) {
 }
 
 void main_window_unload(Window *window) {
+#ifdef USE_HEALTH
+    cleanup_health();
+#endif /* USE_HEALTH */
+
 #ifdef USE_SHADOW_TIME_EFFECT
     cleanup_effects();
 #endif /* USE_SHADOW_TIME_EFFECT */
