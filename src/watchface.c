@@ -19,8 +19,11 @@ TextLayer *date_layer=NULL;
 #ifndef DRAW_BATTERY
 TextLayer *battery_layer=NULL;
 #else
-Layer *battery_layer;
+Layer *battery_layer=NULL;
+const GPathInfo battery_path_small_info={ .num_points = 14, .points = ((GPoint[]){{0,6},{0,0},{10,0},{10,2},{11,2},{11,4},{10,4},{10,6},{0,6},{1,5},{9,5},{9,1},{1,1},{1,5}}) };
+GPath *battery_path_small=NULL;
 #endif /* DRAW_BATTERY */
+GColor     battery_color;
 TextLayer *bluetooth_tlayer=NULL;
 TextLayer *health_tlayer=NULL;
 
@@ -249,7 +252,7 @@ void cleanup_health()
 /*****************/
 
 void handle_battery(BatteryChargeState charge_state) {
-    GColor       battery_color=time_color;
+    battery_color=time_color;
 #ifndef DRAW_BATTERY
     static char battery_text[] = MAX_BAT_STR;
 #endif /* DRAW_BATTERY */
@@ -268,7 +271,9 @@ void handle_battery(BatteryChargeState charge_state) {
     }
 #endif /* PBL_COLOR */
 
-#ifndef DRAW_BATTERY
+#ifdef DRAW_BATTERY
+    layer_mark_dirty(battery_layer);
+#else
     if (charge_state.is_charging)
     {
         snprintf(battery_text, sizeof(battery_text), "Charging");
@@ -282,10 +287,35 @@ void handle_battery(BatteryChargeState charge_state) {
 #endif /* DRAW_BATTERY */
 }
 
+#ifdef DRAW_BATTERY
+void update_battery_proc(Layer *layer, GContext *ctx)
+{
+    int pos_x=BAT_POS.origin.x;
+    int pos_y=BAT_POS.origin.y;
+    BatteryChargeState state=battery_state_service_peek();
+
+    graphics_context_set_fill_color(ctx, battery_color);
+    graphics_context_set_stroke_color(ctx, battery_color);
+
+    gpath_move_to(battery_path_small, GPoint(pos_x, pos_y));
+    gpath_draw_outline(ctx, battery_path_small);
+    gpath_draw_filled(ctx, battery_path_small);
+    graphics_fill_rect(ctx, GRect(pos_x + 2, pos_y + 2, state.charge_percent * 7 / 100, 3), 0, 0);
+}
+#endif /* DRAW_BATTERY */
+
 /* Battery level */
 void setup_battery(Window *window)
 {
-#ifndef DRAW_BATTERY
+#ifdef DRAW_BATTERY
+    Layer *window_layer = window_get_root_layer(window);
+    GRect bounds = layer_get_bounds(window_layer);
+
+    battery_layer = layer_create(bounds);  // TODO BAT_POS - instead
+    battery_path_small = gpath_create(&battery_path_small_info);
+    layer_set_update_proc(battery_layer, update_battery_proc);
+    layer_add_child(window_layer, battery_layer); //??
+#else
     battery_layer = text_layer_create(BAT_POS);
     text_layer_set_text_color(battery_layer, time_color);
     text_layer_set_background_color(battery_layer, GColorClear);
@@ -301,7 +331,10 @@ void setup_battery(Window *window)
 void cleanup_battery()
 {
     battery_state_service_unsubscribe();
-#ifndef DRAW_BATTERY
+#ifdef DRAW_BATTERY
+    layer_destroy(battery_layer);
+    gpath_destroy(battery_path_small);
+#else
     text_layer_destroy(battery_layer);
 #endif /* DRAW_BATTERY */
 }
