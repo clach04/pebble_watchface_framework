@@ -108,7 +108,11 @@
 extern Window    *main_window;
 extern TextLayer *time_layer;
 extern TextLayer *date_layer;
+#ifndef DRAW_BATTERY
 extern TextLayer *battery_layer;
+#else
+extern Layer *battery_layer;
+#endif /* DRAW_BATTERY */
 extern TextLayer *bluetooth_tlayer;
 
 extern GFont       time_font;

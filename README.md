@@ -51,11 +51,13 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * `CLOCK_POS`, `BT_POS, DATE_POS`, and `BAT_POS` to change the on screen position of Time, Bluetooth disconnect message, Date, and battery power.
   * `FONT_BT_SYSTEM_NAME`, `FONT_BAT_SYSTEM_NAME`, and `FONT_DATE_SYSTEM_NAME` can override the system font used.
       * if `USE_TIME_FONT_FOR_DATE` is defined, the date is displayed using the same font as used for time
-  * `BT_ALIGN`, `BAT_ALIGN`, and `TIME_ALIGN` are used to change alignment.
+  * `BT_ALIGN`, `BAT_ALIGN`, and `TIME_ALIGN` are used to change text alignment.
   * If `BLUETOOTH_DISCONNECTED_STR` is defined, this text will be displayed for the Bluetooth disconnect message.
   * If `BT_DISCONNECT_IMAGE` is defined, this resource image will be displayed on bluetooth disconnect.
   * If `DATE_FMT_STR` is defined it will be used for the format of the date text.
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
+      * If `DRAW_SMALL_BATTERY` is defined a small gauge will be used.
+  * If `DRAW_BATTERY` is defined a graphical gauge will be used instead of text
   * `NO_BLUETOOTH`, `NO_BATTERY`, and `NO_DATE` will disable display of bluetooth disconnect, battery status, and date.
   * If `USE_HEALTH` is defined step counts will be displayed. Pebble Time and later only.
       * If `UPDATE_HEALTH_ON_ACTIVITY` is set, step count is updated when the Pebble Health service has an update. If not set, step count is updated once per minute.
