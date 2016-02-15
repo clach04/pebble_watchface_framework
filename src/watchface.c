@@ -473,9 +473,9 @@ void update_time() {
     // Display this time on the TextLayer
     text_layer_set_text(time_layer, buffer);
 
-#if defined(PBL_HEALTH)
+#if defined(USE_HEALTH)
     update_health();
-#endif /* PBL_HEALTH */
+#endif /* USE_HEALTH */
 
 #ifdef DEBUG_TIME_PAUSE
     psleep(DEBUG_TIME_PAUSE);
