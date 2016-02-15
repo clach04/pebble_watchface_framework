@@ -157,6 +157,12 @@ extern TextLayer *health_tlayer;
     #define MAX_HEALTH_STR "123456 steps today"   /* update to match HEALTH_FMT_STR */
 #endif /* HEALTH_FMT_STR */
 
+#ifndef HEALTH_POS
+    #ifndef USE_HEALTH
+        #define HEALTH_POS GRect(50, 50, 144, 168)
+    #endif /* USE_HEALTH */
+#endif /* HEALTH_POS */
+
 void setup_health(Window *window);
 void update_health();
 void cleanup_health();
