@@ -20,7 +20,11 @@ TextLayer *date_layer=NULL;
 TextLayer *battery_layer=NULL;
 #else
 Layer *battery_layer=NULL;
-const GPathInfo battery_path_small_info={ .num_points = 14, .points = ((GPoint[]){{0,6},{0,0},{10,0},{10,2},{11,2},{11,4},{10,4},{10,6},{0,6},{1,5},{9,5},{9,1},{1,1},{1,5}}) };
+    #ifdef DRAW_SMALL_BATTERY
+        const GPathInfo battery_path_info={ .num_points = 14, .points = ((GPoint[]){{0,6},{0,0},{10,0},{10,2},{11,2},{11,4},{10,4},{10,6},{0,6},{1,5},{9,5},{9,1},{1,1},{1,5}}) };
+    #else
+        const GPathInfo battery_path_info={ .num_points = 15, .points = ((GPoint[]){{0,10},{0,0},{20,0},{20,4},{22,4},{22,8},{20,8},{20,12},{0,12},{0,10},{2,10},{18,10},{18,2},{2,2},{2,10}}) };
+    #endif /* DRAW_SMALL_BATTERY */
 GPath *battery_path=NULL;
 #endif /* DRAW_BATTERY */
 GColor     battery_color;
@@ -300,7 +304,11 @@ void update_battery_proc(Layer *layer, GContext *ctx)
     gpath_move_to(battery_path, GPoint(pos_x, pos_y));
     gpath_draw_outline(ctx, battery_path);
     gpath_draw_filled(ctx, battery_path);
+#ifdef DRAW_SMALL_BATTERY
     graphics_fill_rect(ctx, GRect(pos_x + 2, pos_y + 2, state.charge_percent * 7 / 100, 3), 0, 0);
+#else
+    graphics_fill_rect(ctx, GRect(pos_x + 3, pos_y + 3, state.charge_percent * 15 / 100, 7), 0, 0);
+#endif /* DRAW_SMALL_BATTERY */
 }
 #endif /* DRAW_BATTERY */
 
@@ -312,7 +320,7 @@ void setup_battery(Window *window)
     GRect bounds = layer_get_bounds(window_layer);
 
     battery_layer = layer_create(bounds);  // TODO BAT_POS - instead
-    battery_path = gpath_create(&battery_path_small_info);
+    battery_path = gpath_create(&battery_path_info);
     layer_set_update_proc(battery_layer, update_battery_proc);
     layer_add_child(window_layer, battery_layer); //??
 #else

@@ -12,6 +12,7 @@
 #endif /* PBL_HEALTH */
 
 #define DRAW_BATTERY
+#define DRAW_SMALL_BATTERY
 
 #ifdef PBL_ROUND /* 180x180 */
 /*TODO center/move right*/
