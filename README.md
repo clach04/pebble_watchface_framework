@@ -13,6 +13,9 @@ All the examples below use the same framework.
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/132x132_bigtime_at_bottom.png" alt="Spawn Big Time  Pebble Time color screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/144x144_time_at_bottom.png" alt="Spawn Small Time  Pebble Time color screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/basic_watchface.png" alt="Spawn Big Time and Info  Pebble Time color screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_simple_step/screenshots/aplite_no_step_count.png" alt="Aplite Simple Step (no steps) screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_simple_step/screenshots/mono_step_count.png" alt="Basalt Mono Simple Step screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_simple_step/screenshots/mono_chalk_step_count.png" alt="Chalk Mono Simple Step screenshot">
 
 
 
@@ -67,6 +70,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
 Examples
 --------
 
+  * Simple text watch, with step count https://github.com/clach04/watchface_simple_step - screenshots https://github.com/clach04/watchface_simple_step/wiki
   * https://github.com/clach04/watchface_JupiterMass - Black and White, Color, and Round support
       * https://github.com/clach04/watchface_JupiterMass/blob/master/src/watch_config.h + the resources (font and image) that make this different from the basic template)
   * https://github.com/clach04/watchface_spawn/wiki - has a number of branches showing different ideas and formats for a watchface with changes only made in watch_config.h. Uses builtin system font and a single PNG image (with transparency) To import and demo these:
