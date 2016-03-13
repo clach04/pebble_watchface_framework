@@ -687,6 +687,10 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 {
                     text_layer_set_text_color(bluetooth_tlayer, time_color);
                 }
+                if (health_tlayer)
+                {
+                    text_layer_set_text_color(health_tlayer, time_color);
+                }
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
                 break;
 
