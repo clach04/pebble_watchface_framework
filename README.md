@@ -57,7 +57,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * `BT_ALIGN`, `BAT_ALIGN`, and `TIME_ALIGN` are used to change text alignment.
   * If `BLUETOOTH_DISCONNECTED_STR` is defined, this text will be displayed for the Bluetooth disconnect message.
   * If `BT_DISCONNECT_IMAGE` is defined, this resource image will be displayed on bluetooth disconnect.
-      * BT_DISCONNECT_IMAGE_GRECT can be used to position the image
+      * `BT_DISCONNECT_IMAGE_GRECT` can be used to position the image
   * If `DATE_FMT_STR` is defined it will be used for the format of the date text.
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
       * If `DRAW_SMALL_BATTERY` is defined a small gauge will be used.
