@@ -679,10 +679,9 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 }
                 if (battery_layer)
                 {
-                    #ifndef DRAW_BATTERY
-                    // TODO - this is no longer needed?
-                        text_layer_set_text_color(battery_layer, time_color);
-                    #endif /* DRAW_BATTERY */
+                    #ifndef NO_BATTERY
+                        handle_battery(battery_state_service_peek());
+                    #endif /* NO_BATTERY */
                 }
                 if (bluetooth_tlayer)
                 {
