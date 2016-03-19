@@ -82,7 +82,7 @@ Examples
   * Simple text watch, with step count https://github.com/clach04/watchface_simple_step - screenshots https://github.com/clach04/watchface_simple_step/wiki
   * https://github.com/clach04/watchface_JupiterMass - Black and White, Color, and Round support
       * https://github.com/clach04/watchface_JupiterMass/blob/master/src/watch_config.h + the resources (font and image) that make this different from the basic template)
-  * https://github.com/clach04/watchface_spawn/wiki - has a number of branches showing different ideas and formats for a watchface with changes only made in watch_config.h. Uses builtin system font and a single PNG image (with transparency) To import and demo these:
+  * https://github.com/clach04/watchface_spawn/wiki - has a number of branches showing different ideas and formats for a watchface with different round image sizes (leaving different amounts of space) and watch_config.h changes. Uses builtin system font and a single PNG image (with transparency). Also see https://github.com/clach04/watchface_colony/wiki. To import and demo these:
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/120x120_bigtime_at_bottom_battery_and_date
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/132x132_bigtime_at_bottom
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/144x144_time_at_bottom
