@@ -23,6 +23,8 @@ All the examples below use the same framework.
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_colony/images/180x180_chalk.png" alt="Colony Chalk screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_colony/images/132x132_basalt.png" alt="Colony Basalt screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_colony/images/132x132_aplite.png" alt="Colony Aplite screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_storm_trooper/screenshots/vector_outline_white.png" alt="StarWars Stormtrooper screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_storm_trooper/screenshots/vector_opaque_black.png" alt="StarWars Stormtrooper screenshot">
 
 
 Instructions
