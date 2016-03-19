@@ -13,10 +13,16 @@ All the examples below use the same framework.
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/132x132_bigtime_at_bottom.png" alt="Spawn Big Time  Pebble Time color screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/144x144_time_at_bottom.png" alt="Spawn Small Time  Pebble Time color screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/basic_watchface.png" alt="Spawn Big Time and Info  Pebble Time color screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/120x120_spawn_battery_text_and_date.png" alt="Spawn with date/time screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/120x120_spawn_battery_drawn_and_date.png" alt="Spawn with date/time screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/120x120_spawn_battery_text_and_date_bw.png" alt="Spawn with date/time screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_spawn/images/120x120_spawn_battery_text_and_date_br.png" alt="Spawn with date/time screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_simple_step/screenshots/aplite_no_step_count.png" alt="Aplite Simple Step (no steps) screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_simple_step/screenshots/mono_step_count.png" alt="Basalt Mono Simple Step screenshot">
 <img src="https://raw.githubusercontent.com/wiki/clach04/watchface_simple_step/screenshots/mono_chalk_step_count.png" alt="Chalk Mono Simple Step screenshot">
-
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_colony/images/180x180_chalk.png" alt="Colony Chalk screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_colony/images/132x132_basalt.png" alt="Colony Basalt screenshot">
+<img src="https://raw.githubusercontent.com/wiki/clach04/watchface_colony/images/132x132_aplite.png" alt="Colony Aplite screenshot">
 
 
 Instructions
