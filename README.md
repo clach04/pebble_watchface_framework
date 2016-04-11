@@ -56,7 +56,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * If `DEFAULT_TIME_COLOR` is defined it will be used for the default time color.
   * If `DEFAULT_BACKGROUND_COLOR` is defined it will be used for the default background time color.
   * If an image is present under resources and defined as `BG_IMAGE`, it will be used as a background image. For Basalt, image transparency is honored.
-  * If a font  present under resources and  defined as `FONT_NAME`, it will be used for displaying the time.
+  * If a font  present under resources and  defined as `FONT_NAME`, it will be used for displaying the time. E.g. `#define FONT_NAME RESOURCE_ID_.....`
   * If `FONT_SYSTEM_NAME` is defined to a system font name and `FONT_NAME` is not defined, that system font will be used for time display
   * if `REMOVE_LEADING_ZERO_FROM_TIME` is defined, and the watch is configured for 12 hour format display, the leading zero "0" will be removed for times in the morning.
   * `CLOCK_POS`, `BT_POS, DATE_POS`, and `BAT_POS` to change the on screen position of Time, Bluetooth disconnect message, Date, and battery power.
