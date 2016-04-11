@@ -100,6 +100,7 @@ Simple Tutorial
 3. Name the resource FONT_50 - 50 means scale to 50 (optional enter in the CHARACTERS field `[0-9:.]` to only use the characters needed for time, makes watchface smaller), Click Save.
 4. Edit `watch_config.h` add line `#define FONT_NAME RESOURCE_ID_FONT_60` add after (or replace) '#undef FONT_NAME'
 5. Build and run :-)
+6. Try experimenting with different font sizes, make use of `#define DEBUG_TIME` to try wide fonts. For example using the permanent-marker font above with size 60 looks fine for some times but not all. DEBUG_TIME quickly tries a number of different times to check sizes.
 
 
 Notes and other resources
