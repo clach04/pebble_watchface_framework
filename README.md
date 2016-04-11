@@ -92,6 +92,16 @@ Examples
   * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has a custom ticker (and setup/cleanup)
       * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
 
+Simple Tutorial
+---------------
+
+1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
+2. Add a Resource (lower left corner), load a TTF font, e.g. upload the .ttf files from https://www.fontsquirrel.com/fonts/permanent-marker
+3. Name the resource FONT_50 - 50 means scale to 50 (optional enter in the CHARACTERS field `[0-9:.]` to only use the characters needed for time, makes watchface smaller), Click Save.
+4. Edit `watch_config.h` add line `#define FONT_NAME RESOURCE_ID_FONT_60` add after (or replace) '#undef FONT_NAME'
+5. Build and run :-)
+
+
 Notes and other resources
 -------------------------
 
