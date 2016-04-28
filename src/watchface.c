@@ -511,15 +511,19 @@ void update_time() {
         } else {
             // 12 hour format
             strftime(buffer, sizeof(buffer), "%I:%M", tick_time); // produces leading zero for hour and minute
-#ifdef REMOVE_LEADING_ZERO_FROM_TIME
-            if (buffer[0] == '0')
-            {
-                memmove(&buffer[0], &buffer[1], sizeof(buffer) - 1); // remove leading zero
-            }
-#endif /* REMOVE_LEADING_ZERO_FROM_TIME */
         }
     }
 #endif /* DEBUG_TIME */
+
+#ifdef REMOVE_LEADING_ZERO_FROM_TIME
+    if(clock_is_24h_style() == false)
+    {
+        if (buffer[0] == '0')
+        {
+            memmove(&buffer[0], &buffer[1], sizeof(buffer) - 1); // remove leading zero
+        }
+    }
+#endif /* REMOVE_LEADING_ZERO_FROM_TIME */
 
 #ifndef NO_DATE
     /* Update the date only when the day changes */
