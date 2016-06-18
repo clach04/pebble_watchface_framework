@@ -8,7 +8,7 @@
         "configurable"
     ],
     "companyName": "clach04",
-    "enableMultiJS": false,
+    "enableMultiJS": true,
     "longName": "FILL ME IN!",
     "projectType": "native",
     "resources": {
