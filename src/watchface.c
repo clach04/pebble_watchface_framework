@@ -669,68 +669,62 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
     Tuple *t=NULL;
 
+    /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
+
     APP_LOG(APP_LOG_LEVEL_DEBUG, "in_recv_handler() called");
-    t = dict_read_first(iterator);
-    while(t != NULL)
+    t = dict_find(iterator, MESSAGE_KEY_TIME_COLOR);
+    if (t)
     {
-        switch(t->key)
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "got MESSAGE_KEY_TIME_COLOR");
+        config_time_color = (int)t->value->int32;
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting time color: 0x%06x", config_time_color);
+        persist_write_int(MESSAGE_KEY_TIME_COLOR, config_time_color);
+        time_color = GColorFromHEX(config_time_color);
+        text_layer_set_text_color(time_layer, time_color);
+
+        if (date_layer) /* or #ifndef NO_DATE */
         {
-            /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro  */
-
-            case KEY_TIME_COLOR:
-                APP_LOG(APP_LOG_LEVEL_DEBUG, "got KEY_TIME_COLOR");
-                config_time_color = (int)t->value->int32;
-                APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting time color: 0x%06x", config_time_color);
-                persist_write_int(KEY_TIME_COLOR, config_time_color);
-                time_color = GColorFromHEX(config_time_color);
-                text_layer_set_text_color(time_layer, time_color);
-
-                if (date_layer) /* or #ifndef NO_DATE */
-                {
-                    text_layer_set_text_color(date_layer, time_color);
-                }
-                if (battery_layer)
-                {
-                    #ifndef NO_BATTERY
-                        handle_battery(battery_state_service_peek());
-                    #endif /* NO_BATTERY */
-                }
-                if (bluetooth_tlayer)
-                {
-                    text_layer_set_text_color(bluetooth_tlayer, time_color);
-                }
-                if (health_tlayer)
-                {
-                    text_layer_set_text_color(health_tlayer, time_color);
-                }
-                APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
-                break;
-
-            case KEY_BACKGROUND_COLOR:
-                APP_LOG(APP_LOG_LEVEL_DEBUG, "got KEY_BACKGROUND_COLOR");
-                config_background_color = (int)t->value->int32;
-                APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting background color: 0x%06x", config_background_color);
-                persist_write_int(KEY_BACKGROUND_COLOR, config_background_color);
-                background_color = GColorFromHEX(config_background_color);
-                window_set_background_color(main_window, background_color);
-                APP_LOG(APP_LOG_LEVEL_DEBUG, "BACKGROUND COLOR DONE");
-                break;
-
-            case KEY_VIBRATE_ON_DISCONNECT:
-                APP_LOG(APP_LOG_LEVEL_DEBUG, "got KEY_VIBRATE_ON_DISCONNECT");
-                config_time_vib_on_disconnect = (bool)t->value->int32;  /* this doesn't feel correct... */
-                APP_LOG(APP_LOG_LEVEL_INFO, "Persisting vib_on_disconnect: %d", (int) config_time_vib_on_disconnect);
-                persist_write_bool(KEY_VIBRATE_ON_DISCONNECT, config_time_vib_on_disconnect);
-                break;
-
-            /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro  */
-
-            default:
-                APP_LOG(APP_LOG_LEVEL_ERROR, "Unknown key %d! :-(", (int) t->key);
-                break;
+            text_layer_set_text_color(date_layer, time_color);
         }
-        t = dict_read_next(iterator);
+        if (battery_layer)
+        {
+            #ifndef NO_BATTERY
+            handle_battery(battery_state_service_peek());
+            #endif /* NO_BATTERY */
+        }
+        if (bluetooth_tlayer)
+        {
+            text_layer_set_text_color(bluetooth_tlayer, time_color);
+        }
+        if (health_tlayer)
+        {
+            text_layer_set_text_color(health_tlayer, time_color);
+        }
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
     }
+
+    t = dict_find(iterator, MESSAGE_KEY_BACKGROUND_COLOR);
+    if (t)
+    {
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "got MESSAGE_KEY_BACKGROUND_COLOR");
+        config_background_color = (int)t->value->int32;
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting background color: 0x%06x", config_background_color);
+        persist_write_int(MESSAGE_KEY_BACKGROUND_COLOR, config_background_color);
+        background_color = GColorFromHEX(config_background_color);
+        window_set_background_color(main_window, background_color);
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "BACKGROUND COLOR DONE");
+    }
+
+    t = dict_find(iterator, MESSAGE_KEY_VIBRATE_ON_DISCONNECT);
+    if (t)
+    {
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "got MESSAGE_KEY_VIBRATE_ON_DISCONNECT");
+        config_time_vib_on_disconnect = (bool)t->value->int32;  /* this doesn't feel correct... */
+        APP_LOG(APP_LOG_LEVEL_INFO, "Persisting vib_on_disconnect: %d", (int) config_time_vib_on_disconnect);
+        persist_write_bool(MESSAGE_KEY_VIBRATE_ON_DISCONNECT, config_time_vib_on_disconnect);
+    }
+
+    /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 }
 
 
@@ -741,23 +735,23 @@ void init()
 
 #ifdef PBL_COLOR
     /* TODO refactor */
-    if (persist_exists(KEY_TIME_COLOR))
+    if (persist_exists(MESSAGE_KEY_TIME_COLOR))
     {
-        config_time_color = persist_read_int(KEY_TIME_COLOR);
+        config_time_color = persist_read_int(MESSAGE_KEY_TIME_COLOR);
         APP_LOG(APP_LOG_LEVEL_INFO, "Read time color: %x", config_time_color);
         time_color = GColorFromHEX(config_time_color);
     }
-    if (persist_exists(KEY_BACKGROUND_COLOR))
+    if (persist_exists(MESSAGE_KEY_BACKGROUND_COLOR))
     {
-        config_background_color = persist_read_int(KEY_BACKGROUND_COLOR);
+        config_background_color = persist_read_int(MESSAGE_KEY_BACKGROUND_COLOR);
         APP_LOG(APP_LOG_LEVEL_INFO, "Read background color: %x", config_background_color);
         background_color = GColorFromHEX(config_background_color);
     }
 #endif /* PBL_COLOR */
 
-    if (persist_exists(KEY_VIBRATE_ON_DISCONNECT))
+    if (persist_exists(MESSAGE_KEY_VIBRATE_ON_DISCONNECT))
     {
-        config_time_vib_on_disconnect = persist_read_bool(KEY_VIBRATE_ON_DISCONNECT);
+        config_time_vib_on_disconnect = persist_read_bool(MESSAGE_KEY_VIBRATE_ON_DISCONNECT);
         APP_LOG(APP_LOG_LEVEL_INFO, "Read vib_on_disconnect: %d", (int) config_time_vib_on_disconnect);
     }
 

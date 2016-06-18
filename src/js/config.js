@@ -18,13 +18,13 @@ module.exports = [
             {
                 "type": "color",
                 "label": "Background",
-                "appKey": "KEY_BACKGROUND_COLOR",
+                "messageKey": "BACKGROUND_COLOR",
                 "defaultValue": "000000"
             },
             {
                 "type": "color",
                 "label": "Foreground",
-                "appKey": "KEY_TIME_COLOR",
+                "messageKey": "TIME_COLOR",
                 "defaultValue": "FFFFFF"
             }
         ]
@@ -39,7 +39,7 @@ module.exports = [
             {
                 "type": "toggle",
                 "label": "Vibrate on Bluetooth disconnect",
-                "appKey": "KEY_VIBRATE_ON_DISCONNECT",
+                "messageKey": "VIBRATE_ON_DISCONNECT",
                 "defaultValue": false
             }
         ]
