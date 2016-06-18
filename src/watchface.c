@@ -49,6 +49,8 @@ GColor       background_color;
 int          config_time_color;
 int          config_background_color;
 bool         config_time_vib_on_disconnect = false;
+static int major_version = 0;
+
 
 int last_day = -1;
 bool bluetooth_state = false;
@@ -671,6 +673,7 @@ void deinit() {
 void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
     Tuple *t=NULL;
+    bool wrote_config=false;
 
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 
@@ -682,6 +685,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
         config_background_color = (int)t->value->int32;
         APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting background color: 0x%06x", config_background_color);
         persist_write_int(MESSAGE_KEY_BACKGROUND_COLOR, config_background_color);
+        wrote_config = true;
         background_color = GColorFromHEX(config_background_color);
         window_set_background_color(main_window, background_color);
         APP_LOG(APP_LOG_LEVEL_DEBUG, "BACKGROUND COLOR DONE");
@@ -694,6 +698,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
         config_time_vib_on_disconnect = (bool)t->value->int32;  /* this doesn't feel correct... */
         APP_LOG(APP_LOG_LEVEL_INFO, "Persisting vib_on_disconnect: %d", (int) config_time_vib_on_disconnect);
         persist_write_bool(MESSAGE_KEY_VIBRATE_ON_DISCONNECT, config_time_vib_on_disconnect);
+        wrote_config = true;
     }
 
     t = dict_find(iterator, MESSAGE_KEY_TIME_COLOR);
@@ -703,6 +708,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
         config_time_color = (int)t->value->int32;
         APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting time color: 0x%06x", config_time_color);
         persist_write_int(MESSAGE_KEY_TIME_COLOR, config_time_color);
+        wrote_config = true;
         time_color = GColorFromHEX(config_time_color);
         text_layer_set_text_color(time_layer, time_color);
 
@@ -729,6 +735,11 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
         APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
     }
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
+
+    if (wrote_config)
+    {
+        persist_write_int(MESSAGE_KEY_MAJOR_VERSION, major_version);
+    }
 }
 
 void wipe_config()
@@ -751,8 +762,8 @@ void init()
 {
     time_color = DEFAULT_TIME_COLOR;
     background_color = DEFAULT_BACKGROUND_COLOR;
-    int major_version = get_major_app_version();
 
+    major_version = get_major_app_version();
     APP_LOG(APP_LOG_LEVEL_INFO, "get_major_app_version: %d", major_version);
     
     if (persist_exists(MESSAGE_KEY_MAJOR_VERSION))
