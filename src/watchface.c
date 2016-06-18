@@ -135,7 +135,7 @@ void handle_bluetooth(bool connected)
     }
     else
     {
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bluetooth DISconnected", __func__); // TODO open issue with Pebble - Why is this NOT showing up in debug log?
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() bluetooth DISconnected", __func__); // TODO open issue with Pebble - Why is this NOT showing up in debug log? Presumbly as BT is needed even in emulator and logging is thrown away without connection?
         #ifdef BT_DISCONNECT_IMAGE
             bitmap_layer_set_bitmap(bluetooth_blayer, bluetooth_disconnect_bitmap);
         #else /* BT_DISCONNECT_IMAGE */
@@ -672,37 +672,6 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "in_recv_handler() called");
-    t = dict_find(iterator, MESSAGE_KEY_TIME_COLOR);
-    if (t)
-    {
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "got MESSAGE_KEY_TIME_COLOR");
-        config_time_color = (int)t->value->int32;
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting time color: 0x%06x", config_time_color);
-        persist_write_int(MESSAGE_KEY_TIME_COLOR, config_time_color);
-        time_color = GColorFromHEX(config_time_color);
-        text_layer_set_text_color(time_layer, time_color);
-
-        if (date_layer) /* or #ifndef NO_DATE */
-        {
-            text_layer_set_text_color(date_layer, time_color);
-        }
-        if (battery_layer)
-        {
-            #ifndef NO_BATTERY
-            handle_battery(battery_state_service_peek());
-            #endif /* NO_BATTERY */
-        }
-        if (bluetooth_tlayer)
-        {
-            text_layer_set_text_color(bluetooth_tlayer, time_color);
-        }
-        if (health_tlayer)
-        {
-            text_layer_set_text_color(health_tlayer, time_color);
-        }
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
-    }
-
     t = dict_find(iterator, MESSAGE_KEY_BACKGROUND_COLOR);
     if (t)
     {
@@ -724,6 +693,38 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
         persist_write_bool(MESSAGE_KEY_VIBRATE_ON_DISCONNECT, config_time_vib_on_disconnect);
     }
 
+    t = dict_find(iterator, MESSAGE_KEY_TIME_COLOR);
+    if (t)
+    {
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "got MESSAGE_KEY_TIME_COLOR");
+        config_time_color = (int)t->value->int32;
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting time color: 0x%06x", config_time_color);
+        persist_write_int(MESSAGE_KEY_TIME_COLOR, config_time_color);
+        time_color = GColorFromHEX(config_time_color);
+        text_layer_set_text_color(time_layer, time_color);
+
+        if (date_layer) /* or #ifndef NO_DATE */
+        {
+            text_layer_set_text_color(date_layer, time_color);
+        }
+        if (bluetooth_tlayer)
+        {
+            text_layer_set_text_color(bluetooth_tlayer, time_color);
+        }
+        if (health_tlayer)
+        {
+            text_layer_set_text_color(health_tlayer, time_color);
+        }
+        // battery done last, in case battery draw (i.e. NOT text) is used
+        // and mark dirty is called (forgets to then repaint other stuff)
+        if (battery_layer)
+        {
+            #ifndef NO_BATTERY
+            handle_battery(battery_state_service_peek());
+            #endif /* NO_BATTERY */
+        }
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "TIME COLOR DONE");
+    }
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 }
 
