@@ -89,7 +89,10 @@ Examples
       * https://cloudpebble.net/ide/import/github/clach04/watchface_spawn/basic_watchface
   * https://github.com/clach04/watchface_CapNion
       * https://github.com/clach04/watchface_CapNion/blob/master/src/watch_config.h + the resources (font and image) that make this different from the basic template)
-  * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has a custom ticker (and setup/cleanup)
+  * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has:
+      * a custom ticker
+      * setup/cleanup
+      * uses a package dependency on the excellent https://github.com/ygalanter/EffectLayer library
       * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
 
 Simple Tutorial
