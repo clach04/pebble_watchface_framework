@@ -1,0 +1,33 @@
+{
+    "author": "clach04",
+    "dependencies": {},
+    "keywords": [],
+    "name": "fill-me-in",
+    "pebble": {
+        "capabilities": [
+            "configurable"
+        ],
+        "displayName": "FILL ME IN!",
+        "enableMultiJS": true,
+        "messageKeys": {
+            "KEY_BACKGROUND_COLOR": 2,
+            "KEY_TIME_COLOR": 0,
+            "KEY_VIBRATE_ON_DISCONNECT": 1
+        },
+        "projectType": "native",
+        "resources": {
+            "media": []
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk"
+        ],
+        "uuid": "33a003e9-91ec-40fe-b652-b41248212f74",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "0.1.0"
+}
