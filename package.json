@@ -14,7 +14,8 @@
         "messageKeys": [
             "TIME_COLOR",
             "VIBRATE_ON_DISCONNECT",
-            "BACKGROUND_COLOR"
+            "BACKGROUND_COLOR",
+            "MAJOR_VERSION"
         ],
         "projectType": "native",
         "resources": {
@@ -31,5 +32,5 @@
             "watchface": true
         }
     },
-    "version": "0.1.0"
+    "version": "1.0.0"
 }

@@ -1,9 +1,12 @@
 #include <pebble.h>
-#include "watchface.h"
-
+#include <pebble_process_info.h>  // ONLY for get_major_app_version()
+extern const PebbleProcessInfo __pbl_app_info;  // ONLY for get_major_app_version()
+    
 #ifdef USE_SHADOW_TIME_EFFECT
 #include "effect_layer.h"  /* from https://github.com/ygalanter/EffectLayer */
 #endif /* USE_SHADOW_TIME_EFFECT */
+
+#include "watchface.h"
 
 
 #ifdef PBL_BW
@@ -728,11 +731,49 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 }
 
+void wipe_config()
+{
+    (void) persist_delete(MESSAGE_KEY_TIME_COLOR);
+    (void) persist_delete(MESSAGE_KEY_BACKGROUND_COLOR);
+    (void) persist_delete(MESSAGE_KEY_VIBRATE_ON_DISCONNECT);
+}
+
+int get_major_app_version()
+{
+    /*
+    ** Internal API subject to change!
+    ** https://forums.pebble.com/t/how-can-i-get-my-app-version-in-c-code/7959
+    */
+    return __pbl_app_info.process_version.major;
+}
 
 void init()
 {
     time_color = DEFAULT_TIME_COLOR;
     background_color = DEFAULT_BACKGROUND_COLOR;
+    int major_version = get_major_app_version();
+
+    APP_LOG(APP_LOG_LEVEL_INFO, "get_major_app_version: %d", major_version);
+    
+    if (persist_exists(MESSAGE_KEY_MAJOR_VERSION))
+    {
+        int stored_major_version = persist_read_int(MESSAGE_KEY_MAJOR_VERSION);
+
+        if(stored_major_version > major_version)
+        {
+            /* Upgrade logic goes here */
+            wipe_config();  // Quick and dirty
+        }
+        /*
+        ** Minor version bumps are assumed to be settings compatible
+        ** (override this logic if that is not true).
+        */
+    }
+    else
+    {
+        /* Does NOT exist - wipe out settings just in case... */
+        wipe_config();
+    }
 
 #ifdef PBL_COLOR
     /* TODO refactor */
