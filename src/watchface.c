@@ -361,7 +361,7 @@ void cleanup_battery()
 }
 
 void update_date(struct tm *tick_time) {
-    static char buffer[] = MAX_DATE_STR;  /* FIXME use same buffer, one for both date and time? */
+    static char buffer[] = MAX_DATE_STR;  /* TODO use same buffer, one for both date and time? */
 
     last_day = tick_time->tm_mday;
     strftime(buffer, sizeof(buffer), DATE_FMT_STR, tick_time);
