@@ -1,12 +1,6 @@
 #pragma once
 
 #include "watch_config.h"
-    
-/* PebbleKit JS, Message Keys, Pebble config keys */
-// FIXME why can't this be generated from the json settings file into a header?
-#define KEY_TIME_COLOR 0
-#define KEY_VIBRATE_ON_DISCONNECT 1
-#define KEY_BACKGROUND_COLOR 2
 
 #ifndef USE_MAX_MESSAGE_SIZE
     /*
