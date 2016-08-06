@@ -528,6 +528,16 @@ void update_time() {
     }
 #endif /* DEBUG_TIME */
 
+#ifdef REMOVE_LEADING_ZERO_FROM_TIME
+    if(clock_is_24h_style() == false)
+    {
+        if (buffer[0] == '0')
+        {
+            memmove(&buffer[0], &buffer[1], sizeof(buffer) - 1); // remove leading zero
+        }
+    }
+#endif /* REMOVE_LEADING_ZERO_FROM_TIME */
+
 #ifndef NO_DATE
     /* Update the date only when the day changes */
     if (last_day != tick_time->tm_mday)
