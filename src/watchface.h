@@ -39,10 +39,11 @@
     ** Assume 24h not set either
     ** Examples:
     **    24 Hour: "%H:%M" == "%R"
-    **    12 Hour: "%I:%M"  // produces leading zero for both hour and minute
+    **    12 Hour: "%l:%M" NOTE leading space for hour. NOTE requires font to have a space character
+    **             Also see REMOVE_LEADING_ZERO_FROM_TIME
     */
     #define TIME_FMT_STR_24H "%R"
-    #define TIME_FMT_STR_12H "%l:%M"  // no leading zero for hour
+    #define TIME_FMT_STR_12H "%I:%M"  // produces leading zero for both hour and minute
     #define MAX_TIME_STR "00:00"
 #endif /* TIME_FMT_STR_24H */
 

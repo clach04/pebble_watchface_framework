@@ -531,9 +531,9 @@ void update_time() {
 #ifdef REMOVE_LEADING_ZERO_FROM_TIME
     if(clock_is_24h_style() == false)
     {
-        if (buffer[0] == '0')
+        if (buffer[0] == '0' || buffer[0] == ' ')
         {
-            memmove(&buffer[0], &buffer[1], sizeof(buffer) - 1); // remove leading zero
+            memmove(&buffer[0], &buffer[1], sizeof(buffer) - 1); // remove leading character (really byte)
         }
     }
 #endif /* REMOVE_LEADING_ZERO_FROM_TIME */
