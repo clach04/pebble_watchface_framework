@@ -520,10 +520,10 @@ void update_time() {
         // Write the current hours and minutes into the buffer
         if(clock_is_24h_style() == true) {
             // 24h hour format
-            strftime(buffer, sizeof(buffer), "%H:%M", tick_time);
+            strftime(buffer, sizeof(buffer), TIME_FMT_STR_24H, tick_time);
         } else {
             // 12 hour format
-            strftime(buffer, sizeof(buffer), "%I:%M", tick_time); // produces leading zero for hour and minute
+            strftime(buffer, sizeof(buffer), TIME_FMT_STR_12H, tick_time); // produces leading zero for hour and minute
         }
     }
 #endif /* DEBUG_TIME */
