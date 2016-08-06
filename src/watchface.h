@@ -33,13 +33,16 @@
 #define MAX_DATE_STR "Thu, 00 Aug"  /* if custom version of DATE_FMT_STR is set, MAX_DATE_STR  needs to be updated too */
 #endif /* DATE_FMT_STR */
 
-#ifndef TIME_FMT_STR_24H
+#ifndef TIME_FMT_STR_12H
     /*
     ** See https://sourceware.org/newlib/libc.html#strftime
+    ** Assume 24h not set either
+    ** Examples:
+    **    24 Hour: "%H:%M" == "%R"
+    **    12 Hour: "%I:%M"  // produces leading zero for both hour and minute
     */
-    // Assume 12h not set either
-    #define TIME_FMT_STR_24H "%H:%M"
-    #define TIME_FMT_STR_12H "%I:%M"  // produces leading zero for hour and minute
+    #define TIME_FMT_STR_24H "%R"
+    #define TIME_FMT_STR_12H "%l:%M"  // no leading zero for hour
     #define MAX_TIME_STR "00:00"
 #endif /* TIME_FMT_STR_24H */
 
