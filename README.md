@@ -95,8 +95,22 @@ Examples
       * uses a package dependency on the excellent https://github.com/ygalanter/EffectLayer library
       * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
 
-Simple Tutorial
----------------
+Simple Tutorial 1
+-----------------
+
+1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
+2. Edit `watch_config.h` at the bottom, add the following lines:
+
+    #define TICK_HANDLER_INTERVAL SECOND_UNIT
+    #define TIME_FMT_STR_24H "%R:%S"
+    #define TIME_FMT_STR_12H "%I:%M:%S"  // produces leading zero for both hour and minute
+    #define MAX_TIME_STR "00:00:00"
+    #define FONT_SYSTEM_NAME FONT_KEY_ROBOTO_CONDENSED_21
+
+This will show seconds (the `%S` in both formats) and update once a second (by setting `TICK_HANDLER_INTERVAL` to update once a second). `MAX_TIME_STR` is updated to ensure space is allocated for both the colon and the two digits.
+
+Simple Tutorial 2
+-----------------
 
 1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
 2. Add a Resource (lower left corner), load a TTF font, e.g. upload the .ttf files from https://www.fontsquirrel.com/fonts/permanent-marker
