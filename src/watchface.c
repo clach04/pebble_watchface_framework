@@ -821,7 +821,7 @@ void init()
     window_stack_push(main_window, true);
 
     /* Register events; TickTimerService, Battery */
-    tick_timer_service_subscribe(MINUTE_UNIT, TICK_HANDLER);
+    tick_timer_service_subscribe(TICK_HANDLER_INTERVAL, TICK_HANDLER);
 #ifdef DEBUG_TIME
     #ifndef DEBUG_TIME_SCREENSHOT
         tick_timer_service_subscribe(SECOND_UNIT, DEBUG_TICK_HANDLER);

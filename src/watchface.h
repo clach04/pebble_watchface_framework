@@ -99,6 +99,10 @@
 #define TICK_HANDLER tick_handler
 #endif /* TICK_HANDLER */
 
+#ifndef TICK_HANDLER_INTERVAL
+#define TICK_HANDLER_INTERVAL MINUTE_UNIT
+#endif /* TICK_HANDLER_INTERVAL */
+
 #ifndef DEBUG_TICK_HANDLER
 #define DEBUG_TICK_HANDLER debug_tick_handler
 #endif /* DEBUG_TICK_HANDLER */
