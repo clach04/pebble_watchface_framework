@@ -101,11 +101,11 @@ Simple Tutorial 1
 1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
 2. Edit `watch_config.h` at the bottom, add the following lines:
 
-    #define TICK_HANDLER_INTERVAL SECOND_UNIT
-    #define TIME_FMT_STR_24H "%R:%S"
-    #define TIME_FMT_STR_12H "%I:%M:%S"  // produces leading zero for both hour and minute
-    #define MAX_TIME_STR "00:00:00"
-    #define FONT_SYSTEM_NAME FONT_KEY_ROBOTO_CONDENSED_21
+        #define TICK_HANDLER_INTERVAL SECOND_UNIT
+        #define TIME_FMT_STR_24H "%R:%S"
+        #define TIME_FMT_STR_12H "%I:%M:%S"  // produces leading zero for both hour and minute
+        #define MAX_TIME_STR "00:00:00"
+        #define FONT_SYSTEM_NAME FONT_KEY_ROBOTO_CONDENSED_21
 
 This will show seconds (the `%S` in both formats) and update once a second (by setting `TICK_HANDLER_INTERVAL` to update once a second). `MAX_TIME_STR` is updated to ensure space is allocated for both the colon and the two digits.
 
