@@ -107,6 +107,14 @@
 #define DEBUG_TICK_HANDLER debug_tick_handler
 #endif /* DEBUG_TICK_HANDLER */
 
+#ifndef SETUP_TIME
+#define SETUP_TIME setup_text_time
+#endif /* SETUP_TIME */
+
+#ifndef CLEANUP_TIME
+#define CLEANUP_TIME cleanup_text_time
+#endif /* CLEANUP_TIME */
+
 #ifndef MAIN_WINDOW_LOAD
 #define MAIN_WINDOW_LOAD main_window_load
 #endif /* MAIN_WINDOW_LOAD */

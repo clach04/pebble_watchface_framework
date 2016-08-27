@@ -599,7 +599,7 @@ void main_window_load(Window *window) {
     time_font = fonts_get_system_font(FONT_SYSTEM_NAME);
 #endif /* FONT_NAME */
 
-    setup_text_time(window);
+    SETUP_TIME(window);
 
 #ifndef NO_DATE
     setup_date(window);
@@ -658,7 +658,7 @@ void main_window_unload(Window *window) {
     cleanup_bg_image();
 #endif /* BG_IMAGE */
 
-    cleanup_text_time();
+    CLEANUP_TIME();
 
     /* unsubscribe events */
     tick_timer_service_unsubscribe();
