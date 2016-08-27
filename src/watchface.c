@@ -360,6 +360,29 @@ void cleanup_battery()
 #endif /* DRAW_BATTERY */
 }
 
+void setup_text_time(Window *window)
+{
+    // Create time TextLayer
+    time_layer = text_layer_create(CLOCK_POS);
+    text_layer_set_background_color(time_layer, GColorClear);
+    text_layer_set_text_color(time_layer, time_color);
+    text_layer_set_text(time_layer, "00:00");
+
+    // Apply to TextLayer
+    text_layer_set_font(time_layer, time_font);
+    /* Consider GTextAlignmentLeft (with monospaced font) in cases where colon is proportional */
+    text_layer_set_text_alignment(time_layer, TIME_ALIGN);
+
+    // Add it as a child layer to the Window's root layer
+    layer_add_child(window_get_root_layer(window), text_layer_get_layer(time_layer));
+}
+
+void cleanup_text_time()
+{
+    /* Destroy TextLayers */
+    text_layer_destroy(time_layer);
+}
+
 void update_date(struct tm *tick_time) {
     static char buffer[] = MAX_DATE_STR;  /* TODO use same buffer, one for both date and time? */
 
@@ -569,12 +592,6 @@ void main_window_load(Window *window) {
     #endif /* BG_IMAGE_GRECT */
 #endif /* BG_IMAGE */
 
-    // Create time TextLayer
-    time_layer = text_layer_create(CLOCK_POS);
-    text_layer_set_background_color(time_layer, GColorClear);
-    text_layer_set_text_color(time_layer, time_color);
-    text_layer_set_text(time_layer, "00:00");
-
 #ifdef FONT_NAME
     // Create GFont
     time_font = fonts_load_custom_font(resource_get_handle(FONT_NAME));
@@ -582,13 +599,7 @@ void main_window_load(Window *window) {
     time_font = fonts_get_system_font(FONT_SYSTEM_NAME);
 #endif /* FONT_NAME */
 
-    // Apply to TextLayer
-    text_layer_set_font(time_layer, time_font);
-    /* Consider GTextAlignmentLeft (with monospaced font) in cases where colon is proportional */
-    text_layer_set_text_alignment(time_layer, TIME_ALIGN);
-
-    // Add it as a child layer to the Window's root layer
-    layer_add_child(window_get_root_layer(window), text_layer_get_layer(time_layer));
+    setup_text_time(window);
 
 #ifndef NO_DATE
     setup_date(window);
@@ -647,9 +658,7 @@ void main_window_unload(Window *window) {
     cleanup_bg_image();
 #endif /* BG_IMAGE */
 
-    /* Destroy TextLayers */
-    text_layer_destroy(time_layer);
-
+    cleanup_text_time();
 
     /* unsubscribe events */
     tick_timer_service_unsubscribe();
