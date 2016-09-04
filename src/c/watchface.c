@@ -214,6 +214,10 @@ static void health_handler(HealthEventType event, void *context)
             APP_LOG(APP_LOG_LEVEL_INFO, "New HealthService HealthEventHeartRateUpdate event");
             break;
 #endif /* PBL_PLATFORM_DIORITE  */
+        // Default is not a good idea, but get switch warnings (about heart events) without it on Basalt/Chalk SDK4 builds
+        default:
+            APP_LOG(APP_LOG_LEVEL_INFO, "New HealthService UNHANDLED event");
+            break;
     }
 }
 
