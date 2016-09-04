@@ -124,7 +124,10 @@
 #endif /* MAIN_WINDOW_UNLOAD */
 
 extern Window    *main_window;
+#ifndef NO_TEXT_TIME_LAYER
 extern TextLayer *time_layer;
+#endif /* NO_TEXT_TIME_LAYER */
+
 extern TextLayer *date_layer;
 #ifndef DRAW_BATTERY
 extern TextLayer *battery_layer;
@@ -158,10 +161,13 @@ extern void cleanup_date();
 extern void update_time();
 extern void main_window_load(Window *window);
 extern void main_window_unload(Window *window);
-extern void tick_handler(struct tm *tick_time, TimeUnits units_changed);
 extern void in_recv_handler(DictionaryIterator *iterator, void *context);
 extern void init();
 extern void deinit();
+extern void TICK_HANDLER(struct tm *tick_time, TimeUnits units_changed);
+
+extern void CLEANUP_TIME();
+extern void SETUP_TIME(Window *window);
 
 #if defined(PBL_HEALTH)
 extern TextLayer *health_tlayer;
