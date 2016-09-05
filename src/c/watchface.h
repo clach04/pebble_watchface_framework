@@ -169,6 +169,12 @@ extern void TICK_HANDLER(struct tm *tick_time, TimeUnits units_changed);
 extern void CLEANUP_TIME();
 extern void SETUP_TIME(Window *window);
 
+/*
+** CUSTOM_IN_RECV_HANDLER() like app_message_register_inbox_received()
+** but returns bool flag if config was written to persistent storage
+*/
+extern bool CUSTOM_IN_RECV_HANDLER(DictionaryIterator *iterator, void *context);
+
 #if defined(PBL_HEALTH)
 extern TextLayer *health_tlayer;
 

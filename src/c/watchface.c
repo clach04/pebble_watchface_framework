@@ -697,6 +697,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
     Tuple *t=NULL;
     bool wrote_config=false;
+    bool custom_wrote_config=false;
 
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 
@@ -761,7 +762,11 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
     }
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 
-    if (wrote_config)
+#ifdef CUSTOM_IN_RECV_HANDLER
+    custom_wrote_config = CUSTOM_IN_RECV_HANDLER(iterator, context);
+#endif /* CUSTOM_IN_RECV_HANDLER */
+
+    if (wrote_config || custom_wrote_config)
     {
         persist_write_int(MESSAGE_KEY_MAJOR_VERSION, major_version);
     }
@@ -811,7 +816,6 @@ void init()
         wipe_config();
     }
 
-#ifdef PBL_COLOR
     /* TODO refactor */
     if (persist_exists(MESSAGE_KEY_TIME_COLOR))
     {
@@ -825,7 +829,6 @@ void init()
         APP_LOG(APP_LOG_LEVEL_INFO, "Read background color: %x", config_background_color);
         background_color = GColorFromHEX(config_background_color);
     }
-#endif /* PBL_COLOR */
 
     if (persist_exists(MESSAGE_KEY_VIBRATE_ON_DISCONNECT))
     {
