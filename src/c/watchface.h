@@ -175,6 +175,11 @@ extern void SETUP_TIME(Window *window);
 */
 extern bool CUSTOM_IN_RECV_HANDLER(DictionaryIterator *iterator, void *context);
 
+#ifndef PBL_HEALTH
+    // Ensure platforms without health do not accidentally attempt to build using health api
+    #undef USE_HEALTH
+#endif /* PBL_HEALTH */
+
 #if defined(PBL_HEALTH)
 extern TextLayer *health_tlayer;
 
