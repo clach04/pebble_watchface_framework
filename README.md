@@ -44,7 +44,7 @@ Then start adding options and resources. By default the empty framework will:
   * Have a config/settings option on Phone to configure:
       * Time/date/etc. text color
       * Background color
-      * Whether to vibrate on Bluetooth disconnect (default is do *not* vibrate)
+      * Whether to vibrate on Bluetooth disconnect (default is do *not* vibrate), honoring Quiet Time mode
 
 There is no default icon, add a 28x28 resource and declare it as an icon, see http://developer.getpebble.com/guides/pebble-apps/resources/image-resources/
 
