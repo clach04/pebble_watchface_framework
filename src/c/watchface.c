@@ -151,8 +151,20 @@ void handle_bluetooth(bool connected)
         #endif /* BT_DISCONNECT_IMAGE */
         if (config_time_vib_on_disconnect && (bluetooth_state != connected))
         {
+            bool do_vib = true;
+
+            // TODO if health API/permissions available, check if asleep
+            // check if quiet time
+            if (quiet_time_is_active())
+            {
+                do_vib = false;
+            }
+    
             /* had BT connection then lost it, rather than started disconnected */
-            vibes_short_pulse();  /* vibrate/rumble */
+            if (do_vib)
+            {
+                vibes_short_pulse();  /* vibrate/rumble */
+            }
         }
     }
     bluetooth_state = connected;
