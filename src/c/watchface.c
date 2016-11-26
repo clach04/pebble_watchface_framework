@@ -153,13 +153,28 @@ void handle_bluetooth(bool connected)
         {
             bool do_vib = true;
 
-            // TODO if health API/permissions available, check if asleep
             // check if quiet time
             if (quiet_time_is_active())
             {
                 do_vib = false;
             }
-    
+#ifdef USE_HEALTH
+            // check if asleep
+            if (do_vib)
+            {
+                HealthActivityMask activities = health_service_peek_current_activities();
+
+                if (activities & HealthActivitySleep)
+                {
+                    do_vib = false;
+                }
+                if (activities & HealthActivityRestfulSleep)
+                {
+                    do_vib = false;
+                }
+            }
+#endif // USE_HEALTH
+
             /* had BT connection then lost it, rather than started disconnected */
             if (do_vib)
             {

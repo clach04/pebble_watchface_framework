@@ -41,6 +41,10 @@ module.exports = [
                 "label": "Vibrate on Bluetooth disconnect",
                 "messageKey": "VIBRATE_ON_DISCONNECT",
                 "defaultValue": false
+            },
+            {
+                "type": "text",
+                "defaultValue": "Will NOT vibrate during Quiet Time or if health monitoring detects sleeping."
             }
         ]
     },
