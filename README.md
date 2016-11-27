@@ -75,6 +75,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
       * If `UPDATE_HEALTH_ON_ACTIVITY` is set, step count is updated when the Pebble Health service has an update. If not set, step count is updated once per minute.
       * `HEALTH_POS` is a GRect()
       * `HEALTH_FMT_STR` is the format of the string to display. `MAX_HEALTH_STR` should be updated if `HEALTH_FMT_STR` is set.
+  * If `USE_TIME_MACHINE` is defined https://github.com/MorrisTimm/pebble-time-machine will be used (dependencies should be filled in, known to work with version 1.0.2).
 
 Examples
 --------
@@ -117,7 +118,7 @@ Simple Tutorial 2
 3. Name the resource `FONT_50` - 50 means scale to 50 (optional enter in the CHARACTERS field `[0-9:.]` to only use the characters needed for time, makes watchface smaller), Click Save.
 4. Edit `watch_config.h` add line `#define FONT_NAME RESOURCE_ID_FONT_50` add after (or replace) '#undef FONT_NAME' to match resource name above
 5. Build and run :-)
-6. Try experimenting with different font sizes, make use of `#define DEBUG_TIME` to try wide fonts. For example using the permanent-marker font above with size 60 looks fine for some times but not all. DEBUG_TIME quickly tries a number of different times to check sizes.
+6. Try experimenting with different font sizes, make use of `#define DEBUG_TIME` to try wide fonts. For example using the permanent-marker font above with size 60 looks fine for some times but not all. DEBUG_TIME quickly tries a number of different times to check sizes. Also see `USE_TIME_MACHINE` notes.
 
 NOTE there are limitations in the Pebble SDK/Firmware on maximum font size. 60 is the absolute maximum, and for some fonts even 60 is problematic. Very large fonts need to be converted into bitmaps, see https://github.com/pebble-examples/big-time
 
