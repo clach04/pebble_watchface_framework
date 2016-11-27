@@ -2,6 +2,10 @@
 
 #include "watch_config.h"
 
+#ifdef USE_TIME_MACHINE
+    #include <pebble-time-machine/pebble-time-machine.h>
+#endif
+
 #ifndef USE_MAX_MESSAGE_SIZE
     /*
     ** framework expects ONLY the three items above
@@ -158,7 +162,7 @@ extern void cleanup_battery();
 extern void update_date(struct tm *tick_time);
 extern void setup_date(Window *window);
 extern void cleanup_date();
-extern void update_time();
+extern void update_time(struct tm *tick_time);
 extern void main_window_load(Window *window);
 extern void main_window_unload(Window *window);
 extern void in_recv_handler(DictionaryIterator *iterator, void *context);
