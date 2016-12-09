@@ -70,6 +70,8 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
   * If `BAT_FMT_STR` is defined it will be used for the format of the battery power text.
       * If `DRAW_SMALL_BATTERY` is defined a small gauge will be used.
   * If `DRAW_BATTERY` is defined a graphical gauge will be used instead of text
+  * If `QUIET_TIME_IMAGE` is defined as a bitmap resource identifier it will be displayed when quiet time is active.
+      * Optionally set `QUIET_TIME_IMAGE_GRECT` to location/size
   * `NO_BLUETOOTH`, `NO_BATTERY`, and `NO_DATE` will disable display of bluetooth disconnect, battery status, and date.
   * If `USE_HEALTH` is defined step counts will be displayed. Pebble Time and later only.
       * If `UPDATE_HEALTH_ON_ACTIVITY` is set, step count is updated when the Pebble Health service has an update. If not set, step count is updated once per minute.
