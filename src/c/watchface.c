@@ -437,11 +437,7 @@ void setup_quiet_time(Window *window)
     /* Do not attached image to layer (yet...) */
     bitmap_layer_set_bitmap(quiet_time_blayer, NULL);
 
-#ifdef PBL_BW
-     bitmap_layer_set_compositing_mode(quiet_time_blayer, GCompOpAssign);
-#elif PBL_COLOR
-     bitmap_layer_set_compositing_mode(quiet_time_blayer, GCompOpSet);
-#endif
+    bitmap_layer_set_compositing_mode(quiet_time_blayer, GCompOpSet);
     layer_add_child(window_get_root_layer(main_window), bitmap_layer_get_layer(quiet_time_blayer));
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() exit", __func__);
@@ -544,11 +540,7 @@ void setup_bg_image(Window *window, uint32_t resource_id, GRect bounds)
 
     bitmap_layer_set_bitmap(background_layer, background_bitmap);
 
-#ifdef PBL_BW
-     bitmap_layer_set_compositing_mode(background_layer, GCompOpAssign);
-#elif PBL_COLOR
-     bitmap_layer_set_compositing_mode(background_layer, GCompOpSet);
-#endif
+    bitmap_layer_set_compositing_mode(background_layer, GCompOpSet);
 
     layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(background_layer));
 }
@@ -592,11 +584,7 @@ void setup_bt_image(Window *window, uint32_t resource_id, GRect bounds)
     /* Do not attached image to layer (yet...) */
     bitmap_layer_set_bitmap(bluetooth_blayer, NULL);
 
-#ifdef PBL_BW
-     bitmap_layer_set_compositing_mode(bluetooth_blayer, GCompOpAssign);
-#elif PBL_COLOR
-     bitmap_layer_set_compositing_mode(bluetooth_blayer, GCompOpSet);
-#endif
+    bitmap_layer_set_compositing_mode(bluetooth_blayer, GCompOpSet);
     layer_add_child(window_get_root_layer(main_window), bitmap_layer_get_layer(bluetooth_blayer));
 }
 
