@@ -1,6 +1,7 @@
 {
     "author": "clach04",
     "dependencies": {
+        "pebble-bluetooth-icon": "^1.0.7",
         "pebble-clay": "^1.0.1"
     },
     "keywords": [],

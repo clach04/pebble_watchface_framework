@@ -8,6 +8,8 @@ extern const PebbleProcessInfo __pbl_app_info;  // ONLY for get_major_app_versio
 
 #include "watchface.h"
 
+#include <pebble-bluetooth-icon/pebble-bluetooth-icon.h>
+BluetoothLayer *s_bluetooth_layer;
 
 #ifdef PBL_BW
     #ifndef GColorFromHEX
@@ -732,9 +734,17 @@ void main_window_load(Window *window) {
     /* Ensure battery status is displayed from the start */
     handle_battery(battery_state_service_peek());
 #endif /* NO_BATTERY */
+    
+  s_bluetooth_layer = bluetooth_layer_create();
+  layer_add_child(text_layer_get_layer(time_layer), s_bluetooth_layer);  // works
+  //layer_add_child(window_get_root_layer(window), s_bluetooth_layer);  // works offsets are different and thus screen relative
+    bluetooth_set_position(GPoint(50, 80));
+    
 }
 
 void main_window_unload(Window *window) {
+
+    bluetooth_layer_destroy(s_bluetooth_layer);
 
 #ifdef QUIET_TIME_IMAGE
     cleanup_quiet_time();

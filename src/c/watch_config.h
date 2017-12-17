@@ -1,5 +1,7 @@
 #pragma once
 
+#define NO_BLUETOOTH // DEBUG to try https://github.com/orviwan/pebble-bluetooth-icon https://www.npmjs.com/package/pebble-bluetooth-icon
+
 #define USE_GENERIC_MAIN
 #undef REMOVE_LEADING_ZERO_FROM_TIME  /* 12 hour display will not have a leading '0' or ' ' if this is defined */
 #undef FONT_NAME
