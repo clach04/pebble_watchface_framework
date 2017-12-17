@@ -48,4 +48,9 @@
 /* for screen shots and font testing
 #define DEBUG_TIME
 #define DEBUG_TIME_SCREENSHOT
- */
+// ensure quiet time and bluetooth disconnection info is shown
+#ifndef quiet_time_is_active  // so not aplite
+#define quiet_time_is_active() true  // DEBUG!
+#endif
+#define bluetooth_connection_service_peek() false  // DEBUG!
+*/
