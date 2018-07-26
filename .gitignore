@@ -30,3 +30,7 @@
 
 # Debug files
 *.dSYM/
+
+# npm dependencies
+node_modules/
+
