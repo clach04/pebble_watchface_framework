@@ -1,7 +1,6 @@
 {
     "author": "clach04",
     "dependencies": {
-        "pebble-clay": "^1.0.1"
     },
     "keywords": [],
     "name": "fill-me-in",
