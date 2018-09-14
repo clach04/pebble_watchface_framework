@@ -1,4 +1,9 @@
-var URL = 'http://clach04.github.io/pebble/watchface_framework/slate/index.html';  // code for this in bf32f55500e059ae68458df6f305002508844019
+var URL = 'http://clach04.github.io/pebble/watchface_framework/nojquery_pebble-config.html';  // compatible with Slate version http://clach04.github.io/pebble/watchface_framework/slate/index.html
+
+
+
+// test URL
+// http://clach04.github.io/pebble/watchface_framework/nojquery_pebble-config.html?version_settings=0&background_color=000000&time_color=FF55AA&vibrate_disconnect=0&pebble_platform=basalt&pebble_model=qemu_platform_basalt&pebble_language=en_US
 
 var default_dict = {
     version_settings: 0,  // Bump this when ever config storage changes
