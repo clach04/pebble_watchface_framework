@@ -1,9 +1,20 @@
-Watchface Framework
-===================
+Pebble Watchface Framework
+==========================
 
 https://github.com/clach04/pebble_watchface_framework
 
 Working, ready to build Bare-Bones watch face for Pebble (OG/Classic, Time, Round, and Pebble 2) Aplite, Basalt, Chalk, and Diorite. With configuration and settings support via [Clay](https://github.com/clach04/pebble-clay/tree/clach04_emulator_url_index).
+
+Requires Pebble SDK of some kind. Original instructions are for CloudPebble.
+
+Current code works with local SDK, recommend using a Docker Container, for example:
+
+  * https://github.com/bboehmke/docker-pebble-dev
+  * https://github.com/clach04/docker-pebble-dev/wiki has some notes
+
+Installation notes for PBW:
+
+  * Recommend using Cx File Explorer - https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer to "open" it and then select Pebble App.
 
 All the examples below use the same framework.
 
