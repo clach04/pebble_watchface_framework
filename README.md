@@ -59,8 +59,7 @@ Then start adding options and resources. By default the empty framework will:
       * Background color
       * Whether to vibrate on Bluetooth disconnect (default is do *not* vibrate), honoring Quiet Time mode
 
-There is no default icon, add a 25x25 resource and declare it as an icon, see http://developer.getpebble.com/guides/pebble-apps/resources/image-resources/
-
+There is no default icon, add a 25x25 resource and declare it as an icon, see https://developer.rebble.io/developer.pebble.com/guides/migration/migration-guide-4/index.html
 Additional options
 ------------------
 
