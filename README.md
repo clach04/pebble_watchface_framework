@@ -142,4 +142,5 @@ Notes and other resources
 
 For suggestions on image options and conversion see https://www.reddit.com/r/pebble/comments/3ej5wf/pebble_time_image_conversion_contrast/
 
-Multi-platform support https://developer.getpebble.com/guides/best-practices/multi-platform/
+Multi-platform support https://developer.rebble.io/developer.pebble.com/guides/best-practices/index.html
+
