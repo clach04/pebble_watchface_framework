@@ -144,3 +144,7 @@ For suggestions on image options and conversion see https://www.reddit.com/r/peb
 
 Multi-platform support https://developer.rebble.io/developer.pebble.com/guides/best-practices/index.html
 
+SDK API https://developer.rebble.io/developer.pebble.com/docs/index.html
+
+Pebble developer wiki https://github.com/pebble-dev/wiki/wiki
+
