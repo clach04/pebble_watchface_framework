@@ -14,7 +14,8 @@ Current code works with local SDK, recommend using a Docker Container, for examp
 
 Installation notes for PBW:
 
-  * Recommend using Cx File Explorer - https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer to "open" it and then select Pebble App.
+  * Recommend using [Cx File Explorer](https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer) to "open" it and then select Pebble App.
+      * NOTE Android 9 and later also require [File URI Plugin](https://play.google.com/store/apps/details?id=com.alphainventor.plugin.fileuri)
 
 All the examples below use the same framework.
 
