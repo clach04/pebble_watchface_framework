@@ -13,6 +13,7 @@ Current code works with local SDK, recommend using a Docker Container, for examp
   * https://github.com/clach04/docker-pebble-dev/wiki has some notes
 
 GitHub Actions note, https://github.com/clach04/pebble_watchface_framework/blob/master/.github/workflows/main.yml includes a pebble build action that runs by default on every push to master!
+Kudos to daktak for initial version that the action used here is based on. First seen in https://github.com/mattrossman/forecaswatch2/pull/50
 
 Installation notes for PBW:
 
