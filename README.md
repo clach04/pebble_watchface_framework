@@ -115,7 +115,8 @@ Examples
       * setup/cleanup
       * uses a package dependency on the excellent https://github.com/ygalanter/pebble-effect-layer library
       * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
-  * https://github.com/clach04/pebble-watchface_starwars_rebel_imperial similar to Paragade (no screen shots, but does have downloads under GitHub actions)
+  * https://github.com/clach04/pebble-watchface_starwars_rebel_imperial similar to Paragade (no screen shots, but does have downloads under GitHub actions and Releases)
+  * https://github.com/clach04/pebble-watchface_storm_trooper has screen shots and and Release downloads
 
 Simple Tutorial 1
 -----------------
