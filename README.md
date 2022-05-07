@@ -16,6 +16,7 @@ Installation notes for PBW:
 
   * Recommend using [Cx File Explorer](https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer) to "open" it and then select Pebble App.
       * NOTE Android 9 and later also require [File URI Plugin](https://play.google.com/store/apps/details?id=com.alphainventor.plugin.fileuri)
+  * Side Loader https://play.google.com/store/apps/details?id=io.rebble.charon
 
 All the examples below use the same framework.
 
