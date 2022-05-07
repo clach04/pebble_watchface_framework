@@ -12,6 +12,8 @@ Current code works with local SDK, recommend using a Docker Container, for examp
   * https://github.com/bboehmke/docker-pebble-dev
   * https://github.com/clach04/docker-pebble-dev/wiki has some notes
 
+GitHub Actions note, https://github.com/clach04/pebble_watchface_framework/blob/master/.github/workflows/main.yml includes a pebble build action that runs by default on every push to master!
+
 Installation notes for PBW:
 
   * Recommend using [Cx File Explorer](https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer) to "open" it and then select Pebble App.
