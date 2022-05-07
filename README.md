@@ -113,7 +113,7 @@ Examples
   * https://github.com/clach04/watchface_Paragade - NOTE slightly more complicated than JupiterMass and CapNion as it has:
       * a custom ticker
       * setup/cleanup
-      * uses a package dependency on the excellent https://github.com/ygalanter/EffectLayer library
+      * uses a package dependency on the excellent https://github.com/ygalanter/pebble-effect-layer library
       * See https://github.com/clach04/watchface_ParaGade/blob/master/src/watch_config.h and https://github.com/clach04/watchface_ParaGade/blob/master/src/main.c
 
 Simple Tutorial 1
