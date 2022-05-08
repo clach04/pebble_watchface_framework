@@ -15,7 +15,7 @@ Current code works with local SDK, recommend using a Docker Container, for examp
 GitHub Actions note, https://github.com/clach04/pebble_watchface_framework/blob/master/.github/workflows/main.yml includes a pebble build action that runs by default on every push to master!
 Kudos to https://github.com/daktak for initial version that the action used here is based on. First seen in https://github.com/mattrossman/forecaswatch2/pull/50
 
-Installation notes for PBW:
+Installation notes for PBW (Android specific, assuming Pebble/Rebble App is installed https://help.rebble.io/setup/):
 
   * Recommend using [Cx File Explorer](https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer) to "open" it and then select Pebble App.
       * NOTE Android 9 and later also require [File URI Plugin](https://play.google.com/store/apps/details?id=com.alphainventor.plugin.fileuri)
