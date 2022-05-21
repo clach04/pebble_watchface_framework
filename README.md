@@ -75,7 +75,7 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
       * If `UPDATE_HEALTH_ON_ACTIVITY` is set, step count is updated when the Pebble Health service has an update. If not set, step count is updated once per minute.
       * `HEALTH_POS` is a GRect()
       * `HEALTH_FMT_STR` is the format of the string to display. `MAX_HEALTH_STR` should be updated if `HEALTH_FMT_STR` is set.
-  * If `USE_TIME_MACHINE` is defined https://github.com/MorrisTimm/pebble-time-machine will be used (dependencies should be filled in, known to work with version 1.0.2).
+  * If `USE_TIME_MACHINE` is defined https://github.com/MorrisTimm/pebble-time-machine will be used ('dependencies' in package.json should be filled in, known to work with version 1.0.2).
 
 Examples
 --------
