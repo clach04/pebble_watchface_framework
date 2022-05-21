@@ -104,7 +104,7 @@ Simple Tutorial 1
 1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
 2. Edit `watch_config.h` at the bottom, add the following lines:
 
-        #define TICK_HANDLER_INTERVAL SECOND_UNIT  / Update once per second
+        #define TICK_HANDLER_INTERVAL SECOND_UNIT  // Update once per second
         #define TIME_FMT_STR_24H "%R:%S"  // Display seconds
         #define TIME_FMT_STR_12H "%I:%M:%S"  // Display seconds, produces leading zero for hour,minute, and seconds
         #define MAX_TIME_STR "00:00:00"  // Ensure space allocated for string representation of time
