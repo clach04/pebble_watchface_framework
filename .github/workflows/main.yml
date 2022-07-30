@@ -1,15 +1,22 @@
+# From https://github.com/clach04/github_action_pebble_build/
 name: PebbleBuild
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events for any branch (see commented out `branches` lines for  master branch example)
   push:
-    branches: [ master]
+    #branches: [master]
   pull_request:
-    branches: [ master]
+    # External Pull Request requires confirmation BEFORE action fires https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks 
+    #branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    # from https://levelup.gitconnected.com/how-to-manually-trigger-a-github-actions-workflow-4712542f1960
+    inputs:
+      git-ref:
+        description: Git Ref (Optional)    
+        required: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,7 +28,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      # from https://levelup.gitconnected.com/how-to-manually-trigger-a-github-actions-workflow-4712542f1960
+      - name: Clone Repository (Latest)
+        uses: actions/checkout@v2
+        if: github.event.inputs.git-ref == ''
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v2
+        if: github.event.inputs.git-ref != ''
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
       - uses: actions/setup-node@v2
       - uses: actions/setup-python@v2
         with:
@@ -41,7 +56,7 @@ jobs:
       - name: pebble-build
         run: yes | sdk/bin/pebble build
       - name: Upload PBW
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: App
-          path: ${{ github.workspace }}/build/*.pbw
+          name: PebblePBW
+          path: ./**/*.pbw
