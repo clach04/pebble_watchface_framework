@@ -1,4 +1,4 @@
-var meta = require('../../../package.json');
+var meta = require('../../package.json');
 
 module.exports = [
     { 
