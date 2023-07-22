@@ -23,10 +23,24 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
+
+    container:
+      # Pebble SDK needs Python 2.7
+      image: python:2.7.18-buster
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Sanity checks for debugging, if/when problems occur
+      - name: pyver
+        run: python   --version
+      - name: whichpy
+        run: which python
+      - name: whichpy2
+        run: which python2
+      - name: whichpy3
+        run: which python3
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # from https://levelup.gitconnected.com/how-to-manually-trigger-a-github-actions-workflow-4712542f1960
       - name: Clone Repository (Latest)
@@ -38,11 +52,11 @@ jobs:
         with:
           ref: ${{ github.event.inputs.git-ref }}
       - uses: actions/setup-node@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '2.7'
+      #- name: apt-getsudo
+      #  run: apt-get update; apt-get -qq install -y sudo
+
       - name: apt-get
-        run: sudo apt-get update; sudo apt-get -qq install -y wget python-pip python2.7-dev libsdl1.2debian libfdt1 libpixman-1-0 nodejs npm libfreetype6 libx11-6 rlwrap
+        run: apt-get update; apt-get -qq install -y wget python-pip python2.7-dev libsdl1.2debian libfdt1 libpixman-1-0 nodejs npm libfreetype6 libx11-6 rlwrap
       - name: virtualenv
         run: pip install virtualenv
       - name: get sdk
