@@ -12,7 +12,7 @@ Current code works with local SDK, recommend using a Docker Container, for examp
   * https://github.com/bboehmke/docker-pebble-dev
   * https://github.com/clach04/docker-pebble-dev/wiki has some notes
 
-GitHub Actions note, https://github.com/clach04/pebble_watchface_framework/blob/master/.github/workflows/main.yml includes a pebble build action that runs by default on every push to master!
+GitHub Actions note, https://github.com/clach04/pebble_watchface_framework/blob/master/.github/workflows/main.yml includes a pebble build action that runs by default on every push to master! NOTE Downloads are ONLY available when logged into Github, otherwise, the Artifacts "PebblePBW" text is not a link (without any hint as to what is going on).
 Kudos to https://github.com/daktak for initial version that the action used here is based on. First seen in https://github.com/mattrossman/forecaswatch2/pull/50
 
 Installation notes for PBW (Android specific, assuming Pebble/Rebble App is installed https://help.rebble.io/setup/):
