@@ -98,6 +98,7 @@ Examples
   * https://github.com/clach04/pebble-watchface_starwars_rebel_imperial similar to Paragade (no screen shots, but does have downloads under GitHub actions and Releases)
   * https://github.com/clach04/pebble-watchface_storm_trooper has screen shots and and Release downloads
   * https://github.com/clach04/watchface_rota_minute analog/digital hybrid
+  * https://github.com/clach04/pebble_tz multiple timezones, not pretty but very functional
 
 Simple Tutorial 1
 -----------------
