@@ -7,6 +7,8 @@ Working, ready to build Bare-Bones watch face for Pebble (OG/Classic, Time, Roun
 
 Requires Pebble SDK of some kind (current code and WAF script is for SDK 4.5). Original instructions are for CloudPebble.
 
+For non-developers, check out https://github.com/HarrisonAllen/pebble-watchface-generator (started 2025).
+
 Current code works with local SDK, recommend using a Docker Container, for example:
 
   * https://github.com/bboehmke/docker-pebble-dev
