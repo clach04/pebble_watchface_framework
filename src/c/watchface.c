@@ -1,3 +1,5 @@
+#include <inttypes.h>
+
 #include <pebble.h>
 #include <pebble_process_info.h>  // ONLY for get_major_app_version()
 extern const PebbleProcessInfo __pbl_app_info;  // ONLY for get_major_app_version()
@@ -609,6 +611,26 @@ void cleanup_bt_image()
 void update_time(struct tm *tick_time) {
     // Create a long-lived buffer
     static char buffer[] = MAX_TIME_STR;
+
+//#define DEBUG_UTC_TIME
+#ifdef DEBUG_UTC_TIME
+    // Older firmware were local time only, FW3+ has both UTC and localtime APIs - BUT emulator for Aplite appears to differ from actual hardware (hardware has UTC for, emulator does not)
+    static char utc_str_buffer[]="00:00";
+    time_t utc_time_t = time(NULL);
+    time_t local_time_t = time(NULL);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "utc_time_t   %jd", (intmax_t) utc_time_t);  // TODO %d not ideal for time_t, under Pebble this happens to be TIME_T == long - cast into something larger to be sure.
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "utc_time_t   %ju", (uintmax_t) utc_time_t);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "local_time_t %jd", (intmax_t) local_time_t);
+    struct tm *utc_tm = gmtime(&utc_time_t);
+    struct tm *local_tm = localtime(&local_time_t);
+
+    strftime(utc_str_buffer, sizeof(utc_str_buffer), "%R", utc_tm);  // 24-hour format
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "utc_str_buffer   UTC=%s", utc_str_buffer);
+    strftime(utc_str_buffer, sizeof(utc_str_buffer), "%R", local_tm);  // 24-hour format
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "utc_str_buffer local=%s", utc_str_buffer);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "utc_time_t   %jd", (intmax_t) utc_time_t);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "local_time_t %jd", (intmax_t) local_time_t);
+#endif /* DEBUG_UTC_TIME */
 
 #ifdef DEBUG_TIME
     {
