@@ -9,7 +9,7 @@
         "capabilities": [
             "configurable"
         ],
-        "displayName": "FILL ME IN!",
+        "displayName": "FILL ME IN AND CHANGE uuid!",
         "enableMultiJS": true,
         "messageKeys": [
             "TIME_COLOR",
