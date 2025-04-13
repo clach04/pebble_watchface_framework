@@ -18,6 +18,11 @@ extern const PebbleProcessInfo __pbl_app_info;  // ONLY for get_major_app_versio
     #endif /* GColorFromHEX */
 #endif /* PBL_BW */
 
+//#define DEBUG_STACK
+#ifdef DEBUG_STACK
+    static uint32_t stack_initial;
+#endif /* DEBUG_STACK */
+
 Window    *main_window=NULL;
 #ifndef NO_TEXT_TIME_LAYER
 TextLayer *time_layer=NULL;
@@ -612,6 +617,12 @@ void update_time(struct tm *tick_time) {
     // Create a long-lived buffer
     static char buffer[] = MAX_TIME_STR;
 
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() entry", __func__);
+    #ifdef DEBUG_STACK
+        register uint32_t sp __asm__("sp");
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() sp=%p (%ju bytes)", __func__, (void*) sp, (uintmax_t) stack_initial - sp);
+    #endif /* DEBUG_STACK */
+
 //#define DEBUG_UTC_TIME
 #ifdef DEBUG_UTC_TIME
     // Older firmware were local time only, FW3+ has both UTC and localtime APIs - BUT emulator for Aplite appears to differ from actual hardware (hardware has UTC for, emulator does not)
@@ -823,6 +834,11 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
     /* NOTE if new entries are added, increase MAX_MESSAGE_SIZE_OUT macro */
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "in_recv_handler() called");
+    #ifdef DEBUG_STACK
+        register uint32_t sp __asm__("sp");
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() sp=%p (%ju bytes)", __func__, (void*) sp, (uintmax_t) stack_initial - sp);
+    #endif /* DEBUG_STACK */
+
     t = dict_find(iterator, MESSAGE_KEY_BACKGROUND_COLOR);
     if (t)
     {
@@ -1016,6 +1032,11 @@ void init()
 
 #ifdef USE_GENERIC_MAIN
 int main(void) {
+    #ifdef DEBUG_STACK
+        register uint32_t sp __asm__("sp");
+        stack_initial = sp;
+    #endif /* DEBUG_STACK */
+
     init();
     app_event_loop();
     deinit();
