@@ -105,6 +105,39 @@ Examples
 Simple Tutorial 1
 -----------------
 
+ 1. clone
+
+        git clone https://github.com/clach04/pebble_watchface_framework.git
+
+    TODO consider editing `package.json` and changing:
+      * `name`
+      * `displayName`
+      * `uuid`
+
+ 2. build
+
+        pebble build
+        pebble analyze-size
+
+ 3. Run in emulator
+
+        pebble install --emulator aplite --logs
+        pebble install --emulator basalt --logs
+
+    Start emulator, requires a web browser (NOTE potential issues with Clay).
+
+        pebble emu-app-config
+
+ 3. Run on Pebble watch, connected via Developer Connection
+    TODO document phone steps
+
+        pebble install --phone IP_ADDRESS_HERE --logs
+        pebble logs --color --phone PHONE_IP
+
+
+Simple Tutorial 2
+-----------------
+
 1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
 2. Edit `watch_config.h` at the bottom, add the following lines:
 
@@ -116,7 +149,7 @@ Simple Tutorial 1
 
 This will show seconds (the `%S` in both formats) and update once a second (by setting `TICK_HANDLER_INTERVAL` to update once a second). `MAX_TIME_STR` is updated to ensure space is allocated for both the colon and the two digits.
 
-Simple Tutorial 2
+Simple Tutorial 3
 -----------------
 
 1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
