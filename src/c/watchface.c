@@ -18,6 +18,7 @@ extern const PebbleProcessInfo __pbl_app_info;  // ONLY for get_major_app_versio
     #endif /* GColorFromHEX */
 #endif /* PBL_BW */
 
+//#define myDEBUG_HEAP
 //#define DEBUG_STACK
 #ifdef DEBUG_STACK
     static uint32_t stack_initial;
@@ -623,6 +624,12 @@ void update_time(struct tm *tick_time) {
         APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() sp=%p (%ju bytes)", __func__, (void*) sp, (uintmax_t) stack_initial - sp);
     #endif /* DEBUG_STACK */
 
+    #ifdef myDEBUG_HEAP
+        // SDK 4.3 allows %z... unless using aplite target!? :-(
+        //APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() heap free %z bytes heap used %z bytes", __func__, heap_bytes_free(), heap_bytes_used());
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() heap free %ju bytes heap used %ju bytes", __func__, (uintmax_t) heap_bytes_free(), (uintmax_t) heap_bytes_used());
+    #endif /* myDEBUG_HEAP */
+
 //#define DEBUG_UTC_TIME
 #ifdef DEBUG_UTC_TIME
     // Older firmware were local time only, FW3+ has both UTC and localtime APIs - BUT emulator for Aplite appears to differ from actual hardware (hardware has UTC for, emulator does not)
@@ -838,6 +845,11 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
         register uint32_t sp __asm__("sp");
         APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() sp=%p (%ju bytes)", __func__, (void*) sp, (uintmax_t) stack_initial - sp);
     #endif /* DEBUG_STACK */
+
+    #ifdef myDEBUG_HEAP
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() heap free %ju bytes heap used %ju bytes", __func__, (uintmax_t) heap_bytes_free(), (uintmax_t) heap_bytes_used());
+    #endif /* myDEBUG_HEAP */
+
 
     t = dict_find(iterator, MESSAGE_KEY_BACKGROUND_COLOR);
     if (t)
