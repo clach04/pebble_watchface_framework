@@ -850,6 +850,7 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
         APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() heap free %ju bytes heap used %ju bytes", __func__, (uintmax_t) heap_bytes_free(), (uintmax_t) heap_bytes_used());
     #endif /* myDEBUG_HEAP */
 
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() dictionary size %d bytes", __func__, (void*) iterator->end - (void*) iterator->dictionary);
 
     t = dict_find(iterator, MESSAGE_KEY_BACKGROUND_COLOR);
     if (t)
