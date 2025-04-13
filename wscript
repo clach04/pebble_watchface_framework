@@ -25,6 +25,7 @@ def configure(ctx):
 
 def build(ctx):
     ctx.load('pebble_sdk')
+    #ctx.env.CFLAGS += ['-fstack-usage']  # TODO I can't get this to work.. dump stack usage stats that the can be determined statically
 
     build_worker = os.path.exists('worker_src')
     binaries = []
