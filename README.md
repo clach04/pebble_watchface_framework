@@ -38,6 +38,8 @@ For Cloud SDK usage:
   3. Follow the instructions in https://developer.repebble.com/sdk/cloud
   4. Update the UUID in `package.json`. Also see section "Simple Tutorial 2" and "Simple Tutorial 3" later in readme
 
+Stop/Delete codespaces via https://github.com/codespaces
+
 Then start adding options and resources. By default, the empty framework will:
 
   * Display date - using system font
