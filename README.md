@@ -36,7 +36,7 @@ For Cloud SDK usage:
   1. Open https://github.com/clach04/codespaces-pebble
   2. Find green button, "Use this template", click dropdown triangle, Open in a codespace
   3. Follow the instructions in https://developer.repebble.com/sdk/cloud
-  4. Update the UUID in `package.json`
+  4. Update the UUID in `package.json`. Also see section "Simple Tutorial 2" and "Simple Tutorial 3" later in readme
 
 Then start adding options and resources. By default, the empty framework will:
 
@@ -146,7 +146,7 @@ Simple Tutorial 1
 Simple Tutorial 2
 -----------------
 
-1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
+1. Import into Cloud CodeSpace - see Instructions section
 2. Edit `watch_config.h` at the bottom, add the following lines:
 
         #define TICK_HANDLER_INTERVAL SECOND_UNIT  // Update once per second
@@ -160,7 +160,7 @@ This will show seconds (the `%S` in both formats) and update once a second (by s
 Simple Tutorial 3
 -----------------
 
-1. Import into CloudPebble, click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
+1. Import into Cloud CodeSpace - see Instructions section
 2. Add a Resource (lower left corner), load a TTF font, e.g. upload the .ttf files from https://www.fontsquirrel.com/fonts/permanent-marker
 3. Name the resource `FONT_50` - 50 means scale to 50 (optional enter in the CHARACTERS field `[0-9:.]` to only use the characters needed for time, makes watchface smaller), Click Save.
 4. Edit `watch_config.h` add line `#define FONT_NAME RESOURCE_ID_FONT_50` add after (or replace) '#undef FONT_NAME' to match resource name above
