@@ -53,7 +53,9 @@ Then start adding options and resources. By default, the empty framework will:
 There is no default icon, add a 25x25 resource and declare it as an icon, see https://developer.rebble.io/developer.pebble.com/guides/migration/migration-guide-4/index.html
 Additional options
 
-Alternatively use a local SDK.
+https://www.stef.be/dpaint/ is a good web/cloud-based bitmap editor. Upload images to `resources` directory and update `package.json`. See linked examples/samples for images.
+
+Alternatively, use a local SDK.
 
 ------------------
 
