@@ -31,11 +31,14 @@ All the examples below use the same framework.
 Instructions
 ------------
 
-  1. Copy (or clone) into your project. Click https://cloudpebble.net/ide/import/github/clach04/watchface_framework/ to import
-  2. Create a new uuid (in CloudPebble generate one with a single button push under settings) - see appinfo.json
-  3. Compile and run!
+For Cloud SDK usage:
 
-Then start adding options and resources. By default the empty framework will:
+  1. Open https://github.com/clach04/codespaces-pebble
+  2. Find green button, "Use this template", click dropdown triangle, Open in a codespace
+  3. Follow the instructions in https://developer.repebble.com/sdk/cloud
+  4. Update the UUID in `package.json`
+
+Then start adding options and resources. By default, the empty framework will:
 
   * Display date - using system font
   * Display time, updating once per minute- using system font
@@ -49,6 +52,9 @@ Then start adding options and resources. By default the empty framework will:
 
 There is no default icon, add a 25x25 resource and declare it as an icon, see https://developer.rebble.io/developer.pebble.com/guides/migration/migration-guide-4/index.html
 Additional options
+
+Alternatively use a local SDK.
+
 ------------------
 
 In an ideal situation, `watchface.c` and `watchface.h` should not need editing *ever*. There may be cases where `main.c` needs editing. Most of the time `watch_config.h` is the only file that will need editing. `watch_config.h` options:
