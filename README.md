@@ -31,11 +31,28 @@ All the examples below use the same framework.
 Instructions
 ------------
 
-For Cloud SDK usage:
+For GitHub CodeSpace Cloud SDK usage:
+
+  1. Open https://github.com/codespaces
+  2. Find green button, "New codespace"
+  3. Select repository (or copy/paste `clach04/pebble_watchface_framework`)
+  4. Adjust as needed then click green "Create codespace" button
+  5. Wait.....
+  6. Open source file (e.g. watchface.c), see problems pane fill with a couple
+    of errors. Right click on first one,
+    `#include errors detected. Please update your includePath. Squiggles are disabled for this translation unit (/workspaces/codespaces-pebble/myfirstproject/src/c/myfirstproject.c).`,
+    right click and edit include path `Edit "includePath" setting`.
+    Then close new edit view.
+    This will create a .vscode file with correct path, a preset one not not
+    included so as to avoid local SDK conflicts
+    (TODO consider updating setup script to handle this).
+  7. Click Pebble button in left hand bar, and use run buttons to build and run in emulator.
+
+Alternatively - less typing/clicking:
 
   1. Open https://github.com/clach04/codespaces-pebble
   2. Find green button, "Use this template", click dropdown triangle, Open in a codespace
-  3. Open source file (e.g. watchface.c), see problems pan fill with a couple of errors. Right click on first one, `#include errors detected. Please update your includePath. Squiggles are disabled for this translation unit (/workspaces/codespaces-pebble/myfirstproject/src/c/myfirstproject.c).`, right click and edit include path `Edit "includePath" setting`. Then close new edit view.
+  3. Open source file (e.g. watchface.c), see problems pane fill with a couple of errors. Right click on first one, `#include errors detected. Please update your includePath. Squiggles are disabled for this translation unit (/workspaces/codespaces-pebble/myfirstproject/src/c/myfirstproject.c).`, right click and edit include path `Edit "includePath" setting`. Then close new edit view.
   4. Follow the instructions in https://developer.repebble.com/sdk/cloud
   5. Update the UUID in `package.json`. Also see section "Simple Tutorial 2" and "Simple Tutorial 3" later in readme
 
