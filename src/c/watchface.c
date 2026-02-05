@@ -958,6 +958,74 @@ void init()
     time_color = DEFAULT_TIME_COLOR;
     background_color = DEFAULT_BACKGROUND_COLOR;
 
+    APP_LOG(APP_LOG_LEVEL_INFO, "PBL_DISPLAY_HEIGHT : %d", PBL_DISPLAY_HEIGHT);
+    APP_LOG(APP_LOG_LEVEL_INFO, "PBL_DISPLAY_WIDTH : %d", PBL_DISPLAY_WIDTH);
+
+    // https://developer.repebble.com/docs/c/Foundation/WatchInfo/#WatchInfoModel
+    APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model: %d", watch_info_get_model());
+    #ifdef DEBUG_HARDWARE_ID
+    // Generated code
+    switch(watch_info_get_model())
+    {
+        case WATCH_INFO_MODEL_UNKNOWN:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_UNKNOWN");  // Unknown model.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_ORIGINAL:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_ORIGINAL");  // Original Pebble.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_STEEL:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_STEEL");  // Pebble Steel.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_TIME:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_TIME");  // Pebble Time.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_TIME_STEEL:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_TIME_STEEL");  // Pebble Time Steel.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_TIME_ROUND_14:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_TIME_ROUND_14");  // Pebble Time Round, 14mm lug size.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_TIME_ROUND_20:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_TIME_ROUND_20");  // Pebble Time Round, 20mm lug size.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_2_HR:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_2_HR");  // Pebble 2 HR.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_2_SE:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_2_SE");  // Pebble 2 SE.
+            break;
+
+        case WATCH_INFO_MODEL_PEBBLE_TIME_2:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_PEBBLE_TIME_2");  // Pebble Time 2.
+            break;
+
+        case WATCH_INFO_MODEL_COREDEVICES_C2D:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_COREDEVICES_C2D");  // CoreDevices C2D (Core 2 Duo)
+            break;
+
+        case WATCH_INFO_MODEL_COREDEVICES_CT2:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL_COREDEVICES_CT2");  // CoreDevices CT2 (Core Time 2)
+            break;
+
+        case WATCH_INFO_MODEL__MAX:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model WATCH_INFO_MODEL__MAX");  // Max
+            break;
+
+        default:
+            APP_LOG(APP_LOG_LEVEL_INFO, "watch_info_get_model UNKNOWN");
+            break;
+    }
+    #endif // DEBUG_HARDWARE_ID
+
+
     major_version = get_major_app_version();
     APP_LOG(APP_LOG_LEVEL_INFO, "get_major_app_version: %d", major_version);
 

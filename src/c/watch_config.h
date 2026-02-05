@@ -32,17 +32,31 @@
     #else
         #define BAT_POS GRect(0, 140, 180, 180) /* probably taller than really needed */
     #endif /* DRAW_BATTERY */
-
-#else /* PBL_RECT 144x168*/
-    #define CLOCK_POS GRect(0, 52, 144, 168) /* probably taller than really needed */
-    #define HEALTH_POS GRect(0, 40, 144, 168)
-    #define BT_POS GRect(0, 120, 144, 168) /* probably taller than really needed */
-    #define DATE_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
-    #ifdef DRAW_BATTERY
-        #define BAT_POS GRect(5, 150, 144, 168)
-    #else
-        #define BAT_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
-    #endif /* DRAW_BATTERY */
+#else /* PBL_RECT 144x168 */
+    #if PBL_DISPLAY_HEIGHT == 228  // 200x228 Pebble Time 2 (emery)
+        // TODO center? shift slight to right a little more, and down
+        #define CLOCK_POS GRect(0, 52, 200, 228) /* probably taller than really needed */
+        #define HEALTH_POS GRect(0, 40, 200, 228)
+        // below untested
+        #define BT_POS GRect(0, 120, 200, 228) /* probably taller than really needed */
+        // FIXME below should be lower...
+        #define DATE_POS GRect(0, 205, 200, 228) /* probably taller than really needed */
+        #ifdef DRAW_BATTERY
+            #define BAT_POS GRect(5, 215, 200, 228)
+        #else
+            #define BAT_POS GRect(0, 205, 200, 228) /* probably taller than really needed */
+        #endif /* DRAW_BATTERY */
+    #else  //  144x168  Original pebbles; Pebble Classic (aplite), Pebble Time (basalt), Pebble 2 (diorite), Pebble 2 Duo (flint)
+        #define CLOCK_POS GRect(0, 52, 144, 168) /* probably taller than really needed */
+        #define HEALTH_POS GRect(0, 40, 144, 168)
+        #define BT_POS GRect(0, 120, 144, 168) /* probably taller than really needed */
+        #define DATE_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
+        #ifdef DRAW_BATTERY
+            #define BAT_POS GRect(5, 150, 144, 168)
+        #else
+            #define BAT_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
+        #endif /* DRAW_BATTERY */
+    #endif  // end of original rectangle size
 #endif /* end of Round or rectangle */
 
 /* for screen shots and font testing
