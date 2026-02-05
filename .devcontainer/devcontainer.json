@@ -31,7 +31,7 @@
     }
   },
 
-  "workspaceFolder": "/workspaces/codespaces-pebble/mywatchface",
+  "workspaceFolder": "/workspaces/pebble_watchface_framework/",
   "containerEnv": {
     "LOCALWORKSPACEFOLDERBASENAME": "${localWorkspaceFolderBasename}",
     "LOCALWORKSPACEFOLDER": "${localWorkspaceFolder}",
