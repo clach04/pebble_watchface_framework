@@ -35,8 +35,9 @@ For Cloud SDK usage:
 
   1. Open https://github.com/clach04/codespaces-pebble
   2. Find green button, "Use this template", click dropdown triangle, Open in a codespace
-  3. Follow the instructions in https://developer.repebble.com/sdk/cloud
-  4. Update the UUID in `package.json`. Also see section "Simple Tutorial 2" and "Simple Tutorial 3" later in readme
+  3. Open source file (e.g. watchface.c), see problems pan fill with a couple of errors. Right click on first one, `#include errors detected. Please update your includePath. Squiggles are disabled for this translation unit (/workspaces/codespaces-pebble/myfirstproject/src/c/myfirstproject.c).`, right click and edit include path `Edit "includePath" setting`. Then close new edit view.
+  4. Follow the instructions in https://developer.repebble.com/sdk/cloud
+  5. Update the UUID in `package.json`. Also see section "Simple Tutorial 2" and "Simple Tutorial 3" later in readme
 
 Stop/Delete codespaces via https://github.com/codespaces
 
