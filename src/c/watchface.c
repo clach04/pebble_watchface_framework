@@ -3,7 +3,7 @@
 #include <pebble.h>
 #include <pebble_process_info.h>  // ONLY for get_major_app_version()
 extern const PebbleProcessInfo __pbl_app_info;  // ONLY for get_major_app_version()
-    
+
 #ifdef USE_SHADOW_TIME_EFFECT
 #include "effect_layer.h"  /* from https://github.com/ygalanter/EffectLayer */
 #endif /* USE_SHADOW_TIME_EFFECT */
@@ -960,7 +960,7 @@ void init()
 
     major_version = get_major_app_version();
     APP_LOG(APP_LOG_LEVEL_INFO, "get_major_app_version: %d", major_version);
-    
+
     if (persist_exists(MESSAGE_KEY_MAJOR_VERSION))
     {
         int stored_major_version = persist_read_int(MESSAGE_KEY_MAJOR_VERSION);
