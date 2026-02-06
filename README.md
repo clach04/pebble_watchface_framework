@@ -31,7 +31,26 @@ All the examples below use the same framework.
 Instructions
 ------------
 
-For GitHub CodeSpace Cloud SDK usage:
+### GitHub CodeSpace Cloud SDK
+
+#### Quick GitHub CodeSpace Cloud SDK
+
+  1. Open https://github.com/clach04/pebble_watchface_framework/ in web browser
+  2. Click the green "Use this template" button (top right), "Open in a codespace"
+  3. Wait.....
+  4.  Open source file (e.g. watchface.c), see problems pane fill with a couple
+    of errors. Right-click on the first one,
+    `#include errors detected. Please update your includePath. Squiggles are disabled for this translation unit (/workspaces/codespaces-pebble/myfirstproject/src/c/myfirstproject.c).`,
+    right click and edit include path `Edit "includePath" setting`.
+    Then close the new edit view.
+    This will create a .vscode file with the correct path, a preset one is not
+    included to avoid local SDK / VScode conflicts
+    (TODO: consider updating the setup script to handle this).
+  5. Click the Pebble button in the left-hand bar, and use run buttons to build and run in the emulator.
+
+#### Longer GitHub CodeSpace Cloud SDK
+
+These are generic instructions and work for any codespace template.
 
   1. Open https://github.com/codespaces
   2. Find green button, "New codespace"
@@ -58,7 +77,9 @@ Alternatively - less typing/clicking:
 
 Stop/Delete codespaces via https://github.com/codespaces
 
-Then start adding options and resources. By default, the empty framework will:
+## Edit and customize
+
+Start adding options and resources. By default, the empty framework will:
 
   * Display date - using system font
   * Display time, updating once per minute- using system font
@@ -75,9 +96,11 @@ Additional options
 
 https://www.stef.be/dpaint/ is a good web/cloud-based bitmap editor. Upload images to `resources` directory and update `package.json`. See linked examples/samples for images.
 
-Alternatively, use a local SDK.
+Also, you can use a local SDK.
 
 ------------------
+
+## Edit Hints
 
 In an ideal situation, `watchface.c` and `watchface.h` should not need editing *ever*. There may be cases where `main.c` needs editing. Most of the time `watch_config.h` is the only file that will need editing. `watch_config.h` options:
 
