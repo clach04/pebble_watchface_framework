@@ -64,6 +64,11 @@
 #endif /* end of Round or rectangle */
 
 /* for screen shots and font testing
+#define DEBUG  // If set will update each second and use seconds as minutes for checking updates (not the best for screenshots)
+#ifdef DEBUG
+#define TICK_HANDLER_INTERVAL SECOND_UNIT
+#endif // DEBUG
+
 #define DEBUG_TIME
 #define DEBUG_TIME_SCREENSHOT
 // ensure quiet time and bluetooth disconnection info is shown
