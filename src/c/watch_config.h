@@ -74,6 +74,9 @@
 // ensure quiet time and bluetooth disconnection info is shown
 #ifndef quiet_time_is_active  // so not aplite
 #define quiet_time_is_active() true  // DEBUG!
+#else
+#undef quiet_time_is_active  // See if we can force this to always be true
+#define quiet_time_is_active() true  // DEBUG!
 #endif
 #define bluetooth_connection_service_peek() false  // DEBUG!
 */
