@@ -41,7 +41,7 @@
         // below untested
         #define BT_POS GRect(0, 120, 200, 228) /* probably taller than really needed */
         // FIXME below should be lower...
-        #define DATE_POS GRect(0, 205, 200, 228) /* probably taller than really needed */
+        #define DATE_POS GRect(-5, 205, 200, 228) /* probably taller than really needed */
         #ifdef DRAW_BATTERY
             #define BAT_POS GRect(5, 215, 200, 228)
         #else
