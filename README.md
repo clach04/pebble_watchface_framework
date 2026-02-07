@@ -39,12 +39,12 @@ Instructions
   1. Open https://github.com/clach04/pebble_watchface_framework/ in web browser
   2. Click the green "Use this template" button (top right), "Open in a codespace"
   3. Wait.....
-  4.  Open source file (e.g. watchface.c), see problems pane fill with a couple
+  4.  Open source file (e.g. watchface.c), see the problems pane with a couple
     of errors. Right-click on the first one,
     `#include errors detected. Please update your includePath. Squiggles are disabled for this translation unit (/workspaces/codespaces-pebble/myfirstproject/src/c/myfirstproject.c).`,
     right click and edit include path `Edit "includePath" setting`.
     Then close the new edit view.
-    This will create a .vscode file with the correct path, a preset one is not
+    This will create a .vscode file with the correct path (`${workspaceFolder}/**`); a preset one is not
     included to avoid local SDK / VScode conflicts
     (TODO: consider updating the setup script to handle this).
   5. Click the Pebble button in the left-hand bar, and use run buttons to build and run in the emulator.
