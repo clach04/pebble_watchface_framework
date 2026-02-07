@@ -5,7 +5,8 @@ https://github.com/clach04/pebble_watchface_framework
 
 Working, ready to build Bare-Bones watch face for Pebble (OG/Classic, Time, Round, and Pebble 2) Aplite, Basalt, Chalk, and Diorite. With configuration and settings support via [Clay](https://github.com/clach04/pebble-clay/tree/clach04_emulator_url_index).
 
-Requires Pebble SDK of some kind (current code and WAF script is for SDK 4.5). Original instructions are for CloudPebble.
+Requires Pebble SDK of some kind current code and WAF script is for SDK 4.5, works with 4.3 (use `pebble sdk list
+` to confirm version). Original instructions are for CloudPebble.
 
 For non-developers, check out https://github.com/HarrisonAllen/pebble-watchface-generator (started 2025).
 
@@ -172,19 +173,40 @@ Simple Tutorial 1
 
  3. Run in emulator
 
-        pebble install --emulator aplite --logs
-        pebble install --emulator basalt --logs
+        pebble install --emulator aplite --logs  # OG Pebble
+        pebble build && pebble install --emulator aplite --logs  # build then emulate OG Pebble
+        pebble install --emulator basalt --logs  # Pebble Time
+        pebble install --emulator chalk --logs  # Pebble Round
+        pebble install --emulator diorite --logs  # Pebble 2
+        pebble install --emulator emery --logs  # Pebble Time 2
 
     Start emulator, requires a web browser (NOTE potential issues with Clay).
 
         pebble emu-app-config
 
+    Kill / clean up:
+
+        pebble kill
+        pebble wipe
+        pebble clean
+
  3. Run on Pebble watch, connected via Developer Connection
     TODO document phone steps
 
         pebble install --phone IP_ADDRESS_HERE --logs
+        pebble build && pebble install --phone IP_ADDRESS_HERE --logs
         pebble logs --color --phone PHONE_IP
 
+## Core Devices App
+
+Enable remote install / logs via:
+
+ 1. Settings, enable Use LAN devloper connection
+ 2. Device view, enable Dev Connection
+
+BOTH are required for local LAN connections.
+The last will show IP address to use.
+Ensure phone and dev machine are using the same access point.
 
 Simple Tutorial 2
 -----------------
