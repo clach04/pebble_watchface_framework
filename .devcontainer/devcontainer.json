@@ -19,6 +19,7 @@
         "-ms-python.python"
       ],
       "settings": {
+        "C_Cpp.default.includePath": ["${workspaceFolder}/**"],
         "remote.autoForwardPorts": false,
         "workbench.welcomePage.walkthroughs.openOnInstall": false,
         "git.openRepositoryInParentFolders": "always"
