@@ -407,6 +407,9 @@ void cleanup_battery()
 #ifdef QUIET_TIME_IMAGE
 BitmapLayer *quiet_time_blayer=NULL;
 GBitmap     *quiet_time_bitmap=NULL;
+#else
+TextLayer *quiet_time_tlayer=NULL;
+#endif // QUIET_TIME_IMAGE
 
 void handle_quiet_time(void)
 {
@@ -414,12 +417,20 @@ void handle_quiet_time(void)
     if (quiet_time_is_active())
     {
         APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() quiet_time_is_active", __func__);
+#ifdef QUIET_TIME_IMAGE
         bitmap_layer_set_bitmap(quiet_time_blayer, quiet_time_bitmap);
+#else
+        text_layer_set_text(quiet_time_tlayer, QUIET_TIME_STR);
+#endif // QUIET_TIME_IMAGE
     }
     else
     {
         APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() quiet_time_is_not_active", __func__);
+#ifdef QUIET_TIME_IMAGE
         bitmap_layer_set_bitmap(quiet_time_blayer, NULL);
+#else
+        text_layer_set_text(quiet_time_tlayer, "");
+#endif // QUIET_TIME_IMAGE
     }
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() exit", __func__);
@@ -430,6 +441,7 @@ void setup_quiet_time(Window *window)
     GRect bounds;
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() entry", __func__);
+#ifdef QUIET_TIME_IMAGE
     quiet_time_bitmap = gbitmap_create_with_resource(QUIET_TIME_IMAGE);
 
     #ifdef QUIET_TIME_IMAGE_GRECT
@@ -447,12 +459,22 @@ void setup_quiet_time(Window *window)
 
     bitmap_layer_set_compositing_mode(quiet_time_blayer, GCompOpSet);
     layer_add_child(window_get_root_layer(main_window), bitmap_layer_get_layer(quiet_time_blayer));
+#else
+    quiet_time_tlayer = text_layer_create(QUIET_TIME_POS);
+    text_layer_set_text_color(quiet_time_tlayer, time_color);
+    text_layer_set_background_color(quiet_time_tlayer, GColorClear);
+    text_layer_set_font(quiet_time_tlayer, fonts_get_system_font(FONT_BT_SYSTEM_NAME));  // TODO seperate quiet time font from BT/BLUETOOTH
+    text_layer_set_text_alignment(quiet_time_tlayer, BT_ALIGN);
+    layer_add_child(window_get_root_layer(main_window), text_layer_get_layer(quiet_time_tlayer));
+    text_layer_set_text(quiet_time_tlayer, "");
+#endif // QUIET_TIME_IMAGE
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "%s() exit", __func__);
 }
 
 void cleanup_quiet_time(void)
 {
+#ifdef QUIET_TIME_IMAGE
     /* Destroy GBitmap */
     if (quiet_time_bitmap)
     {
@@ -464,8 +486,10 @@ void cleanup_quiet_time(void)
     {
         bitmap_layer_destroy(quiet_time_blayer);
     }
-}
+#else
+    text_layer_destroy(quiet_time_tlayer);
 #endif // QUIET_TIME_IMAGE
+}
 
 
 #ifndef NO_TEXT_TIME_LAYER
@@ -708,9 +732,9 @@ void update_time(struct tm *tick_time) {
     update_health();
 #endif /* USE_HEALTH */
 
-#ifdef QUIET_TIME_IMAGE
+//#ifdef QUIET_TIME_IMAGE  // TODO condition on QUIET_TIME_IMAGE or QUIET_TIME_POS
     handle_quiet_time();
-#endif // QUIET_TIME_IMAGE
+//#endif // QUIET_TIME_IMAGE
 
 #ifdef DEBUG_TIME_PAUSE
     psleep(DEBUG_TIME_PAUSE);
@@ -758,9 +782,9 @@ void main_window_load(Window *window) {
     setup_health(window);
 #endif /* USE_HEALTH */
 
-#ifdef QUIET_TIME_IMAGE
+//#ifdef QUIET_TIME_IMAGE  // TODO condition on QUIET_TIME_IMAGE or QUIET_TIME_POS
     setup_quiet_time(window);
-#endif // QUIET_TIME_IMAGE
+//#endif // QUIET_TIME_IMAGE
 
     /* Make sure the time is displayed from the start */
     // Get a tm structure
@@ -776,9 +800,9 @@ void main_window_load(Window *window) {
 
 void main_window_unload(Window *window) {
 
-#ifdef QUIET_TIME_IMAGE
+//#ifdef QUIET_TIME_IMAGE  // TODO condition on QUIET_TIME_IMAGE or QUIET_TIME_POS
     cleanup_quiet_time();
-#endif // QUIET_TIME_IMAGE
+//#endif // QUIET_TIME_IMAGE
 
 #ifdef USE_HEALTH
     cleanup_health();

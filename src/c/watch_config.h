@@ -14,6 +14,7 @@
 #define DRAW_BATTERY
 #define DRAW_SMALL_BATTERY
 
+#define QUIET_TIME_POS  GRect(20, 20, 60, 60)
 //#define QUIET_TIME_IMAGE RESOURCE_ID_IMAGE_QUIET_TIME
 //#define QUIET_TIME_IMAGE_GRECT GRect(20, 20, 20, 20)  // Example assumes a 20x20 image
 

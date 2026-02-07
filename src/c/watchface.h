@@ -27,6 +27,10 @@
 #define BLUETOOTH_DISCONNECTED_STR "BT Disconnected"
 #endif /* BLUETOOTH_DISCONNECTED_STR */
 
+#ifndef QUIET_TIME_STR
+#define QUIET_TIME_STR "QuietTime"
+#endif /* QUIET_TIME_STR */
+
 #ifndef DATE_FMT_STR
 /*
 ** DATE_FMT_STR format for date, passed to strftime()
