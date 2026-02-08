@@ -225,6 +225,8 @@ This will show seconds (the `%S` in both formats) and update once a second (by s
 Simple Tutorial 3
 -----------------
 
+FIXME this is for Cloud Pebble which requires self hosting
+
 1. Import into Cloud CodeSpace - see Instructions section
 2. Add a Resource (lower left corner), load a TTF font, e.g. upload the .ttf files from https://www.fontsquirrel.com/fonts/permanent-marker
 3. Name the resource `FONT_50` - 50 means scale to 50 (optional enter in the CHARACTERS field `[0-9:.]` to only use the characters needed for time, makes watchface smaller), Click Save.
@@ -233,6 +235,47 @@ Simple Tutorial 3
 6. Try experimenting with different font sizes, make use of `#define DEBUG_TIME` to try wide fonts. For example using the permanent-marker font above with size 60 looks fine for some times but not all. DEBUG_TIME quickly tries a number of different times to check sizes. Also see `USE_TIME_MACHINE` notes.
 
 NOTE there are limitations in the Pebble SDK/Firmware on maximum font size. 60 is the absolute maximum, and for some fonts even 60 is problematic. Very large fonts need to be converted into bitmaps, see https://github.com/pebble-examples/big-time
+
+
+Simple Tutorial 4
+-----------------
+
+Add a quiet time icon, for now use local SDK.
+
+Grab PNG from https://github.com/clach04/pebble_watchface_framework/issues/17
+https://github.com/clach04/pebble_tz/blob/tz_mins/resources/images/quiet_time_red_white_14x14.png
+
+Create dir `resources/images/` (or .gitkeep)
+Populare directory / folder with bitmap(s), for GitHub CodeSpace; Drag and drop from local machine PNG to that directory.
+
+Edit `package.json` need to add resources section pointing to uploaded file
+
+
+        ....
+        "resources": {
+            "media": [
+                {
+                    "file": "images/quiet_time_red_white_14x14.png",
+                    "name": "IMAGE_QUIET_TIME",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                }
+            ]
+        },
+        ....
+
+Also look to add an application icon
+
+Locate and ensure `QUIET_TIME_IMAGE` is set in watch config header
+
+For GitHub CodeSpace problem:
+
+
+      File "/home/vscode/.pebble-sdk/SDKs/current/sdk-core/pebble/common/waftools/resources/find_resource_filename.py", line 33, in find_most_specific_filename
+        root_len = len(root_node.relpath()) + 1
+                       ^^^^^^^^^^^^^^^^^
+    AttributeError: 'NoneType' object has no attribute 'relpath'
+
 
 Notes and other resources
 -------------------------
