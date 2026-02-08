@@ -6,6 +6,8 @@ on:
   # Triggers the workflow on push or pull request events for any branch (see commented out `branches` lines for  master branch example)
   push:
     #branches: [master]
+    # Empty means any and all branches
+    branches: [never_github_stalls_for_24hours_workaround]
   pull_request:
     # External Pull Request requires confirmation BEFORE action fires https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks 
     #branches: [master]
