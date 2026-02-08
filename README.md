@@ -131,6 +131,8 @@ In an ideal situation, `watchface.c` and `watchface.h` should not need editing *
       * `HEALTH_FMT_STR` is the format of the string to display. `MAX_HEALTH_STR` should be updated if `HEALTH_FMT_STR` is set.
   * If `USE_TIME_MACHINE` is defined https://github.com/MorrisTimm/pebble-time-machine will be used ('dependencies' in package.json should be filled in, known to work with version 1.0.2).
 
+Be familar with macros and techniques discussed in https://developer.repebble.com/guides/best-practices/building-for-every-pebble/
+
 Examples
 --------
 
@@ -288,3 +290,4 @@ SDK API https://developer.rebble.io/developer.pebble.com/docs/index.html
 
 Pebble developer wiki https://github.com/pebble-dev/wiki/wiki
 
+Developer portal on Rebble for uploading/editing watchfaces and apps https://dev-portal.rebble.io/
