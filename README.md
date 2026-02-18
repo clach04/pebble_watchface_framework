@@ -279,6 +279,14 @@ For GitHub CodeSpace problem:
     AttributeError: 'NoneType' object has no attribute 'relpath'
 
 
+## Updating to newer version to watchface framework
+
+
+    git remote add upstream_pebble_watchface_framework https://github.com/clach04/pebble_watchface_framework.git
+    git fetch upstream_pebble_watchface_framework
+    git merge upstream_pebble_watchface_framework/master
+
+
 Notes and other resources
 -------------------------
 
