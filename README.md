@@ -10,6 +10,8 @@ Requires Pebble SDK of some kind current code and WAF script is for SDK 4.5, wor
 
 For non-developers, check out https://github.com/HarrisonAllen/pebble-watchface-generator (started 2025).
 
+To get started with CloudPebble  open https://cloudpebble.repebble.com/ide/import/github/clach04/pebble_watchface_framework/ to import into a new CloudPebble project.
+
 Current code works with local SDK, recommend using a Docker Container, for example:
 
   * https://github.com/bboehmke/docker-pebble-dev
