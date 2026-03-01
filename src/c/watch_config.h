@@ -4,6 +4,8 @@
 #undef REMOVE_LEADING_ZERO_FROM_TIME  /* 12 hour display will not have a leading '0' or ' ' if this is defined */
 #undef FONT_NAME
 #undef FONT_SYSTEM_NAME  /* the default font system will be used */
+// See https://developer.rebble.io/guides/app-resources/system-fonts/ for builtin system fonts
+// See https://github.com/clach04/pebble-app-font-browser/releases to see fonts on device
 #undef DEBUG_TIME
 //#define USE_TIME_MACHINE  // NOTE mixing with DEBUG_TIME doesn't make sense. Requires update to package.json for dependencies
 
