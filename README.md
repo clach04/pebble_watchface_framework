@@ -301,3 +301,7 @@ SDK API https://developer.rebble.io/developer.pebble.com/docs/index.html
 Pebble developer wiki https://github.com/pebble-dev/wiki/wiki
 
 Developer portal on Rebble for uploading/editing watchfaces and apps https://dev-portal.rebble.io/
+
+### Alternative Watchface Options
+
+See https://github.com/clach04/not-yet-definitive-pebble-guide/#watchface-generators
