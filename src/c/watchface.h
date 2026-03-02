@@ -16,7 +16,7 @@
     **  [INFO] essage_outbox.c:49: app_message_open() called with app_message_outbox_size_maximum().
     **  [INFO] essage_outbox.c:52: This consumes 8200 bytes of heap memory, potentially more in the future!
     **  [INFO] message_inbox.c:13: app_message_open() called with app_message_inbox_size_maximum().
-    **  [INFO] message_inbox.c:16: This consumes 8200 bytes of heap memory, potentially more in the future!    
+    **  [INFO] message_inbox.c:16: This consumes 8200 bytes of heap memory, potentially more in the future!
     */
     #define MAX_MESSAGE_SIZES
     #define MAX_MESSAGE_SIZE_IN 200
@@ -37,7 +37,7 @@
 ** https://developer.getpebble.com/docs/c/Standard_C/Time/#strftime
 ** See http://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html for more details
 */
-#define DATE_FMT_STR "%a, %d %b"  /* TODO review %d for day */
+#define DATE_FMT_STR "%a, %d %b"  /* TODO review %d (01) for day */
 #define MAX_DATE_STR "Thu, 00 Aug"  /* if custom version of DATE_FMT_STR is set, MAX_DATE_STR  needs to be updated too */
 #endif /* DATE_FMT_STR */
 
