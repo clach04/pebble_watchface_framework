@@ -72,7 +72,7 @@
 #endif // DEBUG
 
 #define DEBUG_TIME
-#define DEBUG_TIME_SCREENSHOT
+//#define DEBUG_TIME_SCREENSHOT  // NOTE if set, will turn on backlight BUT also only show a single time// ensure quiet time and bluetooth disconnection info is shown
 // ensure quiet time and bluetooth disconnection info is shown
 #ifndef quiet_time_is_active  // so not aplite
 #define quiet_time_is_active() true  // DEBUG!
