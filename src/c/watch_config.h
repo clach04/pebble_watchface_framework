@@ -13,54 +13,66 @@
 #define USE_HEALTH
 //#define UPDATE_HEALTH_ON_ACTIVITY  /* If not set, only updates step count display once per minute */
 
+#define PERCENT_WIDTH(x) (PBL_DISPLAY_WIDTH * x / 1000)  // where x is a 1000th. E.g. x=18 == 1.8%, x=1000 == 100%
+#define PERCENT_HEIGHT(x) (PBL_DISPLAY_HEIGHT * x / 1000)  // where x is a 1000th. E.g. x=18 == 1.8%, x=1000 == 100%
+
+// As of 2026-03-14, known screen resolutions are:
+//   * 144x168 - original rectangle
+//   * 180x180 - original Round
+//   * 200x228 - Pebble Time 2 (emery)
+//   * 260x260 - Pebble Round 2 (Gabbro)
+//
+// Consult https://developer.repebble.com/guides/tools-and-resources/hardware-information/
+
 #define DRAW_BATTERY
 #if PBL_DISPLAY_HEIGHT != 228  // 200x228 Pebble Time 2 (emery)  // FIXME this is basically an EMERY check :-(
-#define DRAW_SMALL_BATTERY
+    #define DRAW_SMALL_BATTERY
 #endif
 
-#define QUIET_TIME_POS  GRect(20, 20, 60, 60)
+#ifndef FONT_CLOCK_HEIGHT
+    #define FONT_CLOCK_HEIGHT 0  // should be pixel height of FONT_NAME or FONT_SYSTEM_NAME (default 49) which ever is active
+#endif
+
+// use full width, so that centering works as expected
+#define CLOCK_POS GRect(0, PERCENT_HEIGHT(500) - (FONT_CLOCK_HEIGHT / 2), PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
+#define BT_POS GRect(0, PERCENT_HEIGHT(800), PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
+
 //#define QUIET_TIME_IMAGE RESOURCE_ID_IMAGE_QUIET_TIME
 //#define QUIET_TIME_IMAGE_GRECT GRect(20, 20, 20, 20)  // Example assumes a 20x20 image
 
+#define HEALTH_POS GRect(0, 40, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
+
+
 // See https://developer.rebble.io/guides/best-practices/building-for-every-pebble/#available-defines-and-macros for hardware specific defines
-#ifdef PBL_ROUND /* 180x180 */
-/*TODO center/move right*/
-    #define CLOCK_POS GRect(0, 52, 180, 180) /* probably taller than really needed */
-    #define HEALTH_POS GRect(0, 40, 180, 180)
-    #define BT_POS GRect(0, 100, 180, 180) /* probably taller than really needed */
+#ifdef PBL_ROUND
+    #define QUIET_TIME_POS  GRect(0, PERCENT_HEIGHT(100), PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
 
     #define DATE_ALIGN GTextAlignmentCenter
-    #define DATE_POS GRect(0, 120, 180, 180) /* probably taller than really needed */
+    #define DATE_POS GRect(0, PERCENT_HEIGHT(666) /* TODO font math... */, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
 
     #define BAT_ALIGN GTextAlignmentCenter
     #ifdef DRAW_BATTERY
-        #define BAT_POS GRect(85, 10, 180, 180) /* probably taller than really needed */
+        #define BAT_POS GRect(85, 10, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
     #else
-        #define BAT_POS GRect(0, 140, 180, 180) /* probably taller than really needed */
+        #define BAT_POS GRect(0, 140, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
     #endif /* DRAW_BATTERY */
-#else /* PBL_RECT 144x168 */
+#else /* PBL_RECT */
+    #define QUIET_TIME_POS  GRect(20, 20, 60, 60)
     #if PBL_DISPLAY_HEIGHT == 228  // 200x228 Pebble Time 2 (emery)
-        // TODO center? shift slight to right a little more, and down
-        #define CLOCK_POS GRect(0, 52, 200, 228) /* probably taller than really needed */
-        #define HEALTH_POS GRect(0, 40, 200, 228)
         // below untested
-        #define BT_POS GRect(0, 120, 200, 228) /* probably taller than really needed */
         // FIXME below should be lower...
-        #define DATE_POS GRect(-5, 205, 200, 228) /* probably taller than really needed */
+        #define DATE_POS GRect(-5, 205, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
         #ifdef DRAW_BATTERY
-            #define BAT_POS GRect(5, 215, 200, 228)
+            #define BAT_POS GRect(5, 215, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
         #else
-            #define BAT_POS GRect(0, 205, 200, 228) /* probably taller than really needed */
+            #define BAT_POS GRect(0, 205, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
         #endif /* DRAW_BATTERY */
     #else  //  144x168  Original pebbles; Pebble Classic (aplite), Pebble Time (basalt), Pebble 2 (diorite), Pebble 2 Duo (flint)
-        #define CLOCK_POS GRect(0, 52, 144, 168) /* probably taller than really needed */
-        #define HEALTH_POS GRect(0, 40, 144, 168)
-        #define BT_POS GRect(0, 120, 144, 168) /* probably taller than really needed */
-        #define DATE_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
+        #define DATE_POS GRect(0, 140, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
         #ifdef DRAW_BATTERY
-            #define BAT_POS GRect(5, 150, 144, 168)
+            #define BAT_POS GRect(5, 150, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
         #else
-            #define BAT_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
+            #define BAT_POS GRect(0, 140, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
         #endif /* DRAW_BATTERY */
     #endif  // end of original rectangle size
 #endif /* end of Round or rectangle */
