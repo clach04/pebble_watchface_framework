@@ -1,7 +1,7 @@
 {
     "author": "clach04",
     "dependencies": {
-        "pebble-clay": "^1.0.1"
+        "@rebble/clay": "^1.0.8"
     },
     "keywords": [],
     "name": "fill-me-in",
@@ -27,7 +27,8 @@
             "basalt",
             "chalk",
             "diorite",
-            "emery"
+            "emery",
+            "gabbro"
         ],
         "uuid": "33a003e9-91ec-40fe-b652-b41248212f74",
         "watchapp": {
