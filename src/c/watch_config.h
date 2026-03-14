@@ -35,7 +35,7 @@
 
 // use full width, so that centering works as expected
 #define CLOCK_POS GRect(0, PERCENT_HEIGHT(500) - (FONT_CLOCK_HEIGHT / 2), PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
-#define BT_POS GRect(0, PERCENT_HEIGHT(800), PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
+#define BT_POS GRect(0, PERCENT_HEIGHT(750), PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)  // 760 a touch too low for Chalk
 
 //#define QUIET_TIME_IMAGE RESOURCE_ID_IMAGE_QUIET_TIME
 //#define QUIET_TIME_IMAGE_GRECT GRect(20, 20, 20, 20)  // Example assumes a 20x20 image
@@ -48,7 +48,7 @@
     #define QUIET_TIME_POS  GRect(0, PERCENT_HEIGHT(100), PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT)
 
     #define DATE_ALIGN GTextAlignmentCenter
-    #define DATE_POS GRect(0, PERCENT_HEIGHT(666) /* TODO font math... */, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
+    #define DATE_POS GRect(0, PERCENT_HEIGHT(820) /* consider font math? */, PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT) /* probably taller than really needed */
 
     #define BAT_ALIGN GTextAlignmentCenter
     #ifdef DRAW_BATTERY
